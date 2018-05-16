@@ -1,20 +1,50 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component} from 'react';
+import axios from 'axios';
 import './App.css';
 
+function Testing(){
+  console.log('testinggo')
+  return(
+    <h1>Farts</h1>
+  )
+};
+
+function FriendsList (props) {
+  return (
+    <ul>
+      {props.friends.map((name) => (
+        <li key={name}>
+          {name}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+  constructor(props){
+    super(props);
+    this.state = {
+      friends: ['Jordyn', 'Mikenzi','Jake']
+    }
+  }
+  componentDidMount(){
+    console.log("querying");
+    axios.get('http://localhost:8080/')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  render(){
+    return(
+      <div>
+         <FriendsList friends={this.state.friends}/>
+         <Testing/>
       </div>
-    );
+    )
   }
 }
 
