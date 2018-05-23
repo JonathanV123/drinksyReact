@@ -1,0 +1,64 @@
+@mixin display() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin flexBoxCenter() {
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+@mixin flexBoxColumn{
+  -webkit-flex-direction: column;
+  flex-direction: column;
+};
+
+#root{
+  @include display();
+  @include flexBoxCenter();
+  width: 100%;
+  height: 100vh;
+  background-color: lightcoral;
+}
+
+#appContainer{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  width: 100%;
+  height: 100%;
+  background-color: lightcoral;
+}
+
+#navigationContainer{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  width: 450px;
+  height: 500px;
+  background-color:lightblue;
+  border: 2px solid black;
+}
+#nav{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  width: 100%;
+  height: 100%;
+}
+
+.navLink{
+  @include display();
+  @include flexBoxCenter();
+  width:100%;
+  height:25%;
+  box-sizing: border-box;
+  background-color:royalblue;
+  border: 2px solid black;
+  font-size: 2em;
+}
