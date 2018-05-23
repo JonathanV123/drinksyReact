@@ -1,6 +1,4 @@
 #root {
-  width: 100%;
-  height: 100vh;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -10,4 +8,71 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center;
+  width: 100%;
+  height: 100vh;
   background-color: lightcoral; }
+
+#appContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: lightcoral; }
+
+#navigationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 450px;
+  height: 500px;
+  background-color: lightblue;
+  border: 2px solid black; }
+
+#nav {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; }
+
+.navLink {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+  box-sizing: border-box;
+  background-color: royalblue;
+  border: 2px solid black;
+  font-size: 2em; }
