@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 const cheese = 'cheese';
 const wine = 'wine';
@@ -7,11 +8,11 @@ const name = 'name';
 class AddPlaceForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             name: '',
             cheese: '',
-            wine:'',
-         };
+            wine: '',
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,25 +24,31 @@ class AddPlaceForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        axios.get(`http://localhost:8080/`)
+            .then(res => {
+                console.log(res);
+            })
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
+            <div className="formContainer">
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Name:
                     <input type="text" name='name' value={this.state.name.value} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Cheese Description:
-                    <input type="text" name='cheese'value={this.state.cheese.value} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Wine Description:
+                    </label>
+                    <label>
+                        Cheese Description:
+                    <input type="text" name='cheese' value={this.state.cheese.value} onChange={this.handleChange} />
+                    </label>
+                    <label>
+                        Wine Description:
                     <input type="text" name='wine' value={this.state.wine.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
         );
     }
 }
