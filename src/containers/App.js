@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-// import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
-
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { setAddField, requestDummyData } from '../actions';
 import { connect } from 'react-redux';
+import GetPeople from '../components/GetPeople'
 // import axios from 'axios';
-import Navigation from '../components/Navigation.js';
-// import AddItemForm from '../components/AddItemForm.js';
-// import Places from '../components/Places.js';
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -26,6 +22,17 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+const Navbar = () => {
+  return (
+    <div className="navBarContainer">
+      <nav>
+        <Link className="navBarLink" to={'/'}>Home</Link>
+        <Link className="navBarLink" to={'/people'}>People</Link>
+      </nav>
+    </div>
+  )
+}
+
 
 
 class App extends Component {
@@ -34,22 +41,22 @@ class App extends Component {
   // }
 
 
-  componentDidMount() {
-    this.props.onRequestDummyData();
-    console.log(this.props);
-    console.log(this.state);
-  };
+  // componentDidMount() {
+  //   this.props.onRequestDummyData();
+  // };
 
   render() {
     const { people, isPending } = this.props;
     return (
-      isPending ?
-        <h1>Loading</h1> :
-        <Router>
-          <div id="appContainer">
-            <Navigation />
-          </div>
-        </Router>
+      <Router>
+        <div id="appContainer">
+          <Navbar/>
+          <Route
+            path='/people'
+            render={(props) => <GetPeople {...this.props} />}
+          />
+        </div>
+      </Router>
     )
   }
 }
