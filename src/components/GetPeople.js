@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+// import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import PeopleList from '../components/PeopleList'
-
+import RequestPeople from '../components/RequestPeople'
 
 class GetPeople extends Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
-    componentDidMount() {
-        this.props.onRequestDummyData();
-    };
     render() {
+        const pending = this.props.isPending;
         if (this.props.people.length === 0) {
-            return <h1> Loading </h1>
+            return (
+                <RequestPeople {...this.props} />
+            )
+        } else if (pending === true) {
+            return (
+                <h1>Loading Data</h1>
+            )
         } else {
-            return <PeopleList people={this.props.people} />
-
+            return (
+                <PeopleList people={this.props.people} />
+            )
         }
-        // return <h1> test</h1>
     }
 }
 

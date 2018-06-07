@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const PeopleCard = (props) => {
-    console.log(props);
     return (
         <div className="peopleCard">
             <h1>{props.name}</h1>

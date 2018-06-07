@@ -36,17 +36,7 @@ const Navbar = () => {
 
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-
-
-  // componentDidMount() {
-  //   this.props.onRequestDummyData();
-  // };
-
   render() {
-    const { people, isPending } = this.props;
     return (
       <Router>
         <div id="appContainer">
