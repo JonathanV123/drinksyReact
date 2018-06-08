@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import { setAddField, requestDummyData } from '../actions';
+import { onRequestPeopleData, onPersonRemoval } from '../actions';
 import { connect } from 'react-redux';
 import GetPeople from '../components/GetPeople'
 // import axios from 'axios';
 import '../App.css';
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
-    addField: state.addItem.addField,
-    people: state.requestDummyData.people,
-    isPending: state.requestDummyData.isPending,
-    error: state.requestDummyData.error,
+    test: state.test,
+    responseData: state.requestPeopleData.responseData,
+    peopleData: state.peopleStorage.peopleData,
+    isPending: state.requestPeopleData.isPending,
+    error: state.requestPeopleData.error,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddItemChange: (event) => dispatch(setAddField(event.target.value)),
-    onRequestDummyData: () => dispatch(requestDummyData())
+    requestPeopleData: () => dispatch(onRequestPeopleData()),
+    onPersonRemoval: (name, arr) => dispatch(onPersonRemoval(name, arr))
   }
 }
 
@@ -37,6 +39,7 @@ const Navbar = () => {
 
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
       <Router>
         <div id="appContainer">

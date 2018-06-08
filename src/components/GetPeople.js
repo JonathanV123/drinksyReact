@@ -3,20 +3,25 @@ import React, { Component } from 'react';
 import PeopleList from '../components/PeopleList'
 import RequestPeople from '../components/RequestPeople'
 
+
 class GetPeople extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+    }
     render() {
         const pending = this.props.isPending;
-        if (this.props.people.length === 0) {
-            return (
-                <RequestPeople {...this.props} />
-            )
-        } else if (pending === true) {
+        if (pending === true) {
             return (
                 <h1>Loading Data</h1>
             )
+        } else if (this.props.peopleData.length === 0) {
+            return (
+                <RequestPeople {...this.props} />
+            )
         } else {
             return (
-                <PeopleList people={this.props.people} />
+                <PeopleList {...this.props} />
             )
         }
     }
