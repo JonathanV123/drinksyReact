@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import { onRequestPeopleData, onPersonRemoval } from '../actions';
 import { connect } from 'react-redux';
-import GetPeople from '../components/GetPeople'
+import GetPeople from './GetPeople'
 // import axios from 'axios';
 import '../App.css';
 
@@ -10,17 +9,14 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     test: state.test,
-    responseData: state.requestPeopleData.responseData,
-    peopleData: state.peopleStorage.peopleData,
-    isPending: state.requestPeopleData.isPending,
-    error: state.requestPeopleData.error,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    requestPeopleData: () => dispatch(onRequestPeopleData()),
-    onPersonRemoval: (name, arr) => dispatch(onPersonRemoval(name, arr))
+    // requestPeopleData: () => dispatch(handlePeopleData()),
+    // peopleUserInterfaceRender: () => dispatch(peopleUserInterfaceRender()),
+    // onPersonRemoval: (name) => dispatch(onPersonRemoval(name)),
   }
 }
 
@@ -39,14 +35,15 @@ const Navbar = () => {
 
 class App extends Component {
   render() {
-    console.log(this.props);
+    console.log('APP RUNNING')
+    console.log(this.props)
     return (
       <Router>
         <div id="appContainer">
           <Navbar/>
           <Route
             path='/people'
-            render={(props) => <GetPeople {...this.props} />}
+            render={(props) => <GetPeople />}
           />
         </div>
       </Router>

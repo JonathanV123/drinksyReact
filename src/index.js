@@ -2,25 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
-import { handleRemovePerson, requestPeopleData, peopleStorage,  test } from './reducers';
+import { peopleData,  test, peopleButtonInformation } from './reducers/peopleReducers';
 import registerServiceWorker from './registerServiceWorker';
 
-const logger = createLogger();
+// const logger = createLogger();
 const rootReducer = combineReducers({
-    requestPeopleData,
-    peopleStorage,
-    handleRemovePerson,
+    peopleData,
+    peopleButtonInformation,
+    // handleRemovePerson,
     test,
 })
 
 const store = createStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(thunkMiddleware, logger),
+    applyMiddleware(thunkMiddleware),
 );
 console.log(store);
 ReactDOM.render(
