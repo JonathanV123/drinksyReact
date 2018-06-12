@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Button from './Button'
 
-
+const buttonContent = "Remove Person";
 const PeopleCard = (props) => {
     return (
         <div className="peopleCard">
             <h1>{props.name}</h1>
             <h2>{props.email}</h2>
-            <Button onPersonRemoval={props.onPersonRemoval} buttonInfo={props.buttonInfo} name={props.name} />
+            <Button onPersonRemoval={props.onPersonRemoval} buttonDesc={buttonContent} name={props.name} />
         </div>
     )
 }

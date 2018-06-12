@@ -3,7 +3,6 @@ import {
     REQUEST_PEOPLE_DATA_SUCCESS,
     REQUEST_PEOPLE_DATA_FAILED,
     ON_REMOVE_PERSON,
-    PEOPLE_USER_INTERFACE_UPDATE,
 } from '../constants';
 
 // ************************************** People Data Manipulation Reducers
@@ -31,17 +30,6 @@ export const peopleData = (state = initialPeopleState, action = {}) => {
     }
 }
 
-// *************************************** User Interface Reducers
-
-export const peopleButtonInformation = (state = {}, action = {}) => {
-    switch (action.type) {
-        case PEOPLE_USER_INTERFACE_UPDATE:
-            return Object.assign({}, state, { buttonTextDescription: action.buttonDescription });
-        default:
-            return state;
-    }
-}
-
 const rrr = 'test';
 export const test = (state = 'test', action = {}) => {
     switch (action.type) {
@@ -54,18 +42,5 @@ export const test = (state = 'test', action = {}) => {
     }
 }
 
-// const initialStateRemovePerson = {
-//     name: ''
-// };
-// export const handleRemovePerson = (state = initialStateRemovePerson, action = {}) => {
-//     switch (action.type) {
-//         case ON_REMOVE_PERSON:
-//             console.log(action)
-//             const copy = [...action.people]
-//             const result = copy.filter(person => person.name !== action.name);
-//             return Object.assign({}, state, { peopleData: result });
-//         default:
-//             return state;
-//     }
-// }
+
 

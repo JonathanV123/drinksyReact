@@ -2,7 +2,6 @@ import {
     REQUEST_PEOPLE_DATA_PENDING,
     REQUEST_PEOPLE_DATA_SUCCESS,
     REQUEST_PEOPLE_DATA_FAILED,
-    PEOPLE_USER_INTERFACE_UPDATE,
     ON_REMOVE_PERSON,
 } from '../constants';
 
@@ -22,10 +21,4 @@ export const onPersonRemoval = (name) => {
     }
 };
 
-export const peopleUserInteraceRender = () => {
-    console.log("INTERFACE DATA RUNNING")
-    return {
-        type: PEOPLE_USER_INTERFACE_UPDATE,
-        buttonDescription: "Remove Person"
-    }
-}
+
