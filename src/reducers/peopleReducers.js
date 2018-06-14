@@ -3,6 +3,7 @@ import {
     REQUEST_PEOPLE_DATA_SUCCESS,
     REQUEST_PEOPLE_DATA_FAILED,
     ON_REMOVE_PERSON,
+    ON_EDIT_PERSON,
 } from '../constants';
 
 // ************************************** People Data Manipulation Reducers
@@ -25,6 +26,15 @@ export const peopleData = (state = initialPeopleState, action = {}) => {
             const copy = [...action.currentPeopleData]
             const result = copy.filter(person => person.name !== action.name);
             return Object.assign({}, state, { currentPeopleData: result });
+        default:
+            return state
+    }
+}
+
+export const editPeopleData = (state = {}, action = {}) => {
+    switch (action.type) {
+        case ON_EDIT_PERSON:
+        
         default:
             return state
     }

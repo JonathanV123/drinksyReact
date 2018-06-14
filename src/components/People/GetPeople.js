@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PeopleList from './PeopleList';
 import RequestPeople from './RequestPeople';
-// import PeopleForm from '../components/AddPeopleForm';
 
 const GetPeople = (props) => {
     console.log(props);

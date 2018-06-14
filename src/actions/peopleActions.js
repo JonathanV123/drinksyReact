@@ -3,6 +3,7 @@ import {
     REQUEST_PEOPLE_DATA_SUCCESS,
     REQUEST_PEOPLE_DATA_FAILED,
     ON_REMOVE_PERSON,
+    ON_EDIT_PERSON,
 } from '../constants';
 
 export const handlePeopleData = () => (dispatch) => {
@@ -20,5 +21,16 @@ export const onPersonRemoval = (name) => {
         dispatch({ type: ON_REMOVE_PERSON, currentPeopleData: peopleState, name: name });
     }
 };
+
+export const onEditPeopleData = (person) => {
+    // return (dispatch, getState) => {
+    //     const peopleState = getState().peopleData.currentPeopleData;
+    //     console.log(peopleState);
+    //     dispatch({ type: ON_EDIT_PERSON, currentPeopleData: peopleState, id: id });
+    // }
+    return { type: ON_EDIT_PERSON, id:person.id , name: person.name, email: person.email }
+};
+
+
 
 

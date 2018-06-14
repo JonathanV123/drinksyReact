@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { handlePeopleData, onPersonRemoval } from '../actions/peopleActions';
+import { handlePeopleData, onPersonRemoval, onEditPeopleData } from '../actions/peopleActions';
 import PeopleList from '../components/People/PeopleList';
 import RequestPeople from '../components/People/RequestPeople';
 import PeopleForm from '../components/People/AddPeopleForm';
@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         requestPeopleData: () => dispatch(handlePeopleData()),
         onPersonRemoval: (name) => dispatch(onPersonRemoval(name)),
+        onEditPeopleData: (id, name, email) => dispatch(onEditPeopleData(id, name, email)),
     }
 }
 
@@ -51,6 +52,7 @@ const PeopleContainer = (props) => {
                         peopleData={peopleData}
                         onPersonRemoval={onPersonRemoval}
                         requestPeopleData={requestPeopleData}
+                        onEditPeopleData={onEditPeopleData}
                     />
                 }
             />
