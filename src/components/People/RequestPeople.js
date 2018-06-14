@@ -3,6 +3,7 @@ import React  from 'react';
 class RequestPeople extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }

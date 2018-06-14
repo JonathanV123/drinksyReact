@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handlePeopleData, onPersonRemoval } from '../actions/peopleActions';
-import PeopleList from '../components/PeopleList'
-import RequestPeople from '../components/RequestPeople'
+import PeopleList from '../components/People/PeopleList';
+import RequestPeople from '../components/People/RequestPeople';
+import PeopleForm from '../components/People/AddPeopleForm';
+import GetPeople from '../components/People/GetPeople';
 
 const mapStateToProps = (state) => {
     return {
@@ -20,25 +22,40 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const GetPeople = (props) => {
-    const pending = props.isPending;
-    if (pending === true) {
-        return (
-            <h1>Loading Data</h1>
-        )
-    } else if (props.peopleData.currentPeopleData.length === 0) {
-        return (
-            <div>
-                <RequestPeople {...props} />
-                <Link className="navBarLink" to={'/addPeople'}>Add People</Link>
-            </div>
-        )
-    } else {
-        return (
-            <PeopleList {...props} />
-        )
-    }
-
+const PeopleNav = (props) => {
+    return (
+        <nav>
+            <Link className="navBarLink" to={'/people/addPeople'}>Add People</Link>
+            <Link className="navBarLink" to={'/people/getPeople'}>Get People</Link>
+        </nav>
+    )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GetPeople);
+const PeopleContainer = (props) => {
+    console.log(props);
+    const peopleData = props.peopleData;
+    const onPersonRemoval = props.onPersonRemoval;
+    const requestPeopleData = props.requestPeopleData;
+    return (
+        <div>
+            <PeopleNav />
+            <Route
+                exact path='/people/addPeople'
+                component={PeopleForm}
+            />
+            <Route
+                exact path='/people/getPeople'
+                render={(props) =>
+                    <GetPeople
+                        {...props}
+                        peopleData={peopleData}
+                        onPersonRemoval={onPersonRemoval}
+                        requestPeopleData={requestPeopleData}
+                    />
+                }
+            />
+        </div>
+    )
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PeopleContainer);

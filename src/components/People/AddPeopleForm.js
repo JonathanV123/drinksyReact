@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+console.log("PEOPLE FORM RUNNING")
 
 class PeopleForm extends React.Component {
     constructor(props) {

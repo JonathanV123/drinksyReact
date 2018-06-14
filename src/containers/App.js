@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import GetPeople from './People'
-import PeopleForm from '../components/AddPeopleForm'
+import PeopleContainer from './People'
 
 // import axios from 'axios';
 import '../App.css';
-console.log(PeopleForm)
+import People from './People';
+
 const mapStateToProps = (state) => {
   console.log(state);
   return {
@@ -35,11 +35,14 @@ const Navbar = () => {
   )
 }
 
-const toggleDiv = () => {
+const Home = () => {
+  return (
+    <h1> Home Page </h1>
+  )
 }
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   render() {
@@ -49,14 +52,17 @@ class App extends Component {
       <Router>
         <div id="appContainer">
           <Navbar />
-          <Route
-            path='/people'
-            render={(props) => <GetPeople />}
-          />
-          <Route
-            exact path='/addPeople'
-            component={PeopleForm}
-          />
+          <Switch>
+            <Route
+              path='/'
+              exact component={Home}
+            />
+            <Route
+              path='/people'
+              component={PeopleContainer}
+            />
+            <Route render={() => <h1> 404 </h1>} />
+          </Switch>
         </div>
       </Router>
     )
