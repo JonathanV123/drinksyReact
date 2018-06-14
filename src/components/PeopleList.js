@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Button from './Button'
 
-const buttonContent = "Remove Person";
+
 const PeopleCard = (props) => {
+    const buttonContent = "Remove Person";
     return (
         <div className="peopleCard">
             <h1>{props.name}</h1>
@@ -12,34 +13,8 @@ const PeopleCard = (props) => {
     )
 }
 
-// class PeopleList extends Component {
-//     constructor(props) {
-//         super(props);
-//     }
-//     render() {
-//         const display = this.props.peopleData.currentPeopleData.map((person, index) => {
-//             return (
-//                 <PeopleCard
-//                     key={person.id}
-//                     name={person.name}
-//                     email={person.email}
-//                     onPersonRemoval={this.props.onPersonRemoval}
-//                     buttonInfo={this.props.peopleButtonDescription}
-//                     className="peopleCard"
-//                 />
-//             )
-//         });
-//         return (
-//             <div className="peopleContainer">
-//                 {display}
-//             </div>
-//         )
-//     }
-// }
-
 const PeopleList = (props) => {
-    console.log("PEOPLE LIST RAN");
-    const display = props.peopleData.currentPeopleData.map((person, index) => {
+    const peopleCards = props.peopleData.currentPeopleData.map((person, index) => {
         return (
             <PeopleCard
                 key={person.id}
@@ -53,12 +28,10 @@ const PeopleList = (props) => {
     });
     return (
         <div className="peopleContainer">
-            {display}
+            {peopleCards}
         </div>
     )
 }
 
+export default PeopleList
 
-
-
-export default PeopleList;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handlePeopleData, onPersonRemoval } from '../actions/peopleActions';
 import PeopleList from '../components/PeopleList'
@@ -20,28 +20,25 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-class GetPeople extends Component {
-    constructor(props) {
-        super(props);
-        console.log(this.state)
-        console.log(this.props)
+const GetPeople = (props) => {
+    const pending = props.isPending;
+    if (pending === true) {
+        return (
+            <h1>Loading Data</h1>
+        )
+    } else if (props.peopleData.currentPeopleData.length === 0) {
+        return (
+            <div>
+                <RequestPeople {...props} />
+                <Link className="navBarLink" to={'/addPeople'}>Add People</Link>
+            </div>
+        )
+    } else {
+        return (
+            <PeopleList {...props} />
+        )
     }
-    render() {
-        const pending = this.props.isPending;
-        if (pending === true) {
-            return (
-                <h1>Loading Data</h1>
-            )
-        } else if (this.props.peopleData.currentPeopleData.length === 0) {
-            return (
-                <RequestPeople {...this.props} />
-            )
-        } else {
-            return (
-                <PeopleList {...this.props} />
-            )
-        }
-    }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GetPeople);
