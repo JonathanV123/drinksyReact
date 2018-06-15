@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import Button from '../Button'
 import EditPeopleForm from './EditPeopleForm';
 
@@ -13,14 +14,13 @@ const PeopleCard = (props) => {
             <h1>{props.name}</h1>
             <h2>{props.email}</h2>
             <Button clickAction={props.onPersonRemoval} buttonDesc={removePersonButton} funcArgs={props.name} />
-            <Button clickAction={props.onPersonRemoval} buttonDesc={editPersonButton} />
-            <EditPeopleForm {...props} />
+            <Link className="navBarLink" to={'/people/editPeople'}>Edit Person</Link>
         </div>
     )
 }
 
 const PeopleList = (props) => {
-    const peopleCards = props.peopleData.currentPeopleData.map((person, index) => {
+    const peopleCards = props.peopleData.map((person, index) => {
         return (
             <PeopleCard
                 key={person.id}

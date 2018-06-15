@@ -6,14 +6,13 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
-import { peopleData, editPeopleData, test } from './reducers/peopleReducers';
+import { peopleData, peopleDataFetch } from './reducers/peopleReducers';
 import registerServiceWorker from './registerServiceWorker';
 
 // const logger = createLogger();
 const rootReducer = combineReducers({
     peopleData,
-    editPeopleData,
-    test,
+    peopleDataFetch,
 })
 
 const store = createStore(

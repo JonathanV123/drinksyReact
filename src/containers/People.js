@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handlePeopleData, onPersonRemoval, onEditPeopleData } from '../actions/peopleActions';
-import PeopleList from '../components/People/PeopleList';
-import RequestPeople from '../components/People/RequestPeople';
 import PeopleForm from '../components/People/AddPeopleForm';
 import GetPeople from '../components/People/GetPeople';
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
-        peopleData: state.peopleData,
+        peopleData: state.peopleData.currentPeopleData,
         isPending: state.peopleData.isPending,
-        error: state.peopleData.error,
+        error: state.peopleDataFetch.error,
     }
 }
 
@@ -19,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         requestPeopleData: () => dispatch(handlePeopleData()),
         onPersonRemoval: (name) => dispatch(onPersonRemoval(name)),
-        onEditPeopleData: (id, name, email) => dispatch(onEditPeopleData(id, name, email)),
+        onEditPeopleData: (person) => dispatch(onEditPeopleData(person)),
     }
 }
 
@@ -36,7 +35,9 @@ const PeopleContainer = (props) => {
     console.log(props);
     const peopleData = props.peopleData;
     const onPersonRemoval = props.onPersonRemoval;
+    const onEditPeopleData = props.onEditPeopleData;
     const requestPeopleData = props.requestPeopleData;
+    const isPending = props.isPending;
     return (
         <div>
             <PeopleNav />
@@ -50,6 +51,7 @@ const PeopleContainer = (props) => {
                     <GetPeople
                         {...props}
                         peopleData={peopleData}
+                        isPending ={isPending}
                         onPersonRemoval={onPersonRemoval}
                         requestPeopleData={requestPeopleData}
                         onEditPeopleData={onEditPeopleData}

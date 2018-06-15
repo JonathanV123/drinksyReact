@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 console.log("PEOPLE FORM RUNNING")
 
-class PeopleForm extends React.Component {
+class PeopleForm extends Component {
     constructor(props) {
         super(props);
         this.state = {

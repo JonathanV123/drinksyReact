@@ -5,12 +5,9 @@ import PeopleContainer from './People'
 
 // import axios from 'axios';
 import '../App.css';
-import People from './People';
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-    test: state.test,
   }
 }
 
@@ -42,9 +39,9 @@ const Home = () => {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     console.log('APP RUNNING')
     console.log(this.props)

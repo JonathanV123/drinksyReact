@@ -7,6 +7,7 @@ import {
 } from '../constants';
 
 export const handlePeopleData = () => (dispatch) => {
+    console.log("DISPATCHING HANDLE PEOPLE DATA ")
     dispatch({ type: REQUEST_PEOPLE_DATA_PENDING });
     fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
@@ -16,20 +17,25 @@ export const handlePeopleData = () => (dispatch) => {
 
 export const onPersonRemoval = (name) => {
     return (dispatch, getState) => {
-        const peopleState = getState().peopleData.currentPeopleData;
-        console.log(peopleState);
-        dispatch({ type: ON_REMOVE_PERSON, currentPeopleData: peopleState, name: name });
+        const peopleState = getState().peopleData;
+        const payload = Object.assign({}, peopleState, { updatedPeopleData: peopleState, name: name });
+        console.log(payload);
+        dispatch({ type: ON_REMOVE_PERSON, payload });
     }
 };
 
+
 export const onEditPeopleData = (person) => {
-    // return (dispatch, getState) => {
-    //     const peopleState = getState().peopleData.currentPeopleData;
-    //     console.log(peopleState);
-    //     dispatch({ type: ON_EDIT_PERSON, currentPeopleData: peopleState, id: id });
-    // }
-    return { type: ON_EDIT_PERSON, id:person.id , name: person.name, email: person.email }
+    return (dispatch, getState) => {
+        const peopleState = getState().peopleData.currentPeopleData;
+        dispatch({ type: ON_EDIT_PERSON, currentPeopleData: peopleState, updatedPersonInfo: person });
+    }
 };
+
+
+// export const onEditPeopleData = (person) => {
+//      return { type: ON_EDIT_PERSON, id: person.id, name: person.name, email: person.email }
+// };
 
 
 

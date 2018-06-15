@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 console.log("EDIT PEOPLE FORM RUNNING")
 
-class EditPeopleForm extends React.Component {
+class EditPeopleForm extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
             id: this.props.id,
             name: this.props.name,
