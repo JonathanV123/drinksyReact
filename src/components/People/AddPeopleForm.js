@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
+console.log("PEOPLE FORM RUNNING")
 
-const cheese = 'cheese';
-const wine = 'wine';
-const name = 'name';
-
-class AddPlaceForm extends React.Component {
+class PeopleForm extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             name: '',
-            cheese: '',
-            wine:'',
-         };
+            email: '',
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,26 +15,23 @@ class AddPlaceForm extends React.Component {
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
+        console.log(this.state);
     }
 
     handleSubmit(event) {
+        alert('A name was submitted: ' + this.state.value);
         event.preventDefault();
     }
-
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Name:
-                    <input type="text" name='name' value={this.state.name.value} onChange={this.handleChange} />
+            <input type="text" name="name" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <label>
-                    Cheese Description:
-                    <input type="text" name='cheese'value={this.state.cheese.value} onChange={this.handleChange} />
-                </label>
-                <label>
-                    Wine Description:
-                    <input type="text" name='wine' value={this.state.wine.value} onChange={this.handleChange} />
+                    Email:
+            <input type="text" name="email" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <input type="submit" value="Submit" />
             </form>
@@ -46,4 +39,4 @@ class AddPlaceForm extends React.Component {
     }
 }
 
-export default AddPlaceForm;
+export default PeopleForm;
