@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PeopleContainer from './PeopleContainer'
+import PeopleContainer from './PeopleContainer';
+import LoginForm from '../components/LoginForm';
 
 // import axios from 'axios';
 import '../App.css';
@@ -53,8 +54,8 @@ class App extends Component {
               exact component={Home}
             />
             <Route
-              path='/'
-              exact component={Login}
+              path='/login'
+              exact component={LoginForm}
             />
             <Route
               path='/people'

@@ -1,35 +1,80 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Menuitem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
+});
 
+class LoginForm extends React.Component {
+  state = {
+    email: '',
+    password: '',
+    showValidationMessage: false,
+  };
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  handleChange = (email, password) => event => {
+    this.setState({
+      [email]: event.target.value,
+      [password]: event.target.value,
+    });
+    console.log(this.state);
+  };
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    const state = this.state;
+    if(state.email === ''){
+
+    }
     event.preventDefault();
-  }
+  };
 
   render() {
+    const { classes } = this.props;
+    const validation = 'Required';
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Email:
-            <input type="text" name='email' value={this.state.value} />
-        </label>
-        <label>
-          Password:
-            <input type="text" name='password' value={this.state.value} />
-        </label>
-        <input type="submit" value="Submit" />
+      <form id='login-form' noValidate autocomplete='off' onSubmit={this.handleSubmit}>
+        <TextField
+          id="error"
+          label="error"
+          value={this.state.email}
+          onChange={this.handleChange('email')}
+          margin="normal"
+        />
+        <TextField
+          id="password-input"
+          placeholder="Password"
+          label="Password"
+          type="password"
+          onChange={this.handleChange('password')}
+          margin="normal"
+        />
+        <Button variant="contained" type='submit' color="primary">
+          Login
+        </Button>
       </form>
     );
   }
