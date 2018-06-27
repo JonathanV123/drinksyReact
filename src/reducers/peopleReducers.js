@@ -33,6 +33,7 @@ export const peopleData = (state = initialPeopleState, action = {}) => {
         case ON_REMOVE_PERSON:
             let removeCopy = [...action.payload.currentPeopleData]
             const result = removeCopy.filter(person => person.name !== action.payload.name);
+            return Object.assign({}, state, { currentPeopleData: result });
         case ON_EDIT_PERSON:
             let editCopy = [...action.currentPeopleData]
             const updatedPersonData = action.updatedPersonInfo;

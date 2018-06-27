@@ -3,7 +3,8 @@ import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { handlePeopleData, onPersonRemoval, onEditPeopleData } from '../actions/peopleActions';
 import PeopleForm from '../components/People/AddPeopleForm';
-import GetPeople from '../components/People/GetPeople';
+import People from '../components/People/People';
+import EditPeopleForm from '../components/People/EditPeopleForm';
 
 const mapStateToProps = (state) => {
     console.log(state);
@@ -32,7 +33,6 @@ const PeopleNav = (props) => {
 }
 
 const PeopleContainer = (props) => {
-    console.log(props);
     const peopleData = props.peopleData;
     const onPersonRemoval = props.onPersonRemoval;
     const onEditPeopleData = props.onEditPeopleData;
@@ -48,10 +48,10 @@ const PeopleContainer = (props) => {
             <Route
                 exact path='/people/getPeople'
                 render={(props) =>
-                    <GetPeople
+                    <People
                         {...props}
                         peopleData={peopleData}
-                        isPending ={isPending}
+                        isPending={isPending}
                         onPersonRemoval={onPersonRemoval}
                         requestPeopleData={requestPeopleData}
                         onEditPeopleData={onEditPeopleData}

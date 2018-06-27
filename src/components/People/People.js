@@ -1,9 +1,10 @@
 import React from 'react';
-// import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import PeopleList from './PeopleList';
 import RequestPeople from './RequestPeople';
+import EditPeopleForm from './EditPeopleForm';
 
-const GetPeople = (props) => {
+const People = (props) => {
     console.log(props);
     const pending = props.isPending;
     if (pending === true) {
@@ -18,10 +19,12 @@ const GetPeople = (props) => {
         )
     } else {
         return (
-            <PeopleList {...props} />
+            <div>
+                <PeopleList {...props} />
+            </div>
         )
     }
 
 }
 
-export default GetPeople;
+export default People;

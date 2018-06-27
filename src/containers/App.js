@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PeopleContainer from './People'
+import PeopleContainer from './PeopleContainer'
 
 // import axios from 'axios';
 import '../App.css';
@@ -43,8 +43,6 @@ class App extends Component {
   //   super(props);
   // }
   render() {
-    console.log('APP RUNNING')
-    console.log(this.props)
     return (
       <Router>
         <div id="appContainer">
@@ -53,6 +51,10 @@ class App extends Component {
             <Route
               path='/'
               exact component={Home}
+            />
+            <Route
+              path='/'
+              exact component={Login}
             />
             <Route
               path='/people'
