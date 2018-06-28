@@ -5,7 +5,6 @@ import RequestPeople from './RequestPeople';
 import EditPeopleForm from './EditPeopleForm';
 
 const People = (props) => {
-    console.log(props);
     const pending = props.isPending;
     if (pending === true) {
         return (

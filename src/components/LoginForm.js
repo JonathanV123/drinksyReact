@@ -4,80 +4,97 @@ import Menuitem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  menu: {
-    width: 200,
-  },
-  button: {
-    margin: theme.spacing.unit,
-  },
-  input: {
-    display: 'none',
-  },
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+    menu: {
+        width: 200,
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
 });
 
 class LoginForm extends React.Component {
-  state = {
-    email: '',
-    password: '',
-    showValidationMessage: false,
-  };
-
-  handleChange = (email, password) => event => {
-    this.setState({
-      [email]: event.target.value,
-      [password]: event.target.value,
-    });
-    console.log(this.state);
-  };
-
-
-  handleSubmit(event) {
-    const state = this.state;
-    if(state.email === ''){
-
+    constructor(props) {
+        super();
     }
-    event.preventDefault();
-  };
+    state = {
+        email: '',
+        password_digest: '',
+    };
 
-  render() {
-    const { classes } = this.props;
-    const validation = 'Required';
 
-    return (
-      <form id='login-form' noValidate autocomplete='off' onSubmit={this.handleSubmit}>
-        <TextField
-          id="error"
-          label="error"
-          value={this.state.email}
-          onChange={this.handleChange('email')}
-          margin="normal"
-        />
-        <TextField
-          id="password-input"
-          placeholder="Password"
-          label="Password"
-          type="password"
-          onChange={this.handleChange('password')}
-          margin="normal"
-        />
-        <Button variant="contained" type='submit' color="primary">
-          Login
-        </Button>
-      </form>
-    );
-  }
+    handleChange = (email, password_digest) => event => {
+        this.setState({
+            [email]: event.target.value,
+            [password_digest]: event.target.value,
+        });
+    };
+
+    handleSubmit = (event, data) => {
+        const token = sessionStorage.getItem('jwtToken')
+        console.log(token);
+        axios({
+            method: 'post',
+            url: 'http://localhost:8080/login',
+            headers: { 'Authorization': 'bearer ' + token },
+            data: {
+                email: this.state.email,
+                password_digest: this.state.password_digest
+            }
+        }).then((response) => {
+            console.log(response);
+        }).catch((err) => {
+            console.log(err)
+        })
+        event.preventDefault();
+    };
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <div>
+                <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
+                    <TextField
+                        id="email"
+                        label="Email"
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="password-input"
+                        placeholder="Password"
+                        label="Password"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleChange('password_digest')}
+                        margin="normal"
+                    />
+                    {/* <Link to={'/login'}> */}
+                    <Button variant="contained" type='submit' color="primary">
+                        Login
+                        </Button>
+                    {/* </Link> */}
+                </form>
+            </div>
+        );
+    }
 }
+
 
 export default LoginForm;

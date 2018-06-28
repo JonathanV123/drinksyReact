@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PeopleContainer from './PeopleContainer';
-import LoginForm from '../components/LoginForm';
+import LoginContainer from './LoginContainer';
+
 
 // import axios from 'axios';
 import '../App.css';
@@ -26,7 +27,7 @@ const Navbar = () => {
       <nav>
         <Link className="navBarLink" to={'/'}>Home</Link>
         <Link className="navBarLink" to={'/people'}>People</Link>
-        <Link className="navBarLink" to={'/login'}>Login</Link>
+        <Link className="navBarLink" to={'/createUser'}>Create Account</Link>
         <Link className="navBarLink" to={'/account'}>Account</Link>
       </nav>
     </div>
@@ -54,8 +55,8 @@ class App extends Component {
               exact component={Home}
             />
             <Route
-              path='/login'
-              exact component={LoginForm}
+              path='/createUser'
+              exact component={LoginContainer}
             />
             <Route
               path='/people'
