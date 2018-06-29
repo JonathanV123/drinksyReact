@@ -3,21 +3,22 @@ import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PeopleContainer from './PeopleContainer';
 import LoginContainer from './LoginContainer';
+import { userHasLoggedIn } from '../actions/jwtActions';
 
 
 // import axios from 'axios';
 import '../App.css';
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
+    loggedIn: state.userIsLoggedIn.isUserLoggedIn,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // requestPeopleData: () => dispatch(handlePeopleData()),
-    // peopleUserInterfaceRender: () => dispatch(peopleUserInterfaceRender()),
-    // onPersonRemoval: (name) => dispatch(onPersonRemoval(name)),
+    userLoggedIn: () => dispatch(userHasLoggedIn()),
   }
 }
 
@@ -41,12 +42,15 @@ const Home = () => {
 }
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
   render() {
-    return (
-      <Router>
+    const loggedIn = this.props.loggedIn;
+    if (loggedIn === true) {
+      return (<h1> hey</h1>)
+    } else {
+      return (<Router>
         <div id="appContainer">
           <Navbar />
           <Switch>
@@ -56,7 +60,13 @@ class App extends Component {
             />
             <Route
               path='/createUser'
-              exact component={LoginContainer}
+              render={(props) =>
+                    <LoginContainer
+                        {...props}
+                        loggedIn={loggedIn}
+                        userLoggedIn={this.props.userLoggedIn}
+                    />
+                }
             />
             <Route
               path='/people'
@@ -66,8 +76,11 @@ class App extends Component {
           </Switch>
         </div>
       </Router>
-    )
+      )
+    }
   }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

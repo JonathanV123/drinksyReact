@@ -31,7 +31,6 @@ class LoginContainer extends Component {
         }
     }
     accountCreated = (accountCreated) => {
-        console.log(accountCreated);
         if (accountCreated === true) {
             this.setState((prevState, props) => {
                 return {
@@ -45,14 +44,20 @@ class LoginContainer extends Component {
         if (this.state.userHasAccount === false) {
             return (
                 <div>
-                    <SignUpForm accountCreated={this.accountCreated} />
+                    <SignUpForm
+                        accountCreated={this.accountCreated}
+                        loggedin={this.props.loggedIn}
+                    />
                 </div>
             )
         } else {
             return (
                 <div>
                     <AccountCreatedNotifcation />
-                    <LoginForm />
+                    <LoginForm
+                        loggedin={this.props.loggedIn}
+                        userLoggedIn={this.props.userLoggedIn}
+                    />
                 </div>
             )
         }

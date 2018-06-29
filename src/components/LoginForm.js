@@ -58,6 +58,7 @@ class LoginForm extends React.Component {
             }
         }).then((response) => {
             console.log(response);
+            this.props.userLoggedIn();
         }).catch((err) => {
             console.log(err)
         })
