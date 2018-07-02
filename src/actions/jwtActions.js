@@ -1,6 +1,6 @@
 import {
     USER_LOGGED_IN,
-    NO_USER_LOGGED_IN
+    // NO_USER_LOGGED_IN
 } from '../constants';
 
 // export const handlePeopleData = () => (dispatch) => {

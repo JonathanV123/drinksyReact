@@ -1,6 +1,6 @@
 import React  from 'react';
 
-class RequestPeople extends React.Component {
+class GetRestaurants extends React.Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -13,7 +13,7 @@ class RequestPeople extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.requestPeopleData();
+        this.props.requestRestaurantData();
         event.preventDefault();
     }
 
@@ -29,4 +29,4 @@ class RequestPeople extends React.Component {
     }
 }
 
-export default RequestPeople;
+export default GetRestaurants;

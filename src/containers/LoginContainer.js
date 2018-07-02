@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import SignUpForm from '../components/SignUpForm';
 import LoginForm from '../components/LoginForm';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
-    root: {
-        ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
-        paddingBottom: theme.spacing.unit * 2,
-    },
-});
+// const styles = theme => ({
+//     root: {
+//         ...theme.mixins.gutters(),
+//         paddingTop: theme.spacing.unit * 2,
+//         paddingBottom: theme.spacing.unit * 2,
+//     },
+// });
 
 const AccountCreatedNotifcation = () => {
     return (

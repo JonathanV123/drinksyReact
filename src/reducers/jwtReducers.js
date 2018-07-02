@@ -1,5 +1,5 @@
 import {
-    GET_TOKEN_ME,
+    // GET_TOKEN_ME,
     USER_LOGGED_IN
 } from '../constants';
 

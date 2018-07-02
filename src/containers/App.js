@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import PeopleContainer from './PeopleContainer';
+import RestaurantContainer from './RestaurantContainer';
 import LoginContainer from './LoginContainer';
 import { userHasLoggedIn } from '../actions/jwtActions';
 
-
-// import axios from 'axios';
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -27,7 +25,7 @@ const Navbar = () => {
     <div className="navBarContainer">
       <nav>
         <Link className="navBarLink" to={'/'}>Home</Link>
-        <Link className="navBarLink" to={'/people'}>People</Link>
+        <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
         <Link className="navBarLink" to={'/createUser'}>Create Account</Link>
         <Link className="navBarLink" to={'/account'}>Account</Link>
       </nav>
@@ -42,9 +40,9 @@ const Home = () => {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
     const loggedIn = this.props.loggedIn;
     if (loggedIn === true) {
@@ -61,16 +59,16 @@ class App extends Component {
             <Route
               path='/createUser'
               render={(props) =>
-                    <LoginContainer
-                        {...props}
-                        loggedIn={loggedIn}
-                        userLoggedIn={this.props.userLoggedIn}
-                    />
-                }
+                <LoginContainer
+                  {...props}
+                  loggedIn={loggedIn}
+                  userLoggedIn={this.props.userLoggedIn}
+                />
+              }
             />
             <Route
-              path='/people'
-              component={PeopleContainer}
+              path='/restaurant'
+              component={RestaurantContainer}
             />
             <Route render={() => <h1> 404 </h1>} />
           </Switch>
