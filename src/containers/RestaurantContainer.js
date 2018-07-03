@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { handleRestaurantData, onPersonRemoval, onEditrestaurantData } from '../actions/restaurantActions';
+import { handleRestaurantData } from '../actions/restaurantActions';
 import AddRestaurantForm from '../components/Restaurant/AddRestaurantForm';
 import Restaurant from '../components/Restaurant/Restaurant';
 

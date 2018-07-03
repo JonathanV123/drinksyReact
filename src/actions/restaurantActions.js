@@ -2,8 +2,6 @@ import {
     REQUEST_RESTAURANT_DATA_PENDING,
     REQUEST_RESTAURANT_DATA_SUCCESS,
     REQUEST_RESTAURANT_DATA_FAILED,
-    ON_REMOVE_RESTAURANT,
-    ON_EDIT_RESTAURANT,
 } from '../constants';
 
 export const handleRestaurantData = () => (dispatch) => {

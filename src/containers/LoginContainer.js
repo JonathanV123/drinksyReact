@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import SignUpForm from '../components/SignUpForm';
-import LoginForm from '../components/LoginForm';
+import { Route, Link, } from 'react-router-dom';
+
+import SignUpForm from '../components/User/SignUpForm';
+import LoginForm from '../components/User/LoginForm';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -22,40 +24,65 @@ const AccountCreatedNotifcation = () => {
     )
 }
 
+const SignUp = () => {
+    return (
+        <div className="homePageContainer">
+            <div className="welcomeContainer">
+                <h1>Welcome to Drinksy!</h1>
+            </div>
+            <div className="blankForNow">
+                <nav>
+                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
+                    <Link className="navBarLink" to={'/login'}>Login</Link>
+                </nav>
+            </div>
+        </div>
+    )
+}
+
 class LoginContainer extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             userHasAccount: false,
         }
     }
-    accountCreated = (accountCreated) => {
+    accountJustCreated = (accountCreated) => {
         if (accountCreated === true) {
             this.setState((prevState, props) => {
                 return {
                     userHasAccount: true
                 }
             })
+        } else {
+            this.setState((prevState, props) => {
+                return {
+                    userHasAccount: false
+                }
+            })
         }
     }
 
     render() {
-        if (this.state.userHasAccount === false) {
+        const token = sessionStorage.getItem('jwtToken');
+        if (this.state.userHasAccount) {
             return (
-                <div>
-                    <SignUpForm
-                        accountCreated={this.accountCreated}
+                <div className="formContainer">
+                    <LoginForm
                         loggedin={this.props.loggedIn}
+                        userLoggedIn={this.props.userLoggedIn}
+                        accountJustCreated={this.accountJustCreated}
                     />
                 </div>
             )
         } else {
             return (
-                <div>
-                    <AccountCreatedNotifcation />
-                    <LoginForm
+                <div className="formContainer">
+                    <SignUpForm
+                        accountJustCreated={this.accountJustCreated}
                         loggedin={this.props.loggedIn}
-                        userLoggedIn={this.props.userLoggedIn}
+                        retrieveToken={this.props.retrieveToken}
                     />
                 </div>
             )
