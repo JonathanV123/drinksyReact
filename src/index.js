@@ -6,13 +6,16 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
-import { peopleData, peopleDataFetch } from './reducers/peopleReducers';
+import { restaurantData, restaurantDataFetch } from './reducers/restaurantReducers';
+import { userIsLoggedIn, tokenRetrieved } from './reducers/jwtReducers';
 import registerServiceWorker from './registerServiceWorker';
 
 // const logger = createLogger();
 const rootReducer = combineReducers({
-    peopleData,
-    peopleDataFetch,
+    userIsLoggedIn,
+    tokenRetrieved,
+    restaurantData,
+    restaurantDataFetch,
 })
 
 const store = createStore(
