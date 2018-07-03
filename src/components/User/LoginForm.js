@@ -52,7 +52,7 @@ class LoginForm extends Component {
         axios({
             method: 'post',
             url: 'http://localhost:8080/login',
-            headers: { 'Authorization': 'bearer ' + token },
+            // headers: { 'Authorization': 'bearer ' + token },
             data: {
                 email: this.state.email,
                 password_digest: this.state.password_digest
@@ -89,11 +89,9 @@ class LoginForm extends Component {
                     onChange={this.handleChange('password_digest')}
                     margin="normal"
                 />
-                {/* <Link to={'/home'}> */}
                 <Button variant="contained" type='submit' color="primary">
                     Login
-                    </Button>
-                {/* </Link> */}
+                </Button>
             </form>
         );
     }

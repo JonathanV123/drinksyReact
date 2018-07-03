@@ -14,8 +14,22 @@
 
 #appContainer {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: lightcoral; }
+
+#loginContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100%; }
 
 .navBarContainer {
   width: 100%;
@@ -65,7 +79,7 @@
   border: 2px solid black;
   font-size: 2em; }
 
-.homePageContainer {
+#homePageContainer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -97,3 +111,16 @@
   flex-wrap: wrap;
   width: 100%;
   height: 100vh; }
+
+#loginNav {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }

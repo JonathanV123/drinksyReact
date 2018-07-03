@@ -24,6 +24,22 @@ const Home = (props) => {
         <h1>Welcome</h1>
     )
 }
+const SignUp = (props) => {
+    return (
+        <div>
+            <div className="welcomeContainer">
+                <h1>Welcome to Drinksy!</h1>
+            </div>
+            <div className="blankForNow">
+                <nav id="loginNav">
+                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
+                    <h2> Or </h2>
+                    <Link className="navBarLink" to={'/login'}>Login</Link>
+                </nav>
+            </div>
+        </div>
+    )
+}
 
 class HomeContainer extends Component {
     constructor(props) {
@@ -34,7 +50,7 @@ class HomeContainer extends Component {
         const loggedIn = this.props.loggedIn;
         if (loggedIn) {
             return (
-                <div className="homeContainer">
+                <div id="homeContainer">
                     <Navbar />
                     <Route
                         path='/'
@@ -50,17 +66,20 @@ class HomeContainer extends Component {
             )
         } else {
             return (
-                <Route
-                    path='/'
-                    render={(props) =>
-                        <LoginContainer
-                            {...props}
-                            loggedIn={loggedIn}
-                            userLoggedIn={this.props.userLoggedIn}
-                            retrieveToken={this.props.retrieveToken}
-                        />
-                    }
-                />
+                <div>
+                    <SignUp />
+                    <Route
+                        path='/user'
+                        render={(props) =>
+                            <LoginContainer
+                                {...props}
+                                loggedIn={loggedIn}
+                                userLoggedIn={this.props.userLoggedIn}
+                                retrieveToken={this.props.retrieveToken}
+                            />
+                        }
+                    />
+                </div>
             )
         }
     }

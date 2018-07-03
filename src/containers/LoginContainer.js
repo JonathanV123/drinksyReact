@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Link, } from 'react-router-dom';
-
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Paper from '@material-ui/core/Paper';
@@ -24,21 +23,7 @@ const AccountCreatedNotifcation = () => {
     )
 }
 
-const SignUp = () => {
-    return (
-        <div className="homePageContainer">
-            <div className="welcomeContainer">
-                <h1>Welcome to Drinksy!</h1>
-            </div>
-            <div className="blankForNow">
-                <nav>
-                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
-                    <Link className="navBarLink" to={'/login'}>Login</Link>
-                </nav>
-            </div>
-        </div>
-    )
-}
+
 
 class LoginContainer extends Component {
     constructor(props) {
@@ -65,29 +50,32 @@ class LoginContainer extends Component {
     }
 
     render() {
-        const token = sessionStorage.getItem('jwtToken');
-        if (this.state.userHasAccount) {
-            return (
-                <div className="formContainer">
-                    <LoginForm
-                        loggedin={this.props.loggedIn}
-                        userLoggedIn={this.props.userLoggedIn}
-                        accountJustCreated={this.accountJustCreated}
-                    />
-                </div>
-            )
-        } else {
-            return (
-                <div className="formContainer">
-                    <SignUpForm
-                        accountJustCreated={this.accountJustCreated}
-                        loggedin={this.props.loggedIn}
-                        retrieveToken={this.props.retrieveToken}
-                    />
-                </div>
-            )
-        }
-
+        return (
+            <div id="loginContainer">
+                <Route
+                    path='/createAccount'
+                    exact strict render={(props) =>
+                        <SignUpForm
+                            {...props}
+                            loggedIn={this.props.loggedIn}
+                            userLoggedIn={this.props.userLoggedIn}
+                            retrieveToken={this.props.retrieveToken}
+                        />
+                    }
+                />
+                <Route
+                    path='/login'
+                    exact strict render={(props) =>
+                        <LoginForm
+                            {...props}
+                            loggedIn={this.props.loggedIn}
+                            userLoggedIn={this.props.userLoggedIn}
+                            retrieveToken={this.props.retrieveToken}
+                        />
+                    }
+                />
+            </div>
+        )
     }
 }
 
