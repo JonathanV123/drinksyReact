@@ -48,7 +48,7 @@ class SignUpForm extends React.Component {
       }
     }).then((response) => {
       const user_created = true;
-      this.props.accountJustCreated(user_created);
+      // this.props.accountJustCreated(user_created);
       sessionStorage.setItem('jwtToken', response.data.token)
     });
     event.preventDefault();

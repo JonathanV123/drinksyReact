@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 // import Menuitem from '@material-ui/core/MenuItem';
+import { Redirect } from 'react-router-dom';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -46,23 +48,20 @@ class LoginForm extends Component {
     };
 
     handleSubmit = (event, data) => {
-        const token = sessionStorage.getItem('jwtToken')
-        console.log(token);
-        console.log('YAY!');
         axios({
             method: 'post',
             url: 'http://localhost:8080/login',
-            // headers: { 'Authorization': 'bearer ' + token },
             data: {
                 email: this.state.email,
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
             const clearAcctCreation = false;
-            this.props.accountJustCreated(clearAcctCreation);
+            console.log(response);
             this.props.userLoggedIn();
         }).catch((err) => {
             console.log(err)
+            this.props.renderResponse(err)
         })
         event.preventDefault();
     };
@@ -89,9 +88,11 @@ class LoginForm extends Component {
                     onChange={this.handleChange('password_digest')}
                     margin="normal"
                 />
-                <Button variant="contained" type='submit' color="primary">
-                    Login
-                </Button>
+                <Link className="navBarLink" to={'/test'}>
+                    <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                        Login
+                    </Button>
+                </Link>
             </form>
         );
     }

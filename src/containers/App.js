@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RestaurantContainer from './RestaurantContainer';
-import HomeContainer from './HomeContainer';
 import LoginContainer from './LoginContainer';
 import { userHasLoggedIn, getTokenMe } from '../actions/jwtActions';
 
@@ -14,6 +13,21 @@ const mapStateToProps = (state) => {
     loggedIn: state.userIsLoggedIn.isUserLoggedIn,
   }
 }
+
+const Navbar = (props) => {
+  console.log(props);
+  return (
+    <div className="navBarContainer">
+      <nav>
+        <Link className="navBarLink" to={'/'}>Home</Link>
+        <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
+        <Link className="navBarLink" to={'/account'}>Account</Link>
+      </nav>
+    </div>
+  )
+}
+
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -36,10 +50,11 @@ class App extends Component {
             <Route
               path='/'
               render={(props) =>
-                <HomeContainer
+                <LoginContainer
                   {...props}
                   loggedIn={loggedIn}
                   userLoggedIn={this.props.userLoggedIn}
+                  retrieveToken={this.props.retrieveToken}
                 />
               }
             />
@@ -50,7 +65,5 @@ class App extends Component {
     )
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

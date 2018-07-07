@@ -13,37 +13,64 @@ import Typography from '@material-ui/core/Typography';
 //     },
 // });
 
-const AccountCreatedNotifcation = () => {
+const Notification = (props) => {
+    if (props.showNotification) {
+        return (
+            <Paper elevation={5}>
+                <Typography variant="headline" component="h3">
+                    {/* {props.responseMessage} */}
+                </Typography>
+            </Paper>
+        )
+    } else {
+        return null;
+    }
+}
+
+const SignUp = (props) => {
     return (
-        <Paper elevation={5}>
-            <Typography variant="headline" component="h3">
-                Your Account Has Been Created. Login Below
-            </Typography>
-        </Paper>
+        <div>
+            <div className="welcomeContainer">
+                <h1>Welcome to Drinksy!</h1>
+            </div>
+            <div className="blankForNow">
+                <nav id="loginNav">
+                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
+                    <h2> Or </h2>
+                    <Link className="navBarLink" to={'/login'}>Login</Link>
+                </nav>
+            </div>
+        </div>
     )
 }
 
-
+const Test = (props) => {
+    return (
+        <div>
+            <div className="testingContainer">
+                <h1>Woah!</h1>
+            </div>
+        </div>
+    )
+}
 
 class LoginContainer extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             userHasAccount: false,
+            showNotification: false,
+            responseMessage: '',
         }
     }
-    accountJustCreated = (accountCreated) => {
-        if (accountCreated === true) {
+
+    renderResponse = (err) => {
+        console.log(err.stack);
+        if (err) {
             this.setState((prevState, props) => {
                 return {
-                    userHasAccount: true
-                }
-            })
-        } else {
-            this.setState((prevState, props) => {
-                return {
-                    userHasAccount: false
+                    showNotification: true,
+                    responseMessage: err
                 }
             })
         }
@@ -52,9 +79,10 @@ class LoginContainer extends Component {
     render() {
         return (
             <div id="loginContainer">
+                <SignUp />
                 <Route
                     path='/createAccount'
-                    exact strict render={(props) =>
+                    render={(props) =>
                         <SignUpForm
                             {...props}
                             loggedIn={this.props.loggedIn}
@@ -65,8 +93,20 @@ class LoginContainer extends Component {
                 />
                 <Route
                     path='/login'
-                    exact strict render={(props) =>
+                    render={(props) =>
                         <LoginForm
+                            {...props}
+                            loggedIn={this.props.loggedIn}
+                            userLoggedIn={this.props.userLoggedIn}
+                            retrieveToken={this.props.retrieveToken}
+                            renderResponse={this.renderResponse}
+                        />
+                    }
+                />
+                <Route
+                    path='/test'
+                    exact strict render={(props) =>
+                        <Test
                             {...props}
                             loggedIn={this.props.loggedIn}
                             userLoggedIn={this.props.userLoggedIn}
@@ -74,6 +114,7 @@ class LoginContainer extends Component {
                         />
                     }
                 />
+                <Notification responseMessage={this.state.responseMessage} showNotification={this.state.showNotification} />
             </div>
         )
     }

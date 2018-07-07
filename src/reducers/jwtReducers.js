@@ -10,7 +10,6 @@ const initialIsLoggedIn = {
 };
 
 export const userIsLoggedIn = (state = initialIsLoggedIn, action = {}) => {
-    console.log(action.type);
     switch (action.type) {
         case USER_LOGGED_IN:
             return Object.assign({}, state, { isUserLoggedIn: true });
