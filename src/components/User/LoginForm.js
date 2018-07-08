@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import Menuitem from '@material-ui/core/MenuItem';
-import { Redirect } from 'react-router-dom';
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -57,11 +54,10 @@ class LoginForm extends Component {
             }
         }).then((response) => {
             const clearAcctCreation = false;
-            console.log(response);
             this.props.userLoggedIn();
         }).catch((err) => {
-            console.log(err)
-            this.props.renderResponse(err)
+            const errorMessage = err.response.data.message;
+            this.props.renderResponse(errorMessage)
         })
         event.preventDefault();
     };

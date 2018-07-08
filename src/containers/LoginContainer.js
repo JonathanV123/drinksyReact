@@ -2,24 +2,27 @@ import React, { Component } from 'react';
 import { Route, Link, } from 'react-router-dom';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-// const styles = theme => ({
-//     root: {
-//         ...theme.mixins.gutters(),
-//         paddingTop: theme.spacing.unit * 2,
-//         paddingBottom: theme.spacing.unit * 2,
-//     },
-// });
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+});
 
 const Notification = (props) => {
     if (props.showNotification) {
         return (
             <Paper elevation={5}>
                 <Typography variant="headline" component="h3">
-                    {/* {props.responseMessage} */}
+                    {props.responseMessage}
                 </Typography>
+                <Button variant="contained" onClick={props.clearNotification} color="primary">
+                    Ok
+                </Button>
             </Paper>
         )
     } else {
@@ -64,8 +67,17 @@ class LoginContainer extends Component {
         }
     }
 
+    clearNotification = () => {
+        this.setState((prevState, props) => {
+            return {
+                showNotification: false,
+                responseMessage: ''
+            }
+        })
+    }
+
     renderResponse = (err) => {
-        console.log(err.stack);
+        console.log(err);
         if (err) {
             this.setState((prevState, props) => {
                 return {
@@ -114,10 +126,15 @@ class LoginContainer extends Component {
                         />
                     }
                 />
-                <Notification responseMessage={this.state.responseMessage} showNotification={this.state.showNotification} />
+                <Notification
+                    responseMessage={this.state.responseMessage}
+                    showNotification={this.state.showNotification}
+                    clearNotification={this.clearNotification}
+                />
             </div>
         )
     }
 }
 
-export default LoginContainer;
+export default withStyles(styles)(LoginContainer);
+
