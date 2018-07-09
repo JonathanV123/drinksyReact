@@ -47,6 +47,18 @@
   border: 3px solid black;
 }
 
+.paperNotifcationContainer{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  width:200px;
+  height:200px;
+}
+
+.paperNotifcation{
+  @include flexBoxCenter();
+}
+
 .navBarLink{
   text-decoration: none;
   font-size: 2em;

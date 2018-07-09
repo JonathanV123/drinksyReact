@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link, } from 'react-router-dom';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
+import Dashboard from '../components/Dashboard';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -9,15 +10,15 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing.unit
     },
 });
 
 const Notification = (props) => {
     if (props.showNotification) {
         return (
-            <Paper elevation={5}>
-                <Typography variant="headline" component="h3">
+            <Paper className="paperNotifcationContainer" elevation={5}>
+                <Typography className="paperNotifcation" variant="headline" component="h3">
                     {props.responseMessage}
                 </Typography>
                 <Button variant="contained" onClick={props.clearNotification} color="primary">
@@ -47,17 +48,9 @@ const SignUp = (props) => {
     )
 }
 
-const Test = (props) => {
-    return (
-        <div>
-            <div className="testingContainer">
-                <h1>Woah!</h1>
-            </div>
-        </div>
-    )
-}
 
-class LoginContainer extends Component {
+
+class HomeContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -77,7 +70,6 @@ class LoginContainer extends Component {
     }
 
     renderResponse = (err) => {
-        console.log(err);
         if (err) {
             this.setState((prevState, props) => {
                 return {
@@ -89,13 +81,12 @@ class LoginContainer extends Component {
     }
 
     render() {
-        return (
-            <div id="loginContainer">
-                <SignUp />
+        if (this.props.loggedIn) {
+            return (
                 <Route
-                    path='/createAccount'
+                    path='/dashboard'
                     render={(props) =>
-                        <SignUpForm
+                        <Dashboard
                             {...props}
                             loggedIn={this.props.loggedIn}
                             userLoggedIn={this.props.userLoggedIn}
@@ -103,38 +94,46 @@ class LoginContainer extends Component {
                         />
                     }
                 />
-                <Route
-                    path='/login'
-                    render={(props) =>
-                        <LoginForm
-                            {...props}
-                            loggedIn={this.props.loggedIn}
-                            userLoggedIn={this.props.userLoggedIn}
-                            retrieveToken={this.props.retrieveToken}
-                            renderResponse={this.renderResponse}
-                        />
-                    }
-                />
-                <Route
-                    path='/test'
-                    exact strict render={(props) =>
-                        <Test
-                            {...props}
-                            loggedIn={this.props.loggedIn}
-                            userLoggedIn={this.props.userLoggedIn}
-                            retrieveToken={this.props.retrieveToken}
-                        />
-                    }
-                />
-                <Notification
-                    responseMessage={this.state.responseMessage}
-                    showNotification={this.state.showNotification}
-                    clearNotification={this.clearNotification}
-                />
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div id="loginContainer">
+                    <SignUp />
+                    <Route
+                        path='/createAccount'
+                        render={(props) =>
+                            <SignUpForm
+                                {...props}
+                                loggedIn={this.props.loggedIn}
+                                userLoggedIn={this.props.userLoggedIn}
+                                retrieveToken={this.props.retrieveToken}
+                                renderResponse={this.renderResponse}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/login'
+                        render={(props) =>
+                            <LoginForm
+                                {...props}
+                                loggedIn={this.props.loggedIn}
+                                userLoggedIn={this.props.userLoggedIn}
+                                retrieveToken={this.props.retrieveToken}
+                                renderResponse={this.renderResponse}
+                            />
+                        }
+                    />
+                    <Notification
+                        responseMessage={this.state.responseMessage}
+                        showNotification={this.state.showNotification}
+                        clearNotification={this.clearNotification}
+                    />
+                </div>
+            )
+        }
+
     }
 }
 
-export default withStyles(styles)(LoginContainer);
+export default withStyles(styles)(HomeContainer);
 

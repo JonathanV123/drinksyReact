@@ -36,6 +36,27 @@
   height: 100px;
   border: 3px solid black; }
 
+.paperNotifcationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 200px;
+  height: 200px; }
+
+.paperNotifcation {
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
 .navBarLink {
   text-decoration: none;
   font-size: 2em;

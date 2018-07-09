@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Dashboard from '../Dashboard';
 
 
 const styles = theme => ({
@@ -54,6 +55,7 @@ class LoginForm extends Component {
             }
         }).then((response) => {
             const clearAcctCreation = false;
+            sessionStorage.setItem('jwtToken', response.data.token)
             this.props.userLoggedIn();
         }).catch((err) => {
             const errorMessage = err.response.data.message;
@@ -84,15 +86,13 @@ class LoginForm extends Component {
                     onChange={this.handleChange('password_digest')}
                     margin="normal"
                 />
-                <Link className="navBarLink" to={'/test'}>
-                    <Button variant="contained" onClick={this.handleSubmit} color="primary">
-                        Login
-                    </Button>
-                </Link>
+                <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                    Login
+                </Button>
             </form>
         );
     }
 }
-
 export default withStyles(styles)(LoginForm);
+
 

@@ -4,7 +4,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -50,6 +49,9 @@ class SignUpForm extends React.Component {
       const user_created = true;
       // this.props.accountJustCreated(user_created);
       sessionStorage.setItem('jwtToken', response.data.token)
+    }).catch((err) => {
+      const errorMessage = err.response.data.message;
+      this.props.renderResponse(errorMessage)
     });
     event.preventDefault();
   };
@@ -61,8 +63,6 @@ class SignUpForm extends React.Component {
       [password_digest]: event.target.value,
     });
   };
-
-
 
   render() {
     const { classes } = this.props;

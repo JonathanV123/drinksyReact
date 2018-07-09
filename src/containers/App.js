@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import RestaurantContainer from './RestaurantContainer';
-import LoginContainer from './LoginContainer';
+import HomeContainer from './HomeContainer';
 import { userHasLoggedIn, getTokenMe } from '../actions/jwtActions';
 
 import '../App.css';
@@ -50,7 +50,7 @@ class App extends Component {
             <Route
               path='/'
               render={(props) =>
-                <LoginContainer
+                <HomeContainer
                   {...props}
                   loggedIn={loggedIn}
                   userLoggedIn={this.props.userLoggedIn}
