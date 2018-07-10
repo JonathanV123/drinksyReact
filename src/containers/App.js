@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import RestaurantContainer from './RestaurantContainer';
 import HomeContainer from './HomeContainer';
-import { userHasLoggedIn, getTokenMe } from '../actions/jwtActions';
-
+import LoginContainer from './LoginContainer';
+import { userHasLoggedIn, getTokenMe, setUserProfile } from '../actions/jwtActions';
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -27,34 +26,52 @@ const Navbar = (props) => {
   )
 }
 
-
-
 const mapDispatchToProps = (dispatch) => {
   return {
     userLoggedIn: () => dispatch(userHasLoggedIn()),
     retrieveToken: () => dispatch(getTokenMe()),
+    userInfo: () => dispatch(setUserProfile()),
   }
 }
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    this.state = {
+      userHasAccount: false,
+      showNotification: false,
+      responseMessage: '',
+    }
+
   }
+
   render() {
-    const loggedIn = this.props.loggedIn;
+    const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
         <div id="appContainer">
           <Switch>
             <Route
-              path='/'
+              path='/home/:id'
               render={(props) =>
                 <HomeContainer
                   {...props}
-                  loggedIn={loggedIn}
+                  loggedIn={this.props.loggedIn}
                   userLoggedIn={this.props.userLoggedIn}
                   retrieveToken={this.props.retrieveToken}
+                  userInfo={this.props.userInfo}
+                />
+              }
+            />
+            <Route
+              path='/'
+              render={(props) =>
+                <LoginContainer
+                  {...props}
+                  loggedIn={this.props.loggedIn}
+                  userLoggedIn={this.props.userLoggedIn}
+                  retrieveToken={this.props.retrieveToken}
+                  userInfo={this.props.userInfo}
                 />
               }
             />

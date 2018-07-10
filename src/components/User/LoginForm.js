@@ -3,8 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Dashboard from '../Dashboard';
+import { Redirect } from 'react-router-dom';
 
 
 const styles = theme => ({
@@ -54,9 +53,12 @@ class LoginForm extends Component {
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
-            const clearAcctCreation = false;
+            console.log(response)
             sessionStorage.setItem('jwtToken', response.data.token)
+            
             this.props.userLoggedIn();
+            this.props.userProfile(response.data.user_profile)
+
         }).catch((err) => {
             const errorMessage = err.response.data.message;
             this.props.renderResponse(errorMessage)
@@ -66,31 +68,37 @@ class LoginForm extends Component {
 
     render() {
         const { classes } = this.props;
-        return (
-            <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
-                <TextField
-                    id="email"
-                    label="Email"
-                    value={this.state.email}
-                    className={classes.textField}
-                    onChange={this.handleChange('email')}
-                    margin="normal"
-                />
-                <TextField
-                    id="password-input"
-                    placeholder="Password"
-                    className={classes.textField}
-                    label="Password"
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handleChange('password_digest')}
-                    margin="normal"
-                />
-                <Button variant="contained" onClick={this.handleSubmit} color="primary">
-                    Login
-                </Button>
-            </form>
-        );
+        if (this.props.loggedIn) {
+            return (
+                <Redirect to="/home/:id" />
+            )
+        } else {
+            return (
+                <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
+                    <TextField
+                        id="email"
+                        label="Email"
+                        value={this.state.email}
+                        className={classes.textField}
+                        onChange={this.handleChange('email')}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="password-input"
+                        placeholder="Password"
+                        className={classes.textField}
+                        label="Password"
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleChange('password_digest')}
+                        margin="normal"
+                    />
+                    <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                        Login
+                    </Button>
+                </form>
+            );
+        }
     }
 }
 export default withStyles(styles)(LoginForm);
