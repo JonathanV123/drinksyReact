@@ -47,7 +47,7 @@ class SignUpForm extends React.Component {
         password_digest: this.state.password_digest
       }
     }).then((response) => {
-      const user_created = true;
+      // const user_created = true;
       // this.props.accountJustCreated(user_created);
       sessionStorage.setItem('jwtToken', response.data.token)
     }).catch((err) => {

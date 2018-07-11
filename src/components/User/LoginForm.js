@@ -53,12 +53,9 @@ class LoginForm extends Component {
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
-            console.log(response)
             sessionStorage.setItem('jwtToken', response.data.token)
-            
+            this.props.userInfo(response.data.user_profile);
             this.props.userLoggedIn();
-            this.props.userProfile(response.data.user_profile)
-
         }).catch((err) => {
             const errorMessage = err.response.data.message;
             this.props.renderResponse(errorMessage)
@@ -67,10 +64,11 @@ class LoginForm extends Component {
     };
 
     render() {
+        const userId = this.props.userProfile.userId
         const { classes } = this.props;
         if (this.props.loggedIn) {
             return (
-                <Redirect to="/home/:id" />
+                <Redirect to={{ pathname: `/home/${userId}` }} />
             )
         } else {
             return (

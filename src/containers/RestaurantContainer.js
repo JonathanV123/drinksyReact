@@ -6,7 +6,6 @@ import AddRestaurantForm from '../components/Restaurant/AddRestaurantForm';
 import Restaurant from '../components/Restaurant/Restaurant';
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         restaurantData: state.restaurantData.currentRestaurantData,
         isPending: state.restaurantData.isPending,

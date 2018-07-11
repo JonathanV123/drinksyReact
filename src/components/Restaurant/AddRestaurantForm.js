@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-console.log("PEOPLE FORM RUNNING")
 
 class PeopleForm extends Component {
     constructor(props) {
@@ -15,7 +14,6 @@ class PeopleForm extends Component {
 
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
-        console.log(this.state);
     }
 
     handleSubmit(event) {

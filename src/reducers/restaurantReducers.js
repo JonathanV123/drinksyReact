@@ -41,7 +41,6 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
                     person.email = updatedPersonData.email
                 }
             });
-            console.log(editCopy)
             return Object.assign({}, state, { currentRestaurantData: editCopy });
         default:
             return state

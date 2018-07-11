@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route, Link, Switch } from 'react-router-dom';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
-import Dashboard from '../components/Dashboard';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -23,7 +22,7 @@ const SignUp = (props) => {
                 <nav id="loginNav">
                     <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
                     <h2> Or </h2>
-                    <Link className="navBarLink" to={'/login'}>Login</Link>
+                    <Link className="navBarLink" to={'/signin'}>Login</Link>
                 </nav>
             </div>
         </div>
@@ -96,8 +95,8 @@ class LoginContainer extends Component {
             <div>
                 <SignUp />
                 <Route
-                    path='/createAccount'
-                    exact render={(props) =>
+                    exact path='/createAccount'
+                    render={(props) =>
                         <SignUpForm
                             {...props}
                             loggedIn={this.props.loggedIn}
@@ -108,8 +107,8 @@ class LoginContainer extends Component {
                     }
                 />
                 <Route
-                    path='/login'
-                    exact render={(props) =>
+                    exact path='/login'
+                    render={(props) =>
                         <LoginForm
                             {...props}
                             loggedIn={this.props.loggedIn}
@@ -117,6 +116,7 @@ class LoginContainer extends Component {
                             retrieveToken={this.props.retrieveToken}
                             renderResponse={this.renderResponse}
                             userInfo={this.props.userInfo}
+                            userProfile={this.props.userProfile}
                         />
                     }
                 />
@@ -126,6 +126,7 @@ class LoginContainer extends Component {
                     clearNotification={this.clearNotification}
                 />
             </div>
+
         )
     }
 }

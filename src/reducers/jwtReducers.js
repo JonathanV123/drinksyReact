@@ -35,12 +35,13 @@ export const tokenRetrieved = (state = initialToken, action = {}) => {
 }
 
 const initialProfile = {
-    userProfile: null,
+    userId: null,
+    userEmail: null,
 };
-export const userProfile = (state = initialToken, action = {}) => {
+export const userProfile = (state = initialProfile, action = {}) => {
     switch (action.type) {
         case SET_USER_PROFILE:
-            return Object.assign({}, state, { userProfile: action.payload });
+            return Object.assign({}, state, { userId: action.userProfile.user_id, userEmail: action.userProfile.user_email });
         // case REQUEST_PEOPLE_DATA_FAILED:
         //     return Object.assign({}, state, { error: action.payload, isPending: false });
         default:

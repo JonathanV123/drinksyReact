@@ -5,7 +5,6 @@ import {
 } from '../constants';
 
 export const handleRestaurantData = () => (dispatch) => {
-    console.log("DISPATCHING HANDLE PEOPLE DATA ")
     dispatch({ type: REQUEST_RESTAURANT_DATA_PENDING });
     fetch('http://localhost:8080/')
         .then(response => response.json())
