@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeContainer from './HomeContainer';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
-
-import { userHasLoggedIn, getTokenMe, setUserProfile, verifyToken } from '../actions/jwtActions';
+import { userHasLoggedIn, getTokenMe, verifyToken } from '../actions/jwtActions';
 import '../App.css';
 
 const mapStateToProps = (state) => {
   console.log(state);
   return {
     loggedIn: state.userIsLoggedIn.isUserLoggedIn,
-    userProfile: state.userProfile,
     token: state.verifyJWT.token,
     loading: state.verifyJWT.isPending,
     user: state.verifyJWT.user
@@ -38,7 +36,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     userLoggedIn: () => dispatch(userHasLoggedIn()),
     retrieveToken: () => dispatch(getTokenMe()),
-    userInfo: (userInfo) => dispatch(setUserProfile(userInfo)),
     verifyToken: (token) => dispatch(verifyToken(token)),
   }
 }
@@ -47,8 +44,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     const token = sessionStorage.getItem('jwtToken');
-    props.verifyToken(token);
-
+    // Check for token in case user refreshes page. If there is a token, keep the user logged in.
+    if (token) {
+      props.verifyToken(token);
+    }
     this.state = {
       userHasAccount: false,
       showNotification: false,
@@ -56,9 +55,8 @@ class App extends Component {
 
     }
   }
-
   render() {
-    const userId = this.props.userProfile.userId || this.props.user.id
+    const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
@@ -76,8 +74,7 @@ class App extends Component {
                     loading={this.props.loading}
                     userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
-                    userInfo={this.props.userInfo}
-                    userProfile={this.props.userProfile}
+                    userProfile={this.props.user}
                   />
               )}
             />
@@ -88,10 +85,10 @@ class App extends Component {
                   <Dashboard
                     {...props}
                     loggedIn={this.props.loggedIn}
+                    loading={this.props.loading}
                     userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
-                    userInfo={this.props.userInfo}
-                    userProfile={this.props.userProfile}
+                    userProfile={this.props.user}
                   />
                   :
                   <Redirect to={{ pathname: `/` }} />
@@ -101,7 +98,7 @@ class App extends Component {
             <Route
               path='/createAccount'
               render={(props) => (
-                this.props.loggedIn === 'Valid' ?
+                this.props.loggedIn || this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <SignUpForm
@@ -116,7 +113,7 @@ class App extends Component {
             <Route
               path='/login'
               render={(props) => (
-                this.props.loggedIn === 'Valid' ?
+                this.props.loggedIn || this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <LoginForm
@@ -125,13 +122,13 @@ class App extends Component {
                     userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     renderResponse={this.renderResponse}
-                    userInfo={this.props.userInfo}
-                    userProfile={this.props.userProfile}
+                    userProfile={this.props.user}
+                    loading={this.props.loading}
+                    verifyToken={this.props.verifyToken}
                   />
 
               )}
             />
-
             <Route render={() => <h1> 404 </h1>} />
           </Switch>
         </div>

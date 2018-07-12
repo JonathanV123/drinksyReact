@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-
-const token = sessionStorage.getItem('jwtToken');
-
 class Dashboard extends Component {
     constructor(props) {
         super(props);
+        const userId = this.props.userProfile.id
+        const token = sessionStorage.getItem('jwtToken')
         console.log(props);
+        if (this.props.loading === false) {
+            axios({
+                method: 'get',
+                url: `http://localhost:8080/home/${userId}`,
+                headers: { 'Authorization': "bearer " + token },
+            }).then((response) => {
+                console.log(response);
+                this.setState((prevState, props) => {
+                    return {
+                        restaurants: null,
+                    }
+                })
+            }).catch((err) => {
+                console.log(err.response);
+                const errorMessage = err.response.data.message;
+                this.props.renderResponse(errorMessage)
+            })
+        }
         this.state = {
             restaurants: null,
         }
     }
-    componentDidMount() {
-        const userId = this.props.userProfile.userId
-        axios({
-            method: 'get',
-            url: `http://localhost:8080/home/${userId}`,
-            headers: { 'Authorization': "bearer " + token },
-        }).then((response) => {
-            this.setState((prevState, props) => {
-                return {
-                    restaurants: null,
-                }
-            })
-        }).catch((err) => {
-            console.log(err);
-            // const errorMessage = err.response.data.message;
-            // this.props.renderResponse(errorMessage)
-        })
-    };
-
     render() {
         return (
             <div>

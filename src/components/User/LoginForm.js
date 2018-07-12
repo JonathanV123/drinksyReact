@@ -27,7 +27,13 @@ const styles = theme => ({
         display: 'none',
     },
 });
-
+const Loading = (props) => {
+    return (
+        <div>
+            <h1>Loading</h1>
+        </div>
+    )
+}
 class LoginForm extends Component {
     constructor(props) {
         super();
@@ -37,7 +43,7 @@ class LoginForm extends Component {
         email: '',
         password_digest: '',
     };
-
+    // <Redirect to={{ pathname: `/home/${userId}` }} />
 
     handleChange = (email, password_digest) => event => {
         this.setState({
@@ -55,23 +61,33 @@ class LoginForm extends Component {
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
+            // Set token from server to session storage
+            console.log(response.body)
             sessionStorage.setItem('jwtToken', response.data.token)
+            const token = sessionStorage.getItem('jwtToken');
+            // Set user info redux state
             this.props.userInfo(response.data.user_profile);
+            // Verify the token, so that app has access to user information
+            this.props.verifyToken(token);
+            // Set the user status to logged in
             this.props.userLoggedIn();
         }).catch((err) => {
-            const errorMessage = err.response.data.message;
-            this.props.renderResponse(errorMessage)
+            console.log(err.response)
+            // const errorMessage = err.response.data.message;
+            // this.props.renderResponse(errorMessage)
         })
         event.preventDefault();
     };
 
     render() {
-        const userId = this.props.userProfile.userId
+        const userId = this.props.userProfile.id
         const { classes } = this.props;
-        if (this.props.loggedIn) {
+        // If the user is logged in already, redirect to user's homepage.
+        if (this.props.loading) {
             return (
-                <Redirect to={{ pathname: `/home/${userId}` }} />
+                <Loading />
             )
+            // Otherwise, render the login form.
         } else {
             return (
                 <div>

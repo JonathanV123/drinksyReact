@@ -1,8 +1,6 @@
 import {
     USER_LOGGED_IN,
     GET_TOKEN_ME,
-    SET_USER_PROFILE,
-    VERIFY_JSON_TOKEN,
     VERIFY_JSON_TOKEN_SUCCESS,
     VERIFY_JSON_TOKEN_FAILED,
     VERIFY_JSON_TOKEN_PENDING,
@@ -16,18 +14,6 @@ export const getTokenMe = (token) => (dispatch) => {
 
 export const userHasLoggedIn = () => (dispatch) => {
     dispatch({ type: USER_LOGGED_IN, isUserLoggedIn: true });
-    // return (dispatch, getState) => {
-    //     // const peopleState = getState().peopleData.currentPeopleData;
-    //     dispatch({ type: USER_LOGGED_IN, isUserLoggedIn: true });
-    // }
-};
-
-export const setUserProfile = (userInfo) => (dispatch) => {
-    dispatch({ type: SET_USER_PROFILE, userProfile: { user_id: userInfo.user_id, user_email: userInfo.user_id } });
-    // return (dispatch, getState) => {
-    //     // const peopleState = getState().peopleData.currentPeopleData;
-    //     dispatch({ type: USER_LOGGED_IN, isUserLoggedIn: true });
-    // }
 };
 
 export const verifyToken = (token) => (dispatch) => {
@@ -36,7 +22,6 @@ export const verifyToken = (token) => (dispatch) => {
     axios({
         method: 'post',
         url: 'http://localhost:8080/verifyToken',
-        // headers: { 'Authorization': "bearer " + token },
         data: {
             token: token,
         }
