@@ -6,7 +6,7 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 
-import { userHasLoggedIn, getTokenMe, setUserProfile } from '../actions/jwtActions';
+import { userHasLoggedIn, getTokenMe, setUserProfile, verifyToken } from '../actions/jwtActions';
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,9 @@ const mapStateToProps = (state) => {
   return {
     loggedIn: state.userIsLoggedIn.isUserLoggedIn,
     userProfile: state.userProfile,
+    token: state.verifyJWT.token,
+    loading: state.verifyJWT.isPending,
+    user: state.verifyJWT.user
   }
 }
 
@@ -36,23 +39,26 @@ const mapDispatchToProps = (dispatch) => {
     userLoggedIn: () => dispatch(userHasLoggedIn()),
     retrieveToken: () => dispatch(getTokenMe()),
     userInfo: (userInfo) => dispatch(setUserProfile(userInfo)),
+    verifyToken: (token) => dispatch(verifyToken(token)),
   }
 }
 
 class App extends Component {
   constructor(props) {
     super(props);
-    console.log(props.userProfile);
+    const token = sessionStorage.getItem('jwtToken');
+    props.verifyToken(token);
+
     this.state = {
       userHasAccount: false,
       showNotification: false,
       responseMessage: '',
 
     }
-
   }
+
   render() {
-    const userId = this.props.userProfile.userId
+    const userId = this.props.userProfile.userId || this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
@@ -61,12 +67,13 @@ class App extends Component {
             <Route
               exact path='/'
               render={(props) => (
-                this.props.loggedIn ?
+                this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <HomeContainer
                     {...props}
                     loggedIn={this.props.loggedIn}
+                    loading={this.props.loading}
                     userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     userInfo={this.props.userInfo}
@@ -76,21 +83,25 @@ class App extends Component {
             />
             <Route
               path='/home/:id'
-              render={(props) =>
-                <Dashboard
-                  {...props}
-                  loggedIn={this.props.loggedIn}
-                  userLoggedIn={this.props.userLoggedIn}
-                  retrieveToken={this.props.retrieveToken}
-                  userInfo={this.props.userInfo}
-                  userProfile={this.props.userProfile}
-                />
-              }
+              render={(props) => (
+                this.props.loggedIn || this.props.token === 'Valid' ?
+                  <Dashboard
+                    {...props}
+                    loggedIn={this.props.loggedIn}
+                    userLoggedIn={this.props.userLoggedIn}
+                    retrieveToken={this.props.retrieveToken}
+                    userInfo={this.props.userInfo}
+                    userProfile={this.props.userProfile}
+                  />
+                  :
+                  <Redirect to={{ pathname: `/` }} />
+
+              )}
             />
             <Route
               path='/createAccount'
               render={(props) => (
-                this.props.loggedIn ?
+                this.props.loggedIn === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <SignUpForm
@@ -105,7 +116,7 @@ class App extends Component {
             <Route
               path='/login'
               render={(props) => (
-                this.props.loggedIn ?
+                this.props.loggedIn === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <LoginForm
