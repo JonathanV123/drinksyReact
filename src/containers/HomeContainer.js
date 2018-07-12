@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Switch, Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 // import Button from '@material-ui/core/Button';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
@@ -14,6 +14,23 @@ const styles = theme => ({
 });
 
 
+const SignUp = (props) => {
+    return (
+        <div>
+            <div className="welcomeContainer">
+                <h1>Welcome to Drinksy!</h1>
+            </div>
+            <div className="blankForNow">
+                <nav id="loginNav">
+                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
+                    <h2> Or </h2>
+                    <Link className="navBarLink" to={'/login'}>Login</Link>
+                </nav>
+            </div>
+        </div>
+    )
+}
+
 
 class HomeContainer extends Component {
     constructor(props) {
@@ -21,16 +38,13 @@ class HomeContainer extends Component {
         console.log(props);
     }
     render() {
-        if (this.props.loggedIn) {
-            return (
-                <Dashboard {...this.props} />
-            )
-        } else {
-            return null
-                {/* <Redirect to="/login" /> */}
-                
-           
-        }
+
+        return (
+            <SignUp />
+        )
+        {/* <Redirect to="/login" /> */ }
+
+
     }
 }
 

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeContainer from './HomeContainer';
-import LoginContainer from './LoginContainer';
+import SignUpForm from '../components/User/SignUpForm';
+import LoginForm from '../components/User/LoginForm';
+import Dashboard from '../components/Dashboard';
+
 import { userHasLoggedIn, getTokenMe, setUserProfile } from '../actions/jwtActions';
 import '../App.css';
 
@@ -13,6 +16,7 @@ const mapStateToProps = (state) => {
     userProfile: state.userProfile,
   }
 }
+
 
 // const Navbar = (props) => {
 //   console.log(props);
@@ -43,19 +47,37 @@ class App extends Component {
       userHasAccount: false,
       showNotification: false,
       responseMessage: '',
+
     }
 
   }
   render() {
+    const userId = this.props.userProfile.userId
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
         <div id="appContainer">
           <Switch>
             <Route
+              exact path='/'
+              render={(props) => (
+                this.props.loggedIn ?
+                  <Redirect to={{ pathname: `/home/${userId}` }} />
+                  :
+                  <HomeContainer
+                    {...props}
+                    loggedIn={this.props.loggedIn}
+                    userLoggedIn={this.props.userLoggedIn}
+                    retrieveToken={this.props.retrieveToken}
+                    userInfo={this.props.userInfo}
+                    userProfile={this.props.userProfile}
+                  />
+              )}
+            />
+            <Route
               path='/home/:id'
               render={(props) =>
-                <HomeContainer
+                <Dashboard
                   {...props}
                   loggedIn={this.props.loggedIn}
                   userLoggedIn={this.props.userLoggedIn}
@@ -66,19 +88,40 @@ class App extends Component {
               }
             />
             <Route
-              path='/'
-              exact render={(props) =>
-                <LoginContainer
-                  {...props}
-                  loggedIn={this.props.loggedIn}
-                  userLoggedIn={this.props.userLoggedIn}
-                  retrieveToken={this.props.retrieveToken}
-                  userInfo={this.props.userInfo}
-                  userProfile={this.props.userProfile}
-                />
-              }
+              path='/createAccount'
+              render={(props) => (
+                this.props.loggedIn ?
+                  <Redirect to={{ pathname: `/home/${userId}` }} />
+                  :
+                  <SignUpForm
+                    {...props}
+                    loggedIn={this.props.loggedIn}
+                    userLoggedIn={this.props.userLoggedIn}
+                    retrieveToken={this.props.retrieveToken}
+                    renderResponse={this.renderResponse}
+                  />
+              )}
             />
-            {/* <Route render={() => <h1> 404 </h1>} /> */}
+            <Route
+              path='/login'
+              render={(props) => (
+                this.props.loggedIn ?
+                  <Redirect to={{ pathname: `/home/${userId}` }} />
+                  :
+                  <LoginForm
+                    {...props}
+                    loggedIn={this.props.loggedIn}
+                    userLoggedIn={this.props.userLoggedIn}
+                    retrieveToken={this.props.retrieveToken}
+                    renderResponse={this.renderResponse}
+                    userInfo={this.props.userInfo}
+                    userProfile={this.props.userProfile}
+                  />
+
+              )}
+            />
+
+            <Route render={() => <h1> 404 </h1>} />
           </Switch>
         </div>
       </Router>

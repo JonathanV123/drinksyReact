@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Notification from '../Presentational/Notification';
 
 
 const styles = theme => ({
@@ -30,6 +31,7 @@ const styles = theme => ({
 class LoginForm extends Component {
     constructor(props) {
         super();
+        console.log(props);
     }
     state = {
         email: '',
@@ -72,29 +74,36 @@ class LoginForm extends Component {
             )
         } else {
             return (
-                <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
-                    <TextField
-                        id="email"
-                        label="Email"
-                        value={this.state.email}
-                        className={classes.textField}
-                        onChange={this.handleChange('email')}
-                        margin="normal"
-                    />
-                    <TextField
-                        id="password-input"
-                        placeholder="Password"
-                        className={classes.textField}
-                        label="Password"
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleChange('password_digest')}
-                        margin="normal"
-                    />
-                    <Button variant="contained" onClick={this.handleSubmit} color="primary">
-                        Login
+                <div>
+                    <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
+                        <TextField
+                            id="email"
+                            label="Email"
+                            value={this.state.email}
+                            className={classes.textField}
+                            onChange={this.handleChange('email')}
+                            margin="normal"
+                        />
+                        <TextField
+                            id="password-input"
+                            placeholder="Password"
+                            className={classes.textField}
+                            label="Password"
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.handleChange('password_digest')}
+                            margin="normal"
+                        />
+                        <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                            Login
                     </Button>
-                </form>
+                    </form>
+                    <Notification
+                        responseMessage={this.state.responseMessage}
+                        showNotification={this.state.showNotification}
+                        clearNotification={this.clearNotification}
+                    />
+                </div>
             );
         }
     }

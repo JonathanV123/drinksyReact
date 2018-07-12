@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import Notification from '../Presentational/Notification';
 
 const styles = theme => ({
   container: {
@@ -73,37 +74,44 @@ class SignUpForm extends React.Component {
       )
     } else {
       return (
-        <form id='signup-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
-          <TextField
-            id="name"
-            className={classes.textField}
-            placeholder="Name"
-            label="Name"
-            value={this.state.name}
-            onChange={this.handleChange('name')}
-            margin="normal"
+        <div>
+          <form id='signup-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
+            <TextField
+              id="name"
+              className={classes.textField}
+              placeholder="Name"
+              label="Name"
+              value={this.state.name}
+              onChange={this.handleChange('name')}
+              margin="normal"
+            />
+            <TextField
+              id="email"
+              className={classes.textField}
+              label="Email"
+              value={this.state.email}
+              onChange={this.handleChange('email')}
+              margin="normal"
+            />
+            <TextField
+              id="password-input"
+              className={classes.textField}
+              placeholder="Password"
+              label="Password"
+              type="password"
+              onChange={this.handleChange('password_digest')}
+              margin="normal"
+            />
+            <Button variant="contained" type='submit' color="primary">
+              Create Account
+            </Button>
+          </form>
+          <Notification
+            responseMessage={this.state.responseMessage}
+            showNotification={this.state.showNotification}
+            clearNotification={this.clearNotification}
           />
-          <TextField
-            id="email"
-            className={classes.textField}
-            label="Email"
-            value={this.state.email}
-            onChange={this.handleChange('email')}
-            margin="normal"
-          />
-          <TextField
-            id="password-input"
-            className={classes.textField}
-            placeholder="Password"
-            label="Password"
-            type="password"
-            onChange={this.handleChange('password_digest')}
-            margin="normal"
-          />
-          <Button variant="contained" type='submit' color="primary">
-            Create Account
-        </Button>
-        </form>
+        </div>
       );
     }
   }
