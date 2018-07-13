@@ -1,36 +1,9 @@
 import {
-    GET_TOKEN_ME,
-    USER_LOGGED_IN,
     VERIFY_JSON_TOKEN_SUCCESS,
     VERIFY_JSON_TOKEN_PENDING,
     VERIFY_JSON_TOKEN_FAILED,
 } from '../constants';
 
-
-
-const initialIsLoggedIn = {
-    isUserLoggedIn: false,
-};
-
-export const userIsLoggedIn = (state = initialIsLoggedIn, action = {}) => {
-    switch (action.type) {
-        case USER_LOGGED_IN:
-            return Object.assign({}, state, { isUserLoggedIn: true });
-        default:
-            return state
-    }
-}
-const tokenRet = {
-    token: null,
-};
-export const tokenRetrieved = (state = tokenRet, action = {}) => {
-    switch (action.type) {
-        case GET_TOKEN_ME:
-            return Object.assign({}, state, { token: action.token });
-        default:
-            return state
-    }
-}
 
 const initialToken = {
     isPending: false,

@@ -1,41 +1,26 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import HomeContainer from './HomeContainer';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
-import { userHasLoggedIn, getTokenMe, verifyToken } from '../actions/jwtActions';
+import { verifyToken } from '../actions/jwtActions';
 import '../App.css';
 
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    loggedIn: state.userIsLoggedIn.isUserLoggedIn,
     token: state.verifyJWT.token,
     loading: state.verifyJWT.isPending,
-    user: state.verifyJWT.user
+    user: state.verifyJWT.user,
   }
 }
 
 
-// const Navbar = (props) => {
-//   console.log(props);
-//   return (
-//     <div className="navBarContainer">
-//       <nav>
-//         <Link className="navBarLink" to={'/'}>Home</Link>
-//         <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
-//         <Link className="navBarLink" to={'/account'}>Account</Link>
-//       </nav>
-//     </div>
-//   )
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    userLoggedIn: () => dispatch(userHasLoggedIn()),
-    retrieveToken: () => dispatch(getTokenMe()),
     verifyToken: (token) => dispatch(verifyToken(token)),
   }
 }
@@ -52,10 +37,11 @@ class App extends Component {
       userHasAccount: false,
       showNotification: false,
       responseMessage: '',
-
     }
   }
+
   render() {
+    console.log(this.props);
     const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
@@ -70,9 +56,7 @@ class App extends Component {
                   :
                   <HomeContainer
                     {...props}
-                    loggedIn={this.props.loggedIn}
                     loading={this.props.loading}
-                    userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                   />
@@ -81,12 +65,10 @@ class App extends Component {
             <Route
               path='/home/:id'
               render={(props) => (
-                this.props.loggedIn || this.props.token === 'Valid' ?
+                this.props.token === 'Valid' ?
                   <Dashboard
                     {...props}
-                    loggedIn={this.props.loggedIn}
                     loading={this.props.loading}
-                    userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                   />
@@ -98,13 +80,11 @@ class App extends Component {
             <Route
               path='/createAccount'
               render={(props) => (
-                this.props.loggedIn || this.props.token === 'Valid' ?
+                this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <SignUpForm
                     {...props}
-                    loggedIn={this.props.loggedIn}
-                    userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     renderResponse={this.renderResponse}
                   />
@@ -113,13 +93,11 @@ class App extends Component {
             <Route
               path='/login'
               render={(props) => (
-                this.props.loggedIn || this.props.token === 'Valid' ?
+                this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
                   <LoginForm
                     {...props}
-                    loggedIn={this.props.loggedIn}
-                    userLoggedIn={this.props.userLoggedIn}
                     retrieveToken={this.props.retrieveToken}
                     renderResponse={this.renderResponse}
                     userProfile={this.props.user}
@@ -135,6 +113,14 @@ class App extends Component {
       </Router>
     )
   }
+}
+
+App.propTypes = {
+  token: PropTypes.string,
+  loading: PropTypes.bool,
+  user: PropTypes.object,
+  retrieveToken: PropTypes.func,
+  verifyToken: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

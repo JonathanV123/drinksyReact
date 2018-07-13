@@ -1,20 +1,11 @@
 import {
-    USER_LOGGED_IN,
-    GET_TOKEN_ME,
     VERIFY_JSON_TOKEN_SUCCESS,
     VERIFY_JSON_TOKEN_FAILED,
     VERIFY_JSON_TOKEN_PENDING,
 } from '../constants';
 import axios from 'axios';
 
-export const getTokenMe = (token) => (dispatch) => {
-    const token = sessionStorage.getItem('jwtToken')
-    dispatch({ type: GET_TOKEN_ME, token: token });
-};
 
-export const userHasLoggedIn = () => (dispatch) => {
-    dispatch({ type: USER_LOGGED_IN, isUserLoggedIn: true });
-};
 
 export const verifyToken = (token) => (dispatch) => {
     console.log(token);

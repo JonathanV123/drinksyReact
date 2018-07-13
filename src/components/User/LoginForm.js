@@ -62,15 +62,11 @@ class LoginForm extends Component {
             }
         }).then((response) => {
             // Set token from server to session storage
-            console.log(response.body)
+            console.log(response)
             sessionStorage.setItem('jwtToken', response.data.token)
             const token = sessionStorage.getItem('jwtToken');
-            // Set user info redux state
-            this.props.userInfo(response.data.user_profile);
             // Verify the token, so that app has access to user information
             this.props.verifyToken(token);
-            // Set the user status to logged in
-            this.props.userLoggedIn();
         }).catch((err) => {
             console.log(err.response)
             // const errorMessage = err.response.data.message;

@@ -7,13 +7,11 @@ import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
 import { restaurantData, restaurantDataFetch } from './reducers/restaurantReducers';
-import { userIsLoggedIn, tokenRetrieved, verifyJWT } from './reducers/jwtReducers';
+import { verifyJWT } from './reducers/jwtReducers';
 import registerServiceWorker from './registerServiceWorker';
 
 // const logger = createLogger();
 const rootReducer = combineReducers({
-    userIsLoggedIn,
-    tokenRetrieved,
     restaurantData,
     verifyJWT,
     restaurantDataFetch,
