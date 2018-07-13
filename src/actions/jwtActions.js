@@ -8,7 +8,6 @@ import axios from 'axios';
 
 
 export const verifyToken = (token) => (dispatch) => {
-    console.log(token);
     dispatch({ type: VERIFY_JSON_TOKEN_PENDING });
     axios({
         method: 'post',

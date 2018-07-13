@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { Link, Redirect } from 'react-router-dom';
+// import axios from 'axios';
+import { Link } from 'react-router-dom';
 import Button from './Presentational/Button'
 
 const Navbar = (props) => {
@@ -14,9 +14,11 @@ const Navbar = (props) => {
                 <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
                 <Link className="navBarLink" to={'/'} onClick={props.logout}>Logout</Link>
             </nav>
+
         </header>
     )
 }
+
 const RestaurantCard = (props) => {
     const removePersonButton = "Remove Person";
     // const editPersonButton = "Edit Person";
@@ -53,28 +55,10 @@ const RestaurantList = (props) => {
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
+        console.log(this.props.loading);
         const userId = this.props.userProfile.id
-        const token = sessionStorage.getItem('jwtToken')
         if (this.props.loading === false) {
-            axios({
-                method: 'get',
-                url: `http://localhost:8080/home/${userId}`,
-                headers: { 'Authorization': "bearer " + token },
-            }).then((response) => {
-                console.log(response);
-                this.setState((prevState, props) => {
-                    return {
-                        restaurants: response.data.restaurants,
-                    }
-                })
-                console.log(this.state);
-
-            }).catch((err) => {
-                console.log(err.response);
-                const errorMessage = err.response.data.message;
-                // this.props.renderResponse(errorMessage)
-            })
+            this.props.fetchRestaurantData(userId);
         }
         this.state = {
             restaurants: [],
@@ -86,13 +70,21 @@ class Dashboard extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <Navbar logout={this.logout} />
-                <h1>Welcome {this.props.userProfile.name}</h1>
-                <RestaurantList restaurants={this.state.restaurants} />
-            </div>
-        )
+        if (this.props.loading) {
+            return (
+                <div>
+                    <h1>Loading Data</h1>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Navbar logout={this.logout} />
+                    <RestaurantList restaurants={this.props.restaurantData} />
+                    <h1>Welcome {this.props.userProfile.name}</h1>
+                </div>
+            )
+        }
     }
 }
 

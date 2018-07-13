@@ -7,6 +7,8 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 import { verifyToken } from '../actions/jwtActions';
+import { handleRestaurantData } from '../actions/restaurantActions';
+
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -15,6 +17,7 @@ const mapStateToProps = (state) => {
     token: state.verifyJWT.token,
     loading: state.verifyJWT.isPending,
     user: state.verifyJWT.user,
+    restaurants: state.restaurantData.currentRestaurantData
   }
 }
 
@@ -22,6 +25,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     verifyToken: (token) => dispatch(verifyToken(token)),
+    handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
   }
 }
 
@@ -71,6 +75,8 @@ class App extends Component {
                     loading={this.props.loading}
                     retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
+                    fetchRestaurantData={this.props.handleRestaurantData}
+                    restaurantData={this.props.restaurants}
                   />
                   :
                   <Redirect to={{ pathname: `/` }} />

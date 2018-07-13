@@ -26,8 +26,12 @@ const initialRestaurantData = {
 };
 export const restaurantData = (state = initialRestaurantData, action = {}) => {
     switch (action.type) {
+        case REQUEST_RESTAURANT_DATA_PENDING:
+            return Object.assign({}, state, { isPending: true });
+        case REQUEST_RESTAURANT_DATA_FAILED:
+            return Object.assign({}, state, { error: action.payload, isPending: false });
         case REQUEST_RESTAURANT_DATA_SUCCESS:
-            return Object.assign({}, state, { currentRestaurantData: action.payload, isPending: false });
+            return Object.assign({}, state, { currentRestaurantData: action.payload.restaurants, isPending: false });
         case ON_REMOVE_RESTAURANT:
             let removeCopy = [...action.payload.currentRestaurantData]
             const result = removeCopy.filter(person => person.name !== action.payload.name);

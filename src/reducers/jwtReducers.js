@@ -15,7 +15,6 @@ const initialToken = {
     },
 };
 export const verifyJWT = (state = initialToken, action = {}) => {
-    console.log(action.payload)
     switch (action.type) {
         case VERIFY_JSON_TOKEN_PENDING:
             return Object.assign({}, state, { isPending: true });
