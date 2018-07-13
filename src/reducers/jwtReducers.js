@@ -22,7 +22,7 @@ export const verifyJWT = (state = initialToken, action = {}) => {
         case VERIFY_JSON_TOKEN_SUCCESS:
             return Object.assign({}, state, {
                 token: action.payload.token, isPending: false,
-                user: { id: action.payload.user.id, email: action.payload.user.email, name: action.payload.name }
+                user: { id: action.payload.user.id, email: action.payload.user.email, name: action.payload.user.name }
             }
             );
         case VERIFY_JSON_TOKEN_FAILED:

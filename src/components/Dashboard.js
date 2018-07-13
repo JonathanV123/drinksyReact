@@ -1,16 +1,51 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
+import Button from './Presentational/Button'
 
 const Navbar = (props) => {
-    console.log(props);
     return (
-        <div className="navBarContainer">
-            <nav>
+        <header id="header">
+            <div id="logoContainer">
+                Drinksy
+            </div>
+            <nav id="nav">
                 <Link className="navBarLink" to={'/'}>Home</Link>
                 <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
-                <button className="navBarLink" onClick={props.logout} >Logout</button>
+                <Link className="navBarLink" to={'/'} onClick={props.logout}>Logout</Link>
             </nav>
+        </header>
+    )
+}
+const RestaurantCard = (props) => {
+    const removePersonButton = "Remove Person";
+    // const editPersonButton = "Edit Person";
+    return (
+        <div className="peopleCard">
+            <h1>{props.title}</h1>
+            <p>{props.description}</p>
+            <p>{props.drinks}</p>
+            <Button clickAction={props.onPersonRemoval} buttonDesc={removePersonButton} funcArgs={props.name} />
+            <Link className="navBarLink" to={'/people/editPeople'}>Edit Restaurant</Link>
+        </div>
+    )
+}
+
+const RestaurantList = (props) => {
+    const restaurantCards = props.restaurants.map((restaurant, index) => {
+        return (
+            <RestaurantCard
+                key={restaurant.id}
+                title={restaurant.title}
+                description={restaurant.description}
+                drinks={restaurant.drinks}
+                className="peopleCard"
+            />
+        )
+    });
+    return (
+        <div className="peopleContainer">
+            {restaurantCards}
         </div>
     )
 }
@@ -18,6 +53,7 @@ const Navbar = (props) => {
 class Dashboard extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         const userId = this.props.userProfile.id
         const token = sessionStorage.getItem('jwtToken')
         if (this.props.loading === false) {
@@ -29,9 +65,11 @@ class Dashboard extends Component {
                 console.log(response);
                 this.setState((prevState, props) => {
                     return {
-                        restaurants: null,
+                        restaurants: response.data.restaurants,
                     }
                 })
+                console.log(this.state);
+
             }).catch((err) => {
                 console.log(err.response);
                 const errorMessage = err.response.data.message;
@@ -39,8 +77,7 @@ class Dashboard extends Component {
             })
         }
         this.state = {
-            restaurants: null,
-            logout: null,
+            restaurants: [],
         }
     }
     logout = () => {
@@ -51,10 +88,9 @@ class Dashboard extends Component {
     render() {
         return (
             <div>
-                <div className="testingContainer">
-                    <Navbar logout={this.logout} />
-                    <h1>Dashboard!</h1>
-                </div>
+                <Navbar logout={this.logout} />
+                <h1>Welcome {this.props.userProfile.name}</h1>
+                <RestaurantList restaurants={this.state.restaurants} />
             </div>
         )
     }
