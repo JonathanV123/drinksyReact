@@ -20,14 +20,14 @@ const Navbar = (props) => {
 }
 
 const RestaurantCard = (props) => {
-    const removePersonButton = "Remove Person";
-    // const editPersonButton = "Edit Person";
+    const buttonDesc = "Remove";
+    console.log(props);
     return (
         <div className="peopleCard">
             <h1>{props.title}</h1>
             <p>{props.description}</p>
             <p>{props.drinks}</p>
-            <Button clickAction={props.onPersonRemoval} buttonDesc={removePersonButton} funcArgs={props.name} />
+            <Button clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
             <Link className="navBarLink" to={'/people/editPeople'}>Edit Restaurant</Link>
         </div>
     )
@@ -39,8 +39,10 @@ const RestaurantList = (props) => {
             <RestaurantCard
                 key={restaurant.id}
                 title={restaurant.title}
+                id={restaurant.id}
                 description={restaurant.description}
                 drinks={restaurant.drinks}
+                onRestaurantRemoval={props.onRestaurantRemoval}
                 className="peopleCard"
             />
         )
@@ -80,7 +82,10 @@ class Dashboard extends Component {
             return (
                 <div>
                     <Navbar logout={this.logout} />
-                    <RestaurantList restaurants={this.props.restaurantData} />
+                    <RestaurantList
+                        restaurants={this.props.restaurantData}
+                        onRestaurantRemoval={this.props.onRestaurantRemoval}
+                    />
                     <h1>Welcome {this.props.userProfile.name}</h1>
                 </div>
             )

@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import './index.css';
 import App from './containers/App';
-import { restaurantData, restaurantDataFetch } from './reducers/restaurantReducers';
+import { restaurantData,  } from './reducers/restaurantReducers';
 import { verifyJWT } from './reducers/jwtReducers';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -14,7 +14,7 @@ import registerServiceWorker from './registerServiceWorker';
 const rootReducer = combineReducers({
     restaurantData,
     verifyJWT,
-    restaurantDataFetch,
+    // restaurantDataFetch,
 })
 
 const store = createStore(

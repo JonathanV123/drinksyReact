@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import Notification from '../Presentational/Notification';
 
 
@@ -76,7 +75,7 @@ class LoginForm extends Component {
     };
 
     render() {
-        const userId = this.props.userProfile.id
+        // const userId = this.props.userProfile.id
         const { classes } = this.props;
         // If the user is logged in already, redirect to user's homepage.
         if (this.props.loading) {

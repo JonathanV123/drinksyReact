@@ -2,7 +2,9 @@ import {
     REQUEST_RESTAURANT_DATA_PENDING,
     REQUEST_RESTAURANT_DATA_SUCCESS,
     REQUEST_RESTAURANT_DATA_FAILED,
-    ON_REMOVE_RESTAURANT
+    ON_REMOVE_RESTAURANT_DATA_PENDING,
+    ON_REMOVE_RESTAURANT_SUCCESS,
+    ON_REMOVE_RESTAURANT_DATA_FAILED,
 } from '../constants';
 import axios from 'axios';
 
@@ -18,12 +20,19 @@ export const handleRestaurantData = (userId) => (dispatch) => {
         .catch(error => dispatch({ type: REQUEST_RESTAURANT_DATA_FAILED, payload: error }));
 };
 
-export const onRestaurantRemoval = (id) => {
+export const onRestaurantRemoval = (userId) => {
+    const token = sessionStorage.getItem('jwtToken');
     return (dispatch, getState) => {
-        const peopleState = getState().peopleData;
-        const payload = Object.assign({}, peopleState, { updatedPeopleData: peopleState, name: id });
-        console.log(payload);
-        dispatch({ type: ON_REMOVE_RESTAURANT, payload });
+        console.log('running');
+        dispatch({ type: ON_REMOVE_RESTAURANT_DATA_PENDING });
+        const restaurantState = getState().restaurantData.currentRestaurantData;
+        axios({
+            method: 'delete',
+            url: `http://localhost:8080/deleteRestaurant/${userId}`,
+            headers: { 'Authorization': "bearer " + token },
+        })
+            .then(response => dispatch({ type: ON_REMOVE_RESTAURANT_SUCCESS, restaurantData: restaurantState, payload: response.data, userId: userId }, ))
+            .catch(error => dispatch({ type: ON_REMOVE_RESTAURANT_DATA_FAILED, payload: error }));
     }
 };
 

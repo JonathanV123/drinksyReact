@@ -7,7 +7,7 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 import { verifyToken } from '../actions/jwtActions';
-import { handleRestaurantData } from '../actions/restaurantActions';
+import { handleRestaurantData, onRestaurantRemoval } from '../actions/restaurantActions';
 
 import '../App.css';
 
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     verifyToken: (token) => dispatch(verifyToken(token)),
     handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
+    onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
   }
 }
 
@@ -45,7 +46,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
@@ -77,6 +77,7 @@ class App extends Component {
                     userProfile={this.props.user}
                     fetchRestaurantData={this.props.handleRestaurantData}
                     restaurantData={this.props.restaurants}
+                    onRestaurantRemoval={this.props.onRestaurantRemoval}
                   />
                   :
                   <Redirect to={{ pathname: `/` }} />
