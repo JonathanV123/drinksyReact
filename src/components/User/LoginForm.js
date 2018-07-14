@@ -33,6 +33,7 @@ const Loading = (props) => {
         </div>
     )
 }
+
 class LoginForm extends Component {
     constructor(props) {
         super();
@@ -41,6 +42,7 @@ class LoginForm extends Component {
     state = {
         email: '',
         password_digest: '',
+        responseMessage: null,
     };
     // <Redirect to={{ pathname: `/home/${userId}` }} />
 
@@ -61,28 +63,33 @@ class LoginForm extends Component {
             }
         }).then((response) => {
             // Set token from server to session storage
-            console.log(response)
             sessionStorage.setItem('jwtToken', response.data.token)
             const token = sessionStorage.getItem('jwtToken');
             // Verify the token, so that app has access to user information
             this.props.verifyToken(token);
         }).catch((err) => {
-            console.log(err.response)
-            // const errorMessage = err.response.data.message;
-            // this.props.renderResponse(errorMessage)
+            this.setState({
+                responseMessage: err.response.data.message,
+            });
         })
         event.preventDefault();
     };
+    
+    // Clear notifications telling user if incorrect password, email, ect...
+    clearNotification = () => {
+        this.setState((prevState, props) => {
+            return {
+                responseMessage: ''
+            }
+        })
+    }
 
     render() {
-        // const userId = this.props.userProfile.id
         const { classes } = this.props;
-        // If the user is logged in already, redirect to user's homepage.
         if (this.props.loading) {
             return (
                 <Loading />
             )
-            // Otherwise, render the login form.
         } else {
             return (
                 <div>
@@ -111,7 +118,6 @@ class LoginForm extends Component {
                     </form>
                     <Notification
                         responseMessage={this.state.responseMessage}
-                        showNotification={this.state.showNotification}
                         clearNotification={this.clearNotification}
                     />
                 </div>

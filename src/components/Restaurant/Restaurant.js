@@ -1,27 +1,22 @@
-import React from 'react';
-import RestaurantList from './RestaurantList';
-import GetRestaurants from './GetRestaurants';
+import React, { Component } from 'react';
+import Navigation from '../Presentational/Navigation'
 
-const Restaurant = (props) => {
-    const pending = props.isPending;
-    if (pending === true) {
-        return (
-            <h1>Loading Data</h1>
-        )
-    } else if (props.restaurantData.length === 0) {
-        return (
-            <div>
-                <GetRestaurants {...props} />
-            </div>
-        )
-    } else {
+class Restaurant extends Component {
+    constructor(props) {
+        super(props);
+        console.log(props);
+        const restaurantId = props.match.params.id;
+        props.editRestaurant(restaurantId)
+    }
+    render() {
+        const userId = this.props.userProfile.id
         return (
             <div>
-                <RestaurantList {...props} />
+                <Navigation />
+                <h1>hi</h1>
             </div>
         )
     }
-
 }
 
 export default Restaurant;

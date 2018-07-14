@@ -5,6 +5,9 @@ import {
     ON_REMOVE_RESTAURANT_DATA_PENDING,
     ON_REMOVE_RESTAURANT_SUCCESS,
     ON_REMOVE_RESTAURANT_DATA_FAILED,
+    ON_EDIT_RESTAURANT_PENDING,
+    ON_EDIT_RESTAURANT_SUCCESS,
+    ON_EDIT_RESTAURANT_FAILED,
 } from '../constants';
 
 // const initialRestaurantDataBeforeFetch = {
@@ -27,26 +30,47 @@ const initialRestaurantData = {
     isPending: null,
     error: null,
     removalPending: false,
+    editPending: false,
     notification: null,
 };
 export const restaurantData = (state = initialRestaurantData, action = {}) => {
     switch (action.type) {
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||
         case REQUEST_RESTAURANT_DATA_PENDING:
             return Object.assign({}, state, { isPending: true });
         case REQUEST_RESTAURANT_DATA_SUCCESS:
             return Object.assign({}, state, { currentRestaurantData: action.payload.restaurants, isPending: false })
         case REQUEST_RESTAURANT_DATA_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false });
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+
+        // |||||||||||||||||||||||||||||||||| Remove Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||
         case ON_REMOVE_RESTAURANT_DATA_PENDING:
-            console.log('ON REMOVE RESTAURANT PENDING');
             return Object.assign({}, state, { removalPending: true });
         case ON_REMOVE_RESTAURANT_SUCCESS:
-            console.log('ON_REMOVE_RESTAURANT_SUCCESS');
             let restaurantDataCopy = [...action.restaurantData]
             const result = restaurantDataCopy.filter(restaurant => restaurant.id !== action.userId);
-            return Object.assign({}, state, { currentRestaurantData: result });
+            return Object.assign({}, state, { currentRestaurantData: result, removalPending: false });
         case ON_REMOVE_RESTAURANT_DATA_FAILED:
             return Object.assign({}, state, { error: action.payload, removalPending: false, notification: action.payload.response.data });
+        // ||||||||||||||||||||||||||||||||||Remove Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+
+
+        // |||||||||||||||||||||||||||||||||| Edit Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||||
+        case ON_EDIT_RESTAURANT_PENDING:
+            return Object.assign({}, state, { editPending: true });
+        case ON_EDIT_RESTAURANT_SUCCESS:
+            console.log(action);
+            // const result = restaurantDataCopy.filter(restaurant => restaurant.id !== action.userId);
+            return Object.assign({}, state, { currentRestaurantData: result });
+        case ON_EDIT_RESTAURANT_FAILED:
+            return Object.assign({}, state, { error: action.payload, removalPending: false, notification: action.payload.response.data });
+        // |||||||||||||||||||||||||||||||||| Edit Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
         // case ON_EDIT_RESTAURANT:
         //     let editCopy = [...action.currentRestaurantData]
         //     const updatedPersonData = action.updatedPersonInfo;

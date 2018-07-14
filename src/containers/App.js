@@ -7,7 +7,8 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 import { verifyToken } from '../actions/jwtActions';
-import { handleRestaurantData, onRestaurantRemoval } from '../actions/restaurantActions';
+import { handleRestaurantData, onRestaurantRemoval, onRestaurantEdit } from '../actions/restaurantActions';
+import Restaurant from '../components/Restaurant/Restaurant';
 
 import '../App.css';
 
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     verifyToken: (token) => dispatch(verifyToken(token)),
     handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
     onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
+    onRestaurantEdit: (restaurantId) => dispatch(onRestaurantEdit(restaurantId)),
   }
 }
 
@@ -47,6 +49,7 @@ class App extends Component {
 
   render() {
     const userId = this.props.user.id
+    console.log(this.props);
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
@@ -93,7 +96,6 @@ class App extends Component {
                   <SignUpForm
                     {...props}
                     retrieveToken={this.props.retrieveToken}
-                    renderResponse={this.renderResponse}
                   />
               )}
             />
@@ -106,11 +108,24 @@ class App extends Component {
                   <LoginForm
                     {...props}
                     retrieveToken={this.props.retrieveToken}
-                    renderResponse={this.renderResponse}
                     userProfile={this.props.user}
                     loading={this.props.loading}
                     verifyToken={this.props.verifyToken}
                   />
+
+              )}
+            />
+            <Route
+              path='/restaurant/:id'
+              render={(props) => (
+                <Restaurant
+                  {...props}
+                  userProfile={this.props.user}
+                  loading={this.props.loading}
+                  restaurantData={this.props.restaurants}
+                  verifyToken={this.props.verifyToken}
+                  editRestaurant={this.props.onRestaurantEdit}
+                />
 
               )}
             />
