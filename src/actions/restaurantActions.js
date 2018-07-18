@@ -29,7 +29,6 @@ export const handleRestaurantData = (userId) => (dispatch) => {
 export const onRestaurantRemoval = (userId) => {
     const token = sessionStorage.getItem('jwtToken');
     return (dispatch, getState) => {
-        console.log('running');
         dispatch({ type: ON_REMOVE_RESTAURANT_DATA_PENDING });
         const restaurantState = getState().restaurantData.currentRestaurantData;
         axios({
@@ -44,11 +43,6 @@ export const onRestaurantRemoval = (userId) => {
 
 export const onRestaurantEdit = (restaurantId, title, description, drinks) => (dispatch) => {
     const token = sessionStorage.getItem('jwtToken');
-    console.log('ACTION ON EDIT RESTAURANT RUNNING');
-    console.log(restaurantId)
-    console.log(title)
-    console.log(description)
-    console.log(drinks)
     dispatch({ type: ON_EDIT_RESTAURANT_PENDING });
     axios({
         method: 'patch',

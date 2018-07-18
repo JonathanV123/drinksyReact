@@ -29,7 +29,7 @@ const styles = theme => ({
 
 class EditForm extends React.Component {
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             title: props.restaurant.title,
             description: props.restaurant.description,
@@ -37,26 +37,12 @@ class EditForm extends React.Component {
         };
     }
     handleSubmit = (event, data) => {
-        // axios({
-        //     method: 'patch',
-        //     url: `http://localhost:8080/updateRestaurant/${this.props.restaurantId}`,
-        //     data: {
-        //         title: this.state.title,
-        //         description: this.state.description,
-        //         drinks: this.state.drinks
-        //     }
-        // }).then((response) => {
-        //     console.log(response.data);
-        // }).catch((err) => {
-        //     console.log(err)
-        //     // const errorMessage = err.response.data.message;
-        //     // this.props.renderResponse(errorMessage)
-        // });
         const id = this.props.restaurantId;
         const title = this.state.title;
         const description = this.state.description;
         const drinks = this.state.drinks;
         this.props.editRestaurant(id, title, description, drinks)
+        this.props.showHideForm();
         event.preventDefault();
     };
 
