@@ -42,15 +42,25 @@ export const onRestaurantRemoval = (userId) => {
     }
 };
 
-export const onRestaurantEdit = (restaurantId) => (dispatch) => {
+export const onRestaurantEdit = (restaurantId, title, description, drinks) => (dispatch) => {
     const token = sessionStorage.getItem('jwtToken');
+    console.log('ACTION ON EDIT RESTAURANT RUNNING');
+    console.log(restaurantId)
+    console.log(title)
+    console.log(description)
+    console.log(drinks)
     dispatch({ type: ON_EDIT_RESTAURANT_PENDING });
     axios({
-        method: 'update',
+        method: 'patch',
         url: `http://localhost:8080/updateRestaurant/${restaurantId}`,
         headers: { 'Authorization': "bearer " + token },
+        data: {
+            title: title,
+            description: description,
+            drinks: drinks
+        }
     })
-        .then(response => dispatch({ type: ON_EDIT_RESTAURANT_SUCCESS, payload: response.data, restaurantId: restaurantId }))
+        .then(response => dispatch({ type: ON_EDIT_RESTAURANT_SUCCESS, payload: response.data }))
         .catch(error => dispatch({ type: ON_EDIT_RESTAURANT_FAILED, payload: error }));
 
 };

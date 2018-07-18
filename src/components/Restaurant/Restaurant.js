@@ -8,8 +8,7 @@ const Form = (props) => {
     console.log(props);
     if (props.showForm) {
         return (
-            <EditForm restauranId={props.restaurantId} />
-
+            <EditForm editRestaurant={props.editRestaurant} restaurant={props.restaurantInfo} restaurantId={props.restaurantId} />
         )
     } else {
         return null;
@@ -34,14 +33,21 @@ class Restaurant extends Component {
     }
 
     render() {
+        const restaurantId = this.props.match.params.id;
         if (this.props.restaurantLoaded) {
+            const restaurantInfo = {
+                id: restaurantId,
+                title: this.props.restaurantById.title,
+                description: this.props.restaurantById.description,
+                drinks: this.props.restaurantById.drinks,
+            }
             return (
                 <div>
                     <Navigation />
                     <h1>{this.props.restaurantById.title}</h1>
                     <p>{this.props.restaurantById.description}</p>
                     <p>{this.props.restaurantById.drinks}</p>
-                    <Form restauranId={this.restaurantId} showForm={this.state.showForm} />
+                    <Form editRestaurant={this.props.editRestaurant} restaurantId={restaurantId} restaurantInfo={restaurantInfo} showForm={this.state.showForm} />
                     <Button buttonDesc={'Edit Restaurant'} clickAction={this.showHideForm} funcArgs={null} />
                 </div>
             )

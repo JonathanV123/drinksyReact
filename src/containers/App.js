@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
     verifyToken: (token) => dispatch(verifyToken(token)),
     handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
     onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
-    onRestaurantEdit: (restaurantId) => dispatch(onRestaurantEdit(restaurantId)),
+    onRestaurantEdit: (restaurantId, title, description, drinks) => dispatch(onRestaurantEdit(restaurantId, title, description, drinks)),
     fetchRestaurantById: (restaurantId) => dispatch(fetchRestaurantById(restaurantId)),
   }
 }
@@ -50,6 +50,7 @@ class App extends Component {
     }
   }
   render() {
+    console.log(this.props.restaurantById);
     const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (

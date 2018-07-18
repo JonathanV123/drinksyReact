@@ -30,37 +30,41 @@ const styles = theme => ({
 class EditForm extends React.Component {
     constructor(props) {
         super();
+        this.state = {
+            title: props.restaurant.title,
+            description: props.restaurant.description,
+            drinks: props.restaurant.drinks,
+        };
     }
-    state = {
-        title: '',
-        description: '',
-        drinks: '',
-    };
-
     handleSubmit = (event, data) => {
-        axios({
-            method: 'patch',
-            url: 'http://localhost:8080/updateRestaurant/:id',
-            data: {
-                title: this.state.title,
-                description: this.state.description,
-                drinks: this.state.drinks
-            }
-        }).then((response) => {
-            // const user_created = true;
-            // this.props.accountJustCreated(user_created);
-        }).catch((err) => {
-            const errorMessage = err.response.data.message;
-            this.props.renderResponse(errorMessage)
-        });
+        // axios({
+        //     method: 'patch',
+        //     url: `http://localhost:8080/updateRestaurant/${this.props.restaurantId}`,
+        //     data: {
+        //         title: this.state.title,
+        //         description: this.state.description,
+        //         drinks: this.state.drinks
+        //     }
+        // }).then((response) => {
+        //     console.log(response.data);
+        // }).catch((err) => {
+        //     console.log(err)
+        //     // const errorMessage = err.response.data.message;
+        //     // this.props.renderResponse(errorMessage)
+        // });
+        const id = this.props.restaurantId;
+        const title = this.state.title;
+        const description = this.state.description;
+        const drinks = this.state.drinks;
+        this.props.editRestaurant(id, title, description, drinks)
         event.preventDefault();
     };
 
-    handleChange = (email, password_digest, name) => event => {
+    handleChange = (title, description, drinks) => event => {
         this.setState({
-            [name]: event.target.value,
-            [email]: event.target.value,
-            [password_digest]: event.target.value,
+            [title]: event.target.value,
+            [description]: event.target.value,
+            [drinks]: event.target.value,
         });
     };
 
@@ -75,34 +79,35 @@ class EditForm extends React.Component {
                 <div>
                     <form id='signup-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
                         <TextField
-                            id="name"
+                            id="title"
                             className={classes.textField}
-                            placeholder="Name"
-                            label="Name"
-                            value={this.state.name}
-                            onChange={this.handleChange('name')}
+                            placeholder="Title"
+                            label="title"
+                            value={this.state.title}
+                            onChange={this.handleChange('title')}
                             margin="normal"
                         />
                         <TextField
-                            id="email"
+                            id="description"
                             className={classes.textField}
-                            label="Email"
-                            value={this.state.email}
-                            onChange={this.handleChange('email')}
+                            placeholder="Description"
+                            label="description"
+                            value={this.state.description}
+                            onChange={this.handleChange('description')}
                             margin="normal"
                         />
                         <TextField
-                            id="password-input"
+                            id="drinks"
                             className={classes.textField}
-                            placeholder="Password"
-                            label="Password"
-                            type="password"
-                            onChange={this.handleChange('password_digest')}
+                            placeholder="Drinks"
+                            label="drinks"
+                            value={this.state.drinks}
+                            onChange={this.handleChange('drinks')}
                             margin="normal"
                         />
                         <Button variant="contained" type='submit' color="primary">
-                            Create Account
-            </Button>
+                            Submit Edit
+                        </Button>
                     </form>
                     <Notification
                         responseMessage={this.state.responseMessage}

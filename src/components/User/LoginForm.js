@@ -74,7 +74,7 @@ class LoginForm extends Component {
         })
         event.preventDefault();
     };
-    
+
     // Clear notifications telling user if incorrect password, email, ect...
     clearNotification = () => {
         this.setState((prevState, props) => {
