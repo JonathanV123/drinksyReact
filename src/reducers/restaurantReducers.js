@@ -8,6 +8,9 @@ import {
     ON_EDIT_RESTAURANT_PENDING,
     ON_EDIT_RESTAURANT_SUCCESS,
     ON_EDIT_RESTAURANT_FAILED,
+    ON_FETCH_RESTAURANT_BY_ID_PENDING,
+    ON_FETCH_RESTAURANT_BY_ID_SUCCESS,
+    ON_FETCH_RESTAURANT_BY_ID_FAILED,
 } from '../constants';
 
 // const initialRestaurantDataBeforeFetch = {
@@ -27,23 +30,34 @@ import {
 
 const initialRestaurantData = {
     currentRestaurantData: [],
-    isPending: null,
+    isPending: false,
+    restaurantLoaded: false,
     error: null,
     removalPending: false,
     editPending: false,
     notification: null,
+    currentRestaurantById: null,
 };
 export const restaurantData = (state = initialRestaurantData, action = {}) => {
     switch (action.type) {
-        // |||||||||||||||||||||||||||||||||| Request Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data All |||||||||||||||||||||||||||||||||||||||||||||||||||
         case REQUEST_RESTAURANT_DATA_PENDING:
             return Object.assign({}, state, { isPending: true });
         case REQUEST_RESTAURANT_DATA_SUCCESS:
             return Object.assign({}, state, { currentRestaurantData: action.payload.restaurants, isPending: false })
         case REQUEST_RESTAURANT_DATA_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false });
-        // |||||||||||||||||||||||||||||||||| Request Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data All |||||||||||||||||||||||||||||||||||||||||||||||||||
 
+
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data By Id |||||||||||||||||||||||||||||||||||||||||||||||||||
+        case ON_FETCH_RESTAURANT_BY_ID_PENDING:
+            return Object.assign({}, state, { restaurantLoaded: false });
+        case ON_FETCH_RESTAURANT_BY_ID_SUCCESS:
+            return Object.assign({}, state, { currentRestaurantById: action.payload.restaurant, restaurantLoaded: true })
+        case ON_FETCH_RESTAURANT_BY_ID_FAILED:
+            return Object.assign({}, state, { error: action.payload, isPending: false });
+        // |||||||||||||||||||||||||||||||||| Request Restaurant Data By Id |||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
         // |||||||||||||||||||||||||||||||||| Remove Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||

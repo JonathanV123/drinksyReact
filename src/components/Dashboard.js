@@ -41,7 +41,6 @@ const RestaurantList = (props) => {
 class Dashboard extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.loading);
         const userId = this.props.userProfile.id
         if (this.props.loading === false) {
             this.props.fetchRestaurantData(userId);
@@ -49,11 +48,15 @@ class Dashboard extends Component {
         this.state = {
             restaurants: [],
         }
+
+
     }
+
     logout = () => {
         sessionStorage.removeItem('jwtToken');
         window.location.reload();
     }
+
     render() {
         if (this.props.loading) {
             return (

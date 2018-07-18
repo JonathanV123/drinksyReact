@@ -7,18 +7,20 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 import { verifyToken } from '../actions/jwtActions';
-import { handleRestaurantData, onRestaurantRemoval, onRestaurantEdit } from '../actions/restaurantActions';
+import { handleRestaurantData, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
 import Restaurant from '../components/Restaurant/Restaurant';
 
 import '../App.css';
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log(state)
   return {
     token: state.verifyJWT.token,
     loading: state.verifyJWT.isPending,
     user: state.verifyJWT.user,
-    restaurants: state.restaurantData.currentRestaurantData
+    restaurantLoaded: state.restaurantData.restaurantLoaded,
+    restaurants: state.restaurantData.currentRestaurantData,
+    restaurantById: state.restaurantData.currentRestaurantById,
   }
 }
 
@@ -29,6 +31,7 @@ const mapDispatchToProps = (dispatch) => {
     handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
     onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
     onRestaurantEdit: (restaurantId) => dispatch(onRestaurantEdit(restaurantId)),
+    fetchRestaurantById: (restaurantId) => dispatch(fetchRestaurantById(restaurantId)),
   }
 }
 
@@ -46,10 +49,8 @@ class App extends Component {
       responseMessage: '',
     }
   }
-
   render() {
     const userId = this.props.user.id
-    console.log(this.props);
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
@@ -121,10 +122,11 @@ class App extends Component {
                 <Restaurant
                   {...props}
                   userProfile={this.props.user}
-                  loading={this.props.loading}
-                  restaurantData={this.props.restaurants}
+                  restaurantLoaded={this.props.restaurantLoaded}
+                  restaurantById={this.props.restaurantById}
                   verifyToken={this.props.verifyToken}
                   editRestaurant={this.props.onRestaurantEdit}
+                  fetchRestaurantById={this.props.fetchRestaurantById}
                 />
 
               )}

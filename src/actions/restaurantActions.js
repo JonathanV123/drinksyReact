@@ -8,6 +8,9 @@ import {
     ON_EDIT_RESTAURANT_PENDING,
     ON_EDIT_RESTAURANT_SUCCESS,
     ON_EDIT_RESTAURANT_FAILED,
+    ON_FETCH_RESTAURANT_BY_ID_PENDING,
+    ON_FETCH_RESTAURANT_BY_ID_SUCCESS,
+    ON_FETCH_RESTAURANT_BY_ID_FAILED,
 } from '../constants';
 import axios from 'axios';
 
@@ -42,14 +45,26 @@ export const onRestaurantRemoval = (userId) => {
 export const onRestaurantEdit = (restaurantId) => (dispatch) => {
     const token = sessionStorage.getItem('jwtToken');
     dispatch({ type: ON_EDIT_RESTAURANT_PENDING });
-    // axios({
-    //     method: 'update',
-    //     url: `http://localhost:8080/updateRestaurant/${restaurantId}`,
-    //     headers: { 'Authorization': "bearer " + token },
-    // })
-        // .then(response => dispatch({ type: ON_EDIT_RESTAURANT_SUCCESS, payload: response.data, restaurantId: restaurantId }))
-        // .catch(error => dispatch({ type: ON_EDIT_RESTAURANT_FAILED, payload: error }));
+    axios({
+        method: 'update',
+        url: `http://localhost:8080/updateRestaurant/${restaurantId}`,
+        headers: { 'Authorization': "bearer " + token },
+    })
+        .then(response => dispatch({ type: ON_EDIT_RESTAURANT_SUCCESS, payload: response.data, restaurantId: restaurantId }))
+        .catch(error => dispatch({ type: ON_EDIT_RESTAURANT_FAILED, payload: error }));
 
+};
+
+export const fetchRestaurantById = (restaurantId) => (dispatch) => {
+    const token = sessionStorage.getItem('jwtToken');
+    dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_PENDING });
+    axios({
+        method: 'get',
+        url: `http://localhost:8080/restaurant/${restaurantId}`,
+        headers: { 'Authorization': "bearer " + token },
+    })
+        .then(response => dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_SUCCESS, payload: response.data, restaurantId: restaurantId }))
+        .catch(error => dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_FAILED, payload: error }));
 };
 
 
