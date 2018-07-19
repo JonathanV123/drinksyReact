@@ -11,6 +11,7 @@ const Navigation = (props) => {
             </div>
             <nav id="nav">
                 <Link className="navBarLink" to={`/home/${props.userId}`}>My Restaurants</Link>
+                <Link className="navBarLink" to={`/addRestaurant/${props.userId}`}>Add Restaurant</Link>
                 <Link className="navBarLink" to={'/'} onClick={props.logout}>Logout</Link>
             </nav>
 

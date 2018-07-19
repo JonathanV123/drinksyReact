@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
+import CheckboxLabels from './CheckboxForm'
+import DrinkReviews from './DrinkReviews';
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -20,9 +21,6 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
-    input: {
-        display: 'none',
-    },
 });
 
 class AddRestaurantForm extends Component {
@@ -32,18 +30,34 @@ class AddRestaurantForm extends Component {
         this.state = {
             title: '',
             description: '',
-            drinks: '',
+            from: '',
+            to: '',
+            beer: '',
+            wine: '',
+            cocktails: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange = (title, description, drinks) => event => {
+    handleChange = (title, description, from, to, beer, wine, cocktails) => event => {
         this.setState({
             [title]: event.target.value,
             [description]: event.target.value,
-            [drinks]: event.target.value,
+            [title]: event.target.value,
+            [from]: event.target.value,
+            [to]: event.target.value,
+
         });
+    };
+
+    handleSelection = (name, drinkType) => {
+        this.setState({
+            [drinkType]: name,
+        });
+        console.log('running');
+        console.log(drinkType)
+        console.log(name);
     };
 
 
@@ -58,11 +72,12 @@ class AddRestaurantForm extends Component {
                 title: this.state.title,
                 description: this.state.description,
                 drinks: this.state.drinks,
+                from: this.state.from,
+                to: this.state.to,
             }
         }).then((response) => {
             this.props.handleCreation();
             console.log(response.data);
-
         }).catch((err) => {
             console.log(err.response);
             // this.setState({
@@ -71,7 +86,6 @@ class AddRestaurantForm extends Component {
         })
         event.preventDefault();
     };
-
     render() {
         console.log(this.state);
         const { classes } = this.props;
@@ -121,27 +135,82 @@ class AddRestaurantForm extends Component {
         } else if (this.props.creationStepCount === 2) {
             return (
                 <div>
-                    <h1>What drinks did you like?</h1>
-                    <form id='creation-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
-                        <TextField
-                            id="drinks"
-                            className={classes.textField}
-                            placeholder="Drinks"
-                            label="Drinks"
-                            value={this.state.drinks}
-                            onChange={this.handleChange('drinks')}
-                            margin="normal"
-                        />
-                        <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
-                            Next
+                    <h1>How would you rate their beer selection?</h1>
+                    <DrinkReviews drinkType={'beer'} handleSelection={this.handleSelection} />
+                    <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
+                        Next
                         </Button>
-                        <Button variant="contained" onClick={this.props.formStepBack} color="primary">
-                            Back
+                    <Button variant="contained" onClick={this.props.formStepBack} color="primary">
+                        Back
                         </Button>
-                    </form>
+                </div >
+            )
+        }
+        else if (this.props.creationStepCount === 3) {
+            return (
+                <div>
+                    <h1>How would you rate their wine selection?</h1>
+                    <DrinkReviews drinkType={'wine'} handleSelection={this.handleSelection} />
+                    <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
+                        Next
+                        </Button>
+                    <Button variant="contained" onClick={this.props.formStepBack} color="primary">
+                        Back
+                        </Button>
+                </div >
+            )
+
+        } else if (this.props.creationStepCount === 4) {
+            return (
+                <div>
+                    <h1>How would you rate their cocktail selection?</h1>
+                    <DrinkReviews drinkType={'cocktails'} handleSelection={this.handleSelection} />
+                    <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
+                        Next
+                        </Button>
+                    <Button variant="contained" onClick={this.props.formStepBack} color="primary">
+                        Back
+                        </Button>
+                </div >
+            )
+
+        }
+        else if (this.props.creationStepCount === 4) {
+            return (
+                <div>
+                    <h1>What's the happy hour?</h1>
+                    <TextField
+                        id="from"
+                        className={classes.textField}
+                        placeholder="From"
+                        label="from"
+                        value={this.state.from}
+                        onChange={this.handleChange('from')}
+                        margin="normal"
+                    />
+                    <h1>to</h1>
+                    <TextField
+                        id="to"
+                        className={classes.textField}
+                        placeholder="to"
+                        label="to"
+                        value={this.state.to}
+                        onChange={this.handleChange('to')}
+                        margin="normal"
+                    />
+                    <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
+                        Next
+                        </Button>
+                    <Button variant="contained" onClick={this.props.formStepComplete} color="primary">
+                        No Happy Hour
+                        </Button>
+                    <Button variant="contained" onClick={this.props.formStepBack} color="primary">
+                        Back
+                        </Button>
                 </div>
             )
-        } else if (this.props.creationStepCount === 3) {
+
+        } else if (this.props.creationStepCount === 5) {
             return (
                 <div>
                     <h1>Does this look right?</h1>
