@@ -2,9 +2,9 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import Notification from '../Presentational/Notification';
+import ButtonComponent from '../Presentational/ButtonComponent';
 
 const styles = theme => ({
     container: {
@@ -31,9 +31,9 @@ class EditForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: props.restaurant.title,
-            description: props.restaurant.description,
-            drinks: props.restaurant.drinks,
+            title: props.restaurantTitle,
+            description: props.restaurantDescription,
+            drinks: props.restaurantDrinks,
         };
     }
     handleSubmit = (event, data) => {
@@ -95,6 +95,7 @@ class EditForm extends React.Component {
                             Submit Edit
                         </Button>
                     </form>
+                    <ButtonComponent buttonDesc={'Cancel'} clickAction={this.props.showHideForm} funcArgs={null} />
                     <Notification
                         responseMessage={this.state.responseMessage}
                         showNotification={this.state.showNotification}

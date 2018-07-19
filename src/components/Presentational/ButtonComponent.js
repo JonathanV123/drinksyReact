@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = (props) => {
+const ButtonComponent = (props) => {
     return (
         <button onClick={() => { props.clickAction(props.funcArgs) }}>
             {props.buttonDesc}
@@ -8,4 +8,4 @@ const Button = (props) => {
     )
 }
 
-export default Button
+export default ButtonComponent

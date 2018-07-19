@@ -37,7 +37,6 @@ const Loading = (props) => {
 class LoginForm extends Component {
     constructor(props) {
         super();
-        console.log(props);
     }
     state = {
         email: '',

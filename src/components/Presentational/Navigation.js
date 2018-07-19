@@ -5,11 +5,12 @@ const Navigation = (props) => {
     return (
         <header id="header">
             <div id="logoContainer">
-                Drinksy
+                <Link to={`/home/${props.userId}`}>
+                    Drinksy
+                </Link>
             </div>
             <nav id="nav">
-                <Link className="navBarLink" to={'/'}>Home</Link>
-                <Link className="navBarLink" to={'/restaurant'}>Restaurants</Link>
+                <Link className="navBarLink" to={`/home/${props.userId}`}>My Restaurants</Link>
                 <Link className="navBarLink" to={'/'} onClick={props.logout}>Logout</Link>
             </nav>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../Presentational/Button'
+import ButtonComponent from '../Presentational/ButtonComponent'
 
 
 
@@ -13,7 +13,7 @@ const RestaurantCard = (props) => {
             <h1>{props.title}</h1>
             <p>{props.description}</p>
             <p>{props.drinks}</p>
-            <Button clickAction={props.onPersonRemoval} buttonDesc={removePersonButton} funcArgs={props.name} />
+            <ButtonComponent clickAction={props.onPersonRemoval} buttonDesc={removePersonButton} funcArgs={props.name} />
             <Link className="navBarLink" to={'/people/editPeople'}>Edit Person</Link>
         </div>
     )

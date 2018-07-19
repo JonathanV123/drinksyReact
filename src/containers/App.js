@@ -7,19 +7,21 @@ import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
 import Dashboard from '../components/Dashboard';
 import { verifyToken } from '../actions/jwtActions';
-import { handleRestaurantData, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
+import { fetchAllRestaurantDataForUser, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
 import Restaurant from '../components/Restaurant/Restaurant';
+import Navigation from '../components/Presentational/Navigation';
+import AddRestaurant from '../components/Restaurant/AddRestaurant';
 
 import '../App.css';
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     token: state.verifyJWT.token,
-    loading: state.verifyJWT.isPending,
+    loadingJWT: state.verifyJWT.isPending,
     user: state.verifyJWT.user,
-    restaurantLoaded: state.restaurantData.restaurantLoaded,
-    restaurants: state.restaurantData.currentRestaurantData,
+    restaurantPending: state.restaurantData.isPending,
+    // restaurantLoaded: state.restaurantData.restaurantLoaded,
+    allUserRestaurants: state.restaurantData.currentRestaurantData,
     restaurantById: state.restaurantData.currentRestaurantById,
   }
 }
@@ -28,7 +30,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     verifyToken: (token) => dispatch(verifyToken(token)),
-    handleRestaurantData: (userId) => dispatch(handleRestaurantData(userId)),
+    fetchAllRestaurantDataForUser: (userId) => dispatch(fetchAllRestaurantDataForUser(userId)),
     onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
     onRestaurantEdit: (restaurantId, title, description, drinks) => dispatch(onRestaurantEdit(restaurantId, title, description, drinks)),
     fetchRestaurantById: (restaurantId) => dispatch(fetchRestaurantById(restaurantId)),
@@ -49,8 +51,13 @@ class App extends Component {
       responseMessage: '',
     }
   }
+
+  logout = () => {
+    sessionStorage.removeItem('jwtToken');
+    window.location.reload();
+  }
+
   render() {
-    console.log(this.props.restaurantById);
     const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (
@@ -63,27 +70,33 @@ class App extends Component {
                 this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
-                  <HomeContainer
-                    {...props}
-                    loading={this.props.loading}
-                    retrieveToken={this.props.retrieveToken}
-                    userProfile={this.props.user}
-                  />
+                  <div>
+                    <HomeContainer
+                      {...props}
+                      loading={this.props.loadingJWT}
+                      retrieveToken={this.props.retrieveToken}
+                      userProfile={this.props.user}
+                    />
+                  </div>
               )}
             />
             <Route
               path='/home/:id'
               render={(props) => (
                 this.props.token === 'Valid' ?
-                  <Dashboard
-                    {...props}
-                    loading={this.props.loading}
-                    retrieveToken={this.props.retrieveToken}
-                    userProfile={this.props.user}
-                    fetchRestaurantData={this.props.handleRestaurantData}
-                    restaurantData={this.props.restaurants}
-                    onRestaurantRemoval={this.props.onRestaurantRemoval}
-                  />
+                  <div>
+                    <Navigation userId={userId} logout={this.logout} />
+                    <Dashboard
+                      {...props}
+                      loading={this.props.loadingJWT}
+                      restaurantPending={this.props.restaurantPending}
+                      retrieveToken={this.props.retrieveToken}
+                      userProfile={this.props.user}
+                      fetchAllRestaurantDataForUser={this.props.fetchAllRestaurantDataForUser}
+                      restaurantData={this.props.allUserRestaurants}
+                      onRestaurantRemoval={this.props.onRestaurantRemoval}
+                    />
+                  </div>
                   :
                   <Redirect to={{ pathname: `/` }} />
 
@@ -111,7 +124,7 @@ class App extends Component {
                     {...props}
                     retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
-                    loading={this.props.loading}
+                    loading={this.props.loadingJWT}
                     verifyToken={this.props.verifyToken}
                   />
 
@@ -120,16 +133,32 @@ class App extends Component {
             <Route
               path='/restaurant/:id'
               render={(props) => (
-                <Restaurant
-                  {...props}
-                  userProfile={this.props.user}
-                  restaurantLoaded={this.props.restaurantLoaded}
-                  restaurantById={this.props.restaurantById}
-                  verifyToken={this.props.verifyToken}
-                  editRestaurant={this.props.onRestaurantEdit}
-                  fetchRestaurantById={this.props.fetchRestaurantById}
-                />
-
+                <div>
+                  <Navigation userId={userId} logout={this.logout} />
+                  <Restaurant
+                    {...props}
+                    userProfile={this.props.user}
+                    restaurantPending={this.props.restaurantPending}
+                    restaurantById={this.props.restaurantById}
+                    verifyToken={this.props.verifyToken}
+                    editRestaurant={this.props.onRestaurantEdit}
+                    fetchRestaurantById={this.props.fetchRestaurantById}
+                  />
+                </div>
+              )}
+            />
+            <Route
+              path='/addRestaurant/:id'
+              render={(props) => (
+                <div>
+                  <Navigation userId={userId} logout={this.logout} />
+                  <AddRestaurant
+                    {...props}
+                    userProfile={this.props.user}
+                    restaurantPending={this.props.restaurantPending}
+                    verifyToken={this.props.verifyToken}
+                  />
+                </div>
               )}
             />
             <Route render={() => <h1> 404 </h1>} />
@@ -142,7 +171,7 @@ class App extends Component {
 
 App.propTypes = {
   token: PropTypes.string,
-  loading: PropTypes.bool,
+  loadingJWT: PropTypes.bool,
   user: PropTypes.object,
   retrieveToken: PropTypes.func,
   verifyToken: PropTypes.func

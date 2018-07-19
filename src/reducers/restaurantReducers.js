@@ -31,10 +31,9 @@ import {
 const initialRestaurantData = {
     currentRestaurantData: [],
     isPending: false,
-    restaurantLoaded: false,
     error: null,
-    removalPending: false,
-    editPending: false,
+    // removalPending: false,
+    // editPending: false,
     notification: null,
     currentRestaurantById: null,
 };
@@ -52,9 +51,9 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
 
         // |||||||||||||||||||||||||||||||||| Request Restaurant Data By Id |||||||||||||||||||||||||||||||||||||||||||||||||||
         case ON_FETCH_RESTAURANT_BY_ID_PENDING:
-            return Object.assign({}, state, { restaurantLoaded: false });
+            return Object.assign({}, state, { isPending: true });
         case ON_FETCH_RESTAURANT_BY_ID_SUCCESS:
-            return Object.assign({}, state, { currentRestaurantById: action.payload.restaurant, restaurantLoaded: true })
+            return Object.assign({}, state, { currentRestaurantById: action.payload.restaurant, isPending: false })
         case ON_FETCH_RESTAURANT_BY_ID_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false });
         // |||||||||||||||||||||||||||||||||| Request Restaurant Data By Id |||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -62,13 +61,13 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
 
         // |||||||||||||||||||||||||||||||||| Remove Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||
         case ON_REMOVE_RESTAURANT_DATA_PENDING:
-            return Object.assign({}, state, { removalPending: true });
+            return Object.assign({}, state, { isPending: true });
         case ON_REMOVE_RESTAURANT_SUCCESS:
             let restaurantDataCopy = [...action.restaurantData]
             const result = restaurantDataCopy.filter(restaurant => restaurant.id !== action.userId);
-            return Object.assign({}, state, { currentRestaurantData: result, removalPending: false });
+            return Object.assign({}, state, { currentRestaurantData: result, isPending: false });
         case ON_REMOVE_RESTAURANT_DATA_FAILED:
-            return Object.assign({}, state, { error: action.payload, removalPending: false, notification: action.payload.response.data });
+            return Object.assign({}, state, { error: action.payload, isPending: false, notification: action.payload.response.data });
         // ||||||||||||||||||||||||||||||||||Remove Restaurant Data |||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
@@ -76,11 +75,11 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
 
         // |||||||||||||||||||||||||||||||||| Edit Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||||
         case ON_EDIT_RESTAURANT_PENDING:
-            return Object.assign({}, state, { editPending: true });
+            return Object.assign({}, state, { isPending: true });
         case ON_EDIT_RESTAURANT_SUCCESS:
-            return Object.assign({}, state, { currentRestaurantById: action.payload, editPending: true });
+            return Object.assign({}, state, { currentRestaurantById: action.payload, isPending: false });
         case ON_EDIT_RESTAURANT_FAILED:
-            return Object.assign({}, state, { error: action.payload, removalPending: false, notification: action.payload.response.data });
+            return Object.assign({}, state, { error: action.payload, isPending: false, notification: action.payload.response.data });
         // |||||||||||||||||||||||||||||||||| Edit Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
         // case ON_EDIT_RESTAURANT:

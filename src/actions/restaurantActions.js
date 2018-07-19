@@ -14,7 +14,7 @@ import {
 } from '../constants';
 import axios from 'axios';
 
-export const handleRestaurantData = (userId) => (dispatch) => {
+export const fetchAllRestaurantDataForUser = (userId) => (dispatch) => {
     const token = sessionStorage.getItem('jwtToken');
     dispatch({ type: REQUEST_RESTAURANT_DATA_PENDING });
     axios({

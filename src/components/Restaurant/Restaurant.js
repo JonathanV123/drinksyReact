@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navigation from '../Presentational/Navigation';
 import EditForm from '../User/EditForm';
-import Button from '../Presentational/Button';
+import ButtonComponent from '../Presentational/ButtonComponent';
+import { Link } from 'react-router-dom';
 
 
 const Form = (props) => {
@@ -10,7 +10,9 @@ const Form = (props) => {
             <EditForm
                 showHideForm={props.showHideForm}
                 editRestaurant={props.editRestaurant}
-                restaurant={props.restaurantInfo}
+                restaurantTitle={props.restaurantTitle}
+                restaurantDescription={props.restaurantDescription}
+                restaurantDrinks={props.restaurantDrinks}
                 restaurantId={props.restaurantId}
             />
         )
@@ -38,37 +40,39 @@ class Restaurant extends Component {
 
     render() {
         const restaurantId = this.props.match.params.id;
-        if (this.state.showForm) {
-            const restaurantInfo = {
-                id: restaurantId,
-                title: this.props.restaurantById.title,
-                description: this.props.restaurantById.description,
-                drinks: this.props.restaurantById.drinks,
-            }
+        if (this.props.restaurantPending) {
             return (
                 <div>
-                    <Form
-                        editRestaurant={this.props.editRestaurant}
-                        restaurantId={restaurantId}
-                        restaurantInfo={restaurantInfo}
-                        showForm={this.state.showForm}
-                        showHideForm={this.showHideForm}
-                    />
+                    <h1>Loading Data</h1>
                 </div>
             )
-        } else if (this.props.restaurantLoaded && this.state.showForm === false) {
+        } else if (this.state.showForm === true) {
+            return (
+                <Form
+                    editRestaurant={this.props.editRestaurant}
+                    restaurantId={restaurantId}
+                    restaurantTitle={this.props.restaurantById.title}
+                    restaurantDescription={this.props.restaurantById.description}
+                    restaurantDrinks={this.props.restaurantById.drinks}
+                    showForm={this.state.showForm}
+                    showHideForm={this.showHideForm}
+                />
+            )
+        } else if (this.props.restaurantById && this.state.showForm === false) {
             return (
                 <div>
-                    <Navigation />
                     <h1>{this.props.restaurantById.title}</h1>
                     <p>{this.props.restaurantById.description}</p>
                     <p>{this.props.restaurantById.drinks}</p>
-                    <Button buttonDesc={'Edit Restaurant'} clickAction={this.showHideForm} funcArgs={null} />
+                    <ButtonComponent buttonDesc={'Edit Restaurant'} clickAction={this.showHideForm} funcArgs={null} />
                 </div>
             )
         } else {
             return (
-                <h1> No Restaurants Found </h1>
+                <div>
+                    <h1> There seems to be an error retreiving your restaurant :( </h1>
+                    <Link className="navBarLink" to={`/home/${this.props.userProfile.id}`}>Ok</Link>
+                </div>
             )
         }
     }

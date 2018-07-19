@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Button from './Presentational/Button'
-import Navigation from './Presentational/Navigation'
+import ButtonComponent from './Presentational/ButtonComponent'
 
 const RestaurantCard = (props) => {
     const buttonDesc = "Remove";
@@ -10,7 +9,7 @@ const RestaurantCard = (props) => {
             <h1>{props.title}</h1>
             <p>{props.description}</p>
             <p>{props.drinks}</p>
-            <Button clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
+            <ButtonComponent clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
             <Link className="navBarLink" to={`/restaurant/${props.id}`}>View Restaurant</Link>
         </div >
     )
@@ -43,32 +42,25 @@ class Dashboard extends Component {
         super(props);
         const userId = this.props.userProfile.id
         if (this.props.loading === false) {
-            this.props.fetchRestaurantData(userId);
+            this.props.fetchAllRestaurantDataForUser(userId);
         }
         this.state = {
             restaurants: [],
         }
-
-
     }
-
-    logout = () => {
-        sessionStorage.removeItem('jwtToken');
-        window.location.reload();
-    }
-
     render() {
-        if (this.props.loading) {
+        if (this.props.restaurantPending === true) {
             return (
                 <div>
                     <h1>Loading Data</h1>
                 </div>
             )
-        } else {
+
+        } else if (this.props.restaurantData.length >= 1) {
             return (
                 <div>
-                    <Navigation logout={this.logout} />
                     <RestaurantList
+                        loadingRestaurants={this.props.loading}
                         restaurants={this.props.restaurantData}
                         onRestaurantRemoval={this.props.onRestaurantRemoval}
                         userId={this.props.userProfile.id}
@@ -76,9 +68,14 @@ class Dashboard extends Component {
                     <h1>Welcome {this.props.userProfile.name}</h1>
                 </div>
             )
+        } else {
+            return (
+                <Link className="navBarLink" to={`/addRestaurant/${this.props.userProfile.id}`}>Add A Restaurant</Link>
+            )
         }
     }
 }
+
 
 export default Dashboard;
 
