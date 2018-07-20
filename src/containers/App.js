@@ -56,8 +56,8 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
-
   render() {
+    console.log(this.props);
     const userId = this.props.user.id
     // const path = this.state.loggedIn ? '/home' : '/login';
     return (

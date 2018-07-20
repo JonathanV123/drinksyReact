@@ -24,18 +24,18 @@ class DrinkReview extends React.Component {
         return (
             <div className={classes.root}>
                 <List component="nav">
-                    <ListItem onClick={() => this.props.handleSelection('Amazing', this.props.drinkType)} button>
+                    <ListItem onClick={() => this.props.handleSelection('Amazing', this.props.drinkOrFoodType)} button>
                         <ListItemText primary="Amazing" />
                     </ListItem>
                     <Divider />
-                    <ListItem onClick={() => this.props.handleSelection('Good', this.props.drinkType)} button divider>
+                    <ListItem onClick={() => this.props.handleSelection('Good', this.props.drinkOrFoodType)} button divider>
                         <ListItemText primary="Good" />
                     </ListItem>
-                    <ListItem onClick={() => this.props.handleSelection('Decent', this.props.drinkType)} button>
+                    <ListItem onClick={() => this.props.handleSelection('Decent', this.props.drinkOrFoodType)} button>
                         <ListItemText primary="Decent" />
                     </ListItem>
                     <Divider light />
-                    <ListItem onClick={() => this.props.handleSelection('Bad', this.props.drinkType)} button>
+                    <ListItem onClick={() => this.props.handleSelection('Bad', this.props.drinkOrFoodType)} button>
                         <ListItemText primary="Bad" />
                     </ListItem>
                 </List>
