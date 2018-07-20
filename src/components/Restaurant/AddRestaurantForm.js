@@ -43,14 +43,13 @@ class AddRestaurantForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange = (title, description, from, to, beer, wine, cocktails) => event => {
+    handleChange = (title, description, from, to) => event => {
         this.setState({
             [title]: event.target.value,
             [description]: event.target.value,
             [title]: event.target.value,
             [from]: event.target.value,
             [to]: event.target.value,
-
         });
     };
 
@@ -172,8 +171,7 @@ class AddRestaurantForm extends Component {
                     </Button>
                 </div >
             )
-        }
-        else if (this.props.creationStepCount === 4) {
+        } else if (this.props.creationStepCount === 4) {
             return (
                 <div>
                     <h1>How would you rate their wine selection?</h1>

@@ -35,7 +35,7 @@ class SignUpForm extends React.Component {
     name: '',
     email: '',
     password_digest: '',
-    showValidationMessage: false,
+    responseMessage: null,
   };
 
   handleSubmit = (event, data) => {
@@ -52,12 +52,22 @@ class SignUpForm extends React.Component {
       // this.props.accountJustCreated(user_created);
       sessionStorage.setItem('jwtToken', response.data.token)
     }).catch((err) => {
+      console.log(err.response);
       const errorMessage = err.response.data.message;
-      this.props.renderResponse(errorMessage)
+      this.setState({
+        responseMessage: errorMessage,
+      });
     });
     event.preventDefault();
   };
 
+  clearNotification = () => {
+    this.setState((prevState, props) => {
+      return {
+        responseMessage: ''
+      }
+    })
+  }
   handleChange = (email, password_digest, name) => event => {
     this.setState({
       [name]: event.target.value,
@@ -108,7 +118,6 @@ class SignUpForm extends React.Component {
           </form>
           <Notification
             responseMessage={this.state.responseMessage}
-            showNotification={this.state.showNotification}
             clearNotification={this.clearNotification}
           />
         </div>
