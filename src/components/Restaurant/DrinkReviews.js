@@ -14,34 +14,29 @@ const styles = theme => ({
     },
 });
 
-class DrinkReview extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log(props);
-    }
-    render() {
-        const { classes } = this.props;
-        return (
-            <div className={classes.root}>
-                <List component="nav">
-                    <ListItem onClick={() => this.props.handleSelection('Amazing', this.props.drinkOrFoodType)} button>
-                        <ListItemText primary="Amazing" />
-                    </ListItem>
-                    <Divider />
-                    <ListItem onClick={() => this.props.handleSelection('Good', this.props.drinkOrFoodType)} button divider>
-                        <ListItemText primary="Good" />
-                    </ListItem>
-                    <ListItem onClick={() => this.props.handleSelection('Decent', this.props.drinkOrFoodType)} button>
-                        <ListItemText primary="Decent" />
-                    </ListItem>
-                    <Divider light />
-                    <ListItem onClick={() => this.props.handleSelection('Bad', this.props.drinkOrFoodType)} button>
-                        <ListItemText primary="Bad" />
-                    </ListItem>
-                </List>
-            </div>
-        );
-    }
+
+const DrinkReview = (props) => {
+    const { classes } = props;
+    return (
+        <div className={classes.root}>
+            <List id="noPadding" component="nav">
+                <ListItem onClick={() => { props.handleSelection('Amazing', props.drinkOrFoodType); props.formStepComplete() }} button>
+                    <ListItemText primary="Amazing" />
+                </ListItem>
+                <Divider />
+                <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.formStepComplete() }} button divider>
+                    <ListItemText primary="Good" />
+                </ListItem>
+                <ListItem onClick={() => { props.handleSelection('Decent', props.drinkOrFoodType); props.formStepComplete() }} button>
+                    <ListItemText primary="Decent" />
+                </ListItem>
+                <Divider light />
+                <ListItem onClick={() => { props.handleSelection('Bad', props.drinkOrFoodType); props.formStepComplete() }} button>
+                    <ListItemText primary="Bad" />
+                </ListItem>
+            </List>
+        </div>
+    );
 }
 
 

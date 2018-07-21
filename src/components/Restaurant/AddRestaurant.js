@@ -18,7 +18,6 @@ class AddRestaurant extends React.Component {
             }
         })
     }
-
     handleFormStepBack = () => {
         this.setState((prevState, props) => {
             return {
@@ -32,7 +31,6 @@ class AddRestaurant extends React.Component {
     }
 
     handleCreation = (event) => {
-        console.log(this.state)
         this.setState((prevState, props) => {
             return {
                 restaurantCreated: !prevState.restaurantCreated,
