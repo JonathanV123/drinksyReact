@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonComponent from '../Presentational/ButtonComponent';
 import RestaurantCard from './RestaurantCard';
-
+import FilterNotifcations from '../Presentational/FilterNotifcations';
 
 const FilterHappyHourNow = (props) => {
     const today = new Date().getHours();
@@ -37,8 +37,9 @@ const FilterHappyHourNow = (props) => {
     }
     // If every index value in filteredCards array is undefined, no restaurants match the filter.
     if (filteredCards.every(isUndefined)) {
+        const message = 'None of your restaurants are currently offering Happy Hour :('
         return (
-            <h1>None of your restaurants are currently offering Happy Hour :(</h1>
+            <FilterNotifcations message={message} />
         )
         // Show restaurants that match the filter.
     } else {
@@ -68,7 +69,7 @@ const FoodAndDrinksList = (props) => {
                     wine={restaurant.wine}
                     toStandard={restaurant.toStandard}
                     fromStandard={restaurant.fromStandard}
-                    fromTimeOfDay={restaurant.fromTimeOfday}
+                    fromTimeOfDay={restaurant.fromTimeOfDay}
                     toTimeOfDay={restaurant.toTimeOfDay}
                     onRestaurantRemoval={props.onRestaurantRemoval}
                     className="peopleCard"
@@ -82,8 +83,9 @@ const FoodAndDrinksList = (props) => {
     }
     // If every index value in filteredCards array is undefined, no restaurants match the filter.
     if (filteredCards.every(isUndefined)) {
+        const message = 'None of your restaurants match your current filter :('
         return (
-            <h1> You have no restaurants that match your current filter </h1>
+            <FilterNotifcations message={message} />
         )
         // Show restaurants that match the filter.
     } else {

@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
 
 const styles = {
     card: {
@@ -23,6 +24,7 @@ const styles = {
     },
     pos: {
         marginBottom: 12,
+        // textAlign: 'center',
     },
 };
 
@@ -31,30 +33,35 @@ function RestaurantCard(props) {
     const { classes } = props;
     return (
         <div>
-            <Card className={classes.card}>
+            <Card id="cardSpacing" className={classes.card}>
                 <CardContent>
-                    <Typography variant="headline" component="h2">
+                    <Typography id="hotPinkCenter" variant="headline" component="h2">
                         {props.title}
                     </Typography>
+                    <Divider id="divider" light />
                     <Typography className={classes.pos} color="textSecondary">
                         Wine: {props.wine}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        Cocktails:{props.cocktails}
+                        Cocktails: {props.cocktails}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        Food:{props.food}
+                        Food: {props.food}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                        Beer:{props.beer}
+                        Beer: {props.beer}
                     </Typography>
-                    <Typography component="p">
-                        {props.description}
+                    <Divider id="divider" light />
+                    <Typography id="hotPinkCenter" component="h2">
+                        Happy Hour
+                        </Typography>
+                    <Typography id="centerMeHappyHour" className={classes.pos} color="textSecondary">
+                        {props.fromStandard}{props.fromTimeOfDay} to {props.toStandard}{props.toTimeOfDay}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions id="centerMe" >
                     <Button size="small" color="primary">
-                        <Link className="navBarLink" to={`/restaurant/${props.restaurantId}`}>View Restaurant</Link>
+                        <Link className="link" to={`/restaurant/${props.restaurantId}`}>View Restaurant</Link>
                     </Button>
                 </CardActions>
             </Card>

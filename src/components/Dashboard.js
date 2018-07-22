@@ -4,21 +4,11 @@ import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
 import ButtonComponent from './Presentational/ButtonComponent'
 import LoaderAnimation from './Presentational/Loaders';
+import RestaurantCard from './Restaurant/RestaurantCard';
+
 let isVisible = false;
 let prevFilter = null;
 
-const RestaurantCard = (props) => {
-    const buttonDesc = "Remove";
-    return (
-        <div className="peopleCard">
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-            <p>{props.drinks}</p>
-            <ButtonComponent clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
-            <Link className="navBarLink" to={`/restaurant/${props.id}`}>View Restaurant</Link>
-        </div >
-    )
-}
 
 const RestaurantList = (props) => {
     const restaurantCards = props.restaurants.map((restaurant, index) => {
@@ -26,10 +16,17 @@ const RestaurantList = (props) => {
             <RestaurantCard
                 key={restaurant.id}
                 title={restaurant.title}
-                id={restaurant.id}
+                restaurantId={restaurant.id}
                 description={restaurant.description}
-                drinks={restaurant.drinks}
-                userId={props.userId}
+                userId={restaurant.owner}
+                beer={restaurant.beer}
+                cocktails={restaurant.cocktails}
+                food={restaurant.food}
+                wine={restaurant.wine}
+                toStandard={restaurant.toStandard}
+                fromStandard={restaurant.fromStandard}
+                fromTimeOfDay={restaurant.fromTimeOfDay}
+                toTimeOfDay={restaurant.toTimeOfDay}
                 onRestaurantRemoval={props.onRestaurantRemoval}
                 className="peopleCard"
             />
@@ -92,13 +89,12 @@ class Dashboard extends Component {
             })
         }
     }
-
     render() {
-        console.log(this.state);
         if (this.props.restaurantPending === true) {
             return (
                 <LoaderAnimation />
             )
+
         } else if (this.state.filterActive === true) {
             return (
                 <div>

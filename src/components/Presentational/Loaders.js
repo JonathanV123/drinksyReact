@@ -12,7 +12,7 @@ const styles = theme => ({
 function LoaderAnimation(props) {
     const { classes } = props;
     return (
-        <div>
+        <div id="centerLoader" >
             <CircularProgress className={classes.progress} size={50} />
         </div>
     );

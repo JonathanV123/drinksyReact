@@ -46,7 +46,7 @@ class FilterBar extends React.Component {
         const { classes } = this.props;
         console.log(this.props)
         return (
-            <div className={classes.root}>
+            <div id="transparent" className={classes.root}>
                 <AppBar id="filterTabsCenter" position="static" color="default">
                     <Tabs
                         value={this.state.value}
@@ -73,44 +73,3 @@ FilterBar.propTypes = {
 };
 
 export default withStyles(styles)(FilterBar);
-
-
-// import React from 'react';
-// import Paper from '@material-ui/core/Paper';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
-// import PhoneIcon from '@material-ui/icons/Phone';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import PersonPinIcon from '@material-ui/icons/PersonPin';
-
-// export default class IconLabelTabs extends React.Component {
-//     state = {
-//         value: 0,
-//     };
-
-//     handleChange = (event, value) => {
-//         this.setState({ value });
-//     };
-
-//     render() {
-//         return (
-//             <div id="filterTabsContainer">
-//                 <Paper style={{ width: 500 }}>
-//                     <Tabs
-//                         value={this.state.value}
-//                         onChange={this.handleChange}
-//                         fullWidth
-//                         indicatorColor="secondary"
-//                         textColor="secondary"
-//                     >
-//                         <Tab icon={<HappyHourIcon />} label="Happy Hour" />
-//                         <Tab icon={<FoodIcon />} label="Food" />
-//                         <Tab icon={<WineIcon />} label="Wine" />
-//                         <Tab icon={<WineIcon />} label="Beer" />
-//                         <Tab icon={<WineIcon />} label="Cocktails" />
-//                     </Tabs>
-//                 </Paper>
-//             </div>
-//         );
-//     }
-// }
