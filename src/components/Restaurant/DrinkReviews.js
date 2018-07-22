@@ -23,16 +23,21 @@ const DrinkReview = (props) => {
                 <ListItem onClick={() => { props.handleSelection('Amazing', props.drinkOrFoodType); props.formStepComplete() }} button>
                     <ListItemText primary="Amazing" />
                 </ListItem>
-                <Divider />
-                <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.formStepComplete() }} button divider>
+                <Divider light />
+                <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.formStepComplete() }} button>
                     <ListItemText primary="Good" />
                 </ListItem>
+                <Divider light />
                 <ListItem onClick={() => { props.handleSelection('Decent', props.drinkOrFoodType); props.formStepComplete() }} button>
                     <ListItemText primary="Decent" />
                 </ListItem>
                 <Divider light />
                 <ListItem onClick={() => { props.handleSelection('Bad', props.drinkOrFoodType); props.formStepComplete() }} button>
                     <ListItemText primary="Bad" />
+                </ListItem>
+                <Divider light />
+                <ListItem onClick={() => { props.handleSelection('None', props.drinkOrFoodType); props.formStepComplete() }} button>
+                    <ListItemText primary="None" />
                 </ListItem>
             </List>
         </div>

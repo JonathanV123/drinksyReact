@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import FilterBar from '../components/Presentational/FilterBar';
+import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
 import ButtonComponent from './Presentational/ButtonComponent'
 
+let isVisible = false;
+let prevFilter = null;
+
 const RestaurantCard = (props) => {
-    console.log
     const buttonDesc = "Remove";
     return (
         <div className="peopleCard">
@@ -13,32 +17,6 @@ const RestaurantCard = (props) => {
             <ButtonComponent clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
             <Link className="navBarLink" to={`/restaurant/${props.id}`}>View Restaurant</Link>
         </div >
-    )
-}
-
-const FilterHappyHourNow = (props) => {
-    console.log(props.restaurants)
-    const today = new Date().getHours();
-    const filteredCards = props.restaurants.map((restaurant, index) => {
-        if (today >= restaurant.from && today <= restaurant.to) {
-            return (
-                <RestaurantCard
-                    key={restaurant.id}
-                    title={restaurant.title}
-                    id={restaurant.id}
-                    description={restaurant.description}
-                    drinks={restaurant.drinks}
-                    userId={props.userId}
-                    onRestaurantRemoval={props.onRestaurantRemoval}
-                    className="peopleCard"
-                />
-            )
-        }
-    });
-    return (
-        <div className="peopleContainer">
-            {filteredCards}
-        </div>
     )
 }
 
@@ -72,31 +50,81 @@ class Dashboard extends Component {
             this.props.fetchAllRestaurantDataForUser(userId);
         }
         this.state = {
-            restaurants: [],
+            filterActive: false,
+            filterWine: false,
+            filterBeer: false,
+            filterHappyHour: false,
+            filterFood: false,
+            filterCocktails: false,
         }
     }
+
+    filterFoodAndDrink = (type) => {
+        console.log('running!')
+        console.log(isVisible);
+        isVisible = !isVisible;
+        console.log(isVisible);
+        if (type !== 'filterActive') {
+            this.setState((prevState, props) => {
+                for (var key in prevState) {
+                    if (prevState[key] === true) {
+                        prevFilter = key
+                    }
+                }
+                console.log(prevFilter);
+                return {
+                    [type]: ![prevState][type],
+                    [prevFilter]: false,
+                    filterActive: true,
+                }
+            })
+        } else {
+            this.setState((prevState, props) => {
+                for (var key in prevState) {
+                    if (prevState[key] === true && prevState[key] !== 'filterActive') {
+                        prevFilter = key
+                    }
+                }
+                return {
+                    [prevFilter]: false,
+                    filterActive: false,
+                }
+            })
+        }
+    }
+
     render() {
+        console.log(this.state);
         if (this.props.restaurantPending === true) {
             return (
                 <div>
                     <h1>Loading Data</h1>
                 </div>
             )
-
-        } else if (this.props.restaurantData.length >= 1) {
+        } else if (this.state.filterActive === true) {
             return (
                 <div>
-                    {/* <RestaurantList
+                    <h1>Welcome {this.props.userProfile.name}</h1>
+                    <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} />
+                    <FilterFoodAndDrinks foodState={this.state} restaurantData={this.props.restaurantData} />
+                </div>
+            )
+        }
+        else if (this.props.restaurantData.length >= 1) {
+            return (
+                <div>
+                    <h1>Welcome {this.props.userProfile.name}</h1>
+                    <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} filterHappyHour={this.filterHappyHour} />
+                    <RestaurantList
                         loadingRestaurants={this.props.loading}
                         restaurants={this.props.restaurantData}
                         onRestaurantRemoval={this.props.onRestaurantRemoval}
                         userId={this.props.userProfile.id}
-                    /> */}
-                    <h1>Welcome {this.props.userProfile.name}</h1>
-                    <FilterHappyHourNow restaurants={this.props.restaurantData} />
+                    />
                 </div>
             )
-        } else {
+        }
+        else {
             return (
                 <Link className="navBarLink" to={`/addRestaurant/${this.props.userProfile.id}`}>Add A Restaurant</Link>
             )

@@ -60,6 +60,8 @@ class AddRestaurantForm extends Component {
             }
         })
     }
+
+
     checkStepCompletion = (name) => {
         if (this.state[name].length >= 1) {
             this.props.formStepComplete();
@@ -88,9 +90,9 @@ class AddRestaurantForm extends Component {
         });
     };
 
-    handleSelection = (name, drinkOrFoodType) => {
+    handleSelection = (review, drinkOrFoodType) => {
         this.setState({
-            [drinkOrFoodType]: name,
+            [drinkOrFoodType]: review,
         });
     };
 
@@ -125,7 +127,7 @@ class AddRestaurantForm extends Component {
         }).catch((err) => {
             console.log(err.response)
             this.setState({
-                responseMessage: err.response.data.message,
+                responseMessage: 'Unable to add restaurant. Please ensure all fields are properly filled out, and try again.',
             });
         })
         event.preventDefault();
@@ -287,6 +289,7 @@ class AddRestaurantForm extends Component {
             )
 
         } else if (this.props.creationStepCount === 7) {
+            console.log(this.state);
             return (
                 <div>
                     <h1>Does this look right?</h1>

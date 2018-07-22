@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SimpleMenu from './SimpleMenu';
 
 const Navigation = (props) => {
     return (
@@ -10,9 +11,7 @@ const Navigation = (props) => {
                 </Link>
             </div>
             <nav id="nav">
-                <Link className="navBarLink" to={`/home/${props.userId}`}>My Restaurants</Link>
-                <Link className="navBarLink" to={`/addRestaurant/${props.userId}`}>Add Restaurant</Link>
-                <Link className="navBarLink" to={'/'} onClick={props.logout}>Logout</Link>
+                <SimpleMenu />
             </nav>
 
         </header>
