@@ -1,112 +1,126 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ButtonComponent from '../Presentational/ButtonComponent';
+import RestaurantCard from './RestaurantCard';
 
-const RestaurantCard = (props) => {
-    const buttonDesc = "Remove";
-    return (
-        <div className="peopleCard">
-            <h1>{props.title}</h1>
-            <p>{props.description}</p>
-            <p>{props.drinks}</p>
-            <ButtonComponent clickAction={props.onRestaurantRemoval} buttonDesc={buttonDesc} funcArgs={props.id} />
-            <Link className="navBarLink" to={`/restaurant/${props.id}`}>View Restaurant</Link>
-        </div >
-    )
-}
 
 const FilterHappyHourNow = (props) => {
-    console.log(props.restaurants)
     const today = new Date().getHours();
     const filteredCards = props.restaurantData.map((restaurant, index) => {
-        console.log(restaurant);
+        // Checks current time against military time to see if restaurant happy hour is happening right now.
         if (today >= restaurant.fromMilitary && today <= restaurant.toMilitary) {
             return (
                 <RestaurantCard
                     key={restaurant.id}
                     title={restaurant.title}
-                    id={restaurant.id}
+                    restaurantId={restaurant.id}
                     description={restaurant.description}
-                    drinks={restaurant.drinks}
-                    userId={props.userId}
+                    userId={restaurant.owner}
+                    beer={restaurant.beer}
+                    cocktails={restaurant.cocktails}
+                    food={restaurant.food}
+                    wine={restaurant.wine}
+                    toStandard={restaurant.toStandard}
+                    fromStandard={restaurant.fromStandard}
+                    fromTimeOfDay={restaurant.fromTimeOfday}
+                    toTimeOfDay={restaurant.toTimeOfDay}
                     onRestaurantRemoval={props.onRestaurantRemoval}
                     className="peopleCard"
                 />
             )
         }
     });
-    return (
-        <div className="peopleContainer">
-            {filteredCards}
-        </div>
-    )
+    // Refactor to use single function!!! not DRY
+    // Function that checks if a value is undefined.
+    function isUndefined(currentValue) {
+        return currentValue === undefined;
+    }
+    // If every index value in filteredCards array is undefined, no restaurants match the filter.
+    if (filteredCards.every(isUndefined)) {
+        return (
+            <h1>None of your restaurants are currently offering Happy Hour :(</h1>
+        )
+        // Show restaurants that match the filter.
+    } else {
+        return (
+            <div className="peopleContainer">
+                {filteredCards}
+            </div>
+        )
+    }
 }
 
 const FoodAndDrinksList = (props) => {
+    console.log(props);
+    // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, then show the restaurant.
     const filteredCards = props.restaurantData.map((restaurant, index) => {
-        console.log(restaurant[props.typeFiltered])
         if (restaurant[props.typeFiltered] !== 'None') {
             return (
                 <RestaurantCard
                     key={restaurant.id}
                     title={restaurant.title}
-                    id={restaurant.id}
+                    restaurantId={restaurant.id}
                     description={restaurant.description}
-                    drinks={restaurant.drinks}
-                    userId={props.userId}
+                    userId={restaurant.owner}
+                    beer={restaurant.beer}
+                    cocktails={restaurant.cocktails}
+                    food={restaurant.food}
+                    wine={restaurant.wine}
+                    toStandard={restaurant.toStandard}
+                    fromStandard={restaurant.fromStandard}
+                    fromTimeOfDay={restaurant.fromTimeOfday}
+                    toTimeOfDay={restaurant.toTimeOfDay}
                     onRestaurantRemoval={props.onRestaurantRemoval}
                     className="peopleCard"
                 />
             )
         }
     });
-    return (
-        <div className="peopleContainer">
-            {filteredCards}
-        </div>
-    )
+    // Function that checks if a value is undefined.
+    function isUndefined(currentValue) {
+        return currentValue === undefined;
+    }
+    // If every index value in filteredCards array is undefined, no restaurants match the filter.
+    if (filteredCards.every(isUndefined)) {
+        return (
+            <h1> You have no restaurants that match your current filter </h1>
+        )
+        // Show restaurants that match the filter.
+    } else {
+        return (
+            <div className="peopleContainer">
+                {filteredCards}
+            </div>
+        )
+    }
 }
 
-class FilterFoodAndDrinks extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            filterWine: false,
-            filterBeer: false,
-            filterHappyHour: false,
-            filterFood: false,
-            filterCocktails: false,
-        }
+const FilterFoodAndDrinks = (props) => {
+    if (props.foodState.filterHappyHour === true) {
+        return (
+            <FilterHappyHourNow restaurantData={props.restaurantData} typeFiltered={'happyhour'} />
+        )
+    } else if (props.foodState.filterBeer === true) {
+        return (
+            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'beer'} />
+        )
     }
-
-    render() {
-        console.log(this.props)
-        if (this.props.foodState.filterHappyHour === true) {
-            return (
-                <FilterHappyHourNow restaurantData={this.props.restaurantData} typeFiltered={'happyhour'} />
-            )
-        } else if (this.props.foodState.filterBeer === true) {
-            return (
-                <FoodAndDrinksList restaurantData={this.props.restaurantData} typeFiltered={'beer'} />
-            )
-        }
-        else if (this.props.foodState.filterWine === true) {
-            return (
-                <FoodAndDrinksList restaurantData={this.props.restaurantData} typeFiltered={'wine'} />
-            )
-        }
-        else if (this.props.foodState.filterCocktails === true) {
-            return (
-                <FoodAndDrinksList restaurantData={this.props.restaurantData} typeFiltered={'cocktails'} />
-            )
-        }
-        else if (this.props.foodState.filterFood === true) {
-            return (
-                <FoodAndDrinksList restaurantData={this.props.restaurantData} typeFiltered={'food'} />
-            )
-        } else {
-            return null
-        }
+    else if (props.foodState.filterWine === true) {
+        return (
+            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'wine'} />
+        )
+    }
+    else if (props.foodState.filterCocktails === true) {
+        return (
+            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'cocktails'} />
+        )
+    }
+    else if (props.foodState.filterFood === true) {
+        return (
+            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'food'} />
+        )
+    } else {
+        return null
     }
 }
 

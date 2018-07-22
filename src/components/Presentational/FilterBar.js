@@ -29,6 +29,7 @@ const styles = theme => ({
         width: '100%',
         backgroundColor: theme.palette.background.paper,
     },
+
 });
 
 class FilterBar extends React.Component {
@@ -46,14 +47,13 @@ class FilterBar extends React.Component {
         console.log(this.props)
         return (
             <div className={classes.root}>
-                <AppBar position="static" color="default">
+                <AppBar id="filterTabsCenter" position="static" color="default">
                     <Tabs
-                        id="filterTabsCenter"
                         value={this.state.value}
                         onChange={this.handleChange}
                         indicatorColor="primary"
                         textColor="primary"
-                        
+                        id="responsiveFilterBar"
                     >
                         <Tab label="All" onClick={() => this.props.filterFoodAndDrink('filterActive')} icon={<AllRestaurantsIcon />} />
                         <Tab label="Happy Hour" onClick={() => this.props.filterFoodAndDrink('filterHappyHour')} icon={<HappyHourIcon />} />
@@ -63,7 +63,7 @@ class FilterBar extends React.Component {
                         <Tab label="Wine" onClick={() => this.props.filterFoodAndDrink('filterWine')} icon={<WineIcon />} />
                     </Tabs>
                 </AppBar>
-            </div>
+            </div >
         );
     }
 }

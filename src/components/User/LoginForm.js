@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Notification from '../Presentational/Notification';
+import LoaderAnimation from '../Presentational/Loaders';
 
 
 const styles = theme => ({
@@ -29,7 +30,7 @@ const styles = theme => ({
 const Loading = (props) => {
     return (
         <div>
-            <h1>Loading</h1>
+            <LoaderAnimation />
         </div>
     )
 }
@@ -87,7 +88,7 @@ class LoginForm extends Component {
         const { classes } = this.props;
         if (this.props.loading) {
             return (
-                <Loading />
+                <LoaderAnimation />
             )
         } else {
             return (

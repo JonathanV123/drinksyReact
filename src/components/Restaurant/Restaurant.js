@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EditForm from '../User/EditForm';
 import ButtonComponent from '../Presentational/ButtonComponent';
 import { Link } from 'react-router-dom';
+import LoaderAnimation from '../Presentational/Loaders';
 
 
 const Form = (props) => {
@@ -39,11 +40,12 @@ class Restaurant extends Component {
     }
 
     render() {
+        console.log(this.props);
         const restaurantId = this.props.match.params.id;
         if (this.props.restaurantPending) {
             return (
                 <div>
-                    <h1>Loading Data</h1>
+                    <LoaderAnimation />
                 </div>
             )
         } else if (this.state.showForm === true) {

@@ -58,7 +58,6 @@ class App extends Component {
   render() {
     console.log(this.props);
     const userId = this.props.user.id
-    // const path = this.state.loggedIn ? '/home' : '/login';
     return (
       <Router>
         <div id="appContainer">
@@ -84,7 +83,7 @@ class App extends Component {
               render={(props) => (
                 this.props.token === 'Valid' ?
                   <div>
-                    <Navigation userId={userId} logout={this.logout} />
+                    <Navigation user={this.props.user} logout={this.logout} />
                     <Dashboard
                       {...props}
                       loading={this.props.loadingJWT}
@@ -133,7 +132,7 @@ class App extends Component {
               path='/restaurant/:id'
               render={(props) => (
                 <div>
-                  <Navigation userId={userId} logout={this.logout} />
+                  <Navigation user={this.props.user} logout={this.logout} />
                   <Restaurant
                     {...props}
                     userProfile={this.props.user}
@@ -150,7 +149,7 @@ class App extends Component {
               path='/addRestaurant/:id'
               render={(props) => (
                 <div>
-                  <Navigation userId={userId} logout={this.logout} />
+                  <Navigation user={this.props.user} logout={this.logout} />
                   <AddRestaurant
                     {...props}
                     userProfile={this.props.user}

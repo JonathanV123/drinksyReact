@@ -28,7 +28,7 @@
   @include flexBoxCenter();
   width: 100%;
   height: 100vh;
-  background-color: lightcoral;
+  background: #fa7774;
 }
 
 #appContainer{
@@ -36,8 +36,23 @@
   // @include flexBoxCenter();
   // @include flexBoxColumn();
   width: 100%;
-  height: 100vh;
-  background-color: lightcoral;
+  height: 100%;
+}
+
+#homeLink{
+  text-decoration: none;
+  color: rgb(255,255,255);
+}
+
+#menuColor{
+  color: rgb(255,255,255);
+  font-size: 1.1em;
+  @include display();
+  @include flexBoxCenter();
+}
+
+#filterBar{
+  background:#2c3970;
 }
 
 #loginContainer{
@@ -132,15 +147,17 @@
   @include flexBoxCenterNoJustify();
 }
 
-#logoContainer{
+#welcomeContainer{
   width: 60%;
   @include display();
   @include flexBoxCenterNoJustify();
   padding-left: 5px;
+  padding-top:5px;
+  margin-top:2px;
   margin-left: 10px;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
-  font-size: 3em;
+  font-size: 2em;
   font-weight: bold;
   height: 100%;
   font-family: 'Open Sans', sans-serif;
@@ -149,6 +166,8 @@
 #nav{
   width: 95%;
   height: 100%;
+  padding-top: 5px;
+  margin-top: 9px;
   @include display();
   @include flexBoxCenterNoJustify();
   -webkit-flex-wrap: wrap;
@@ -192,7 +211,7 @@
 }
 
 @media (max-width: 479px) { 
-  .MuiTabs-flexContainer-77{
+  #responsiveFilterBar > div:first-child > div:first-child > div:first-child{
     @include display();
     @include flexBoxCenter();
     -webkit-flex-wrap: wrap;

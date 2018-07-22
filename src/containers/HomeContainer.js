@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import LoaderAnimation from '../components/Presentational/Loaders';
 
 
 const styles = theme => ({
@@ -14,9 +15,7 @@ const styles = theme => ({
 
 const Loading = (props) => {
     return (
-        <div>
-            <h1>Loading</h1>
-        </div>
+        <LoaderAnimation />
     )
 }
 
@@ -44,7 +43,7 @@ class HomeContainer extends Component {
     // }
     render() {
         if (this.props.loading) {
-            return <Loading />
+            return <LoaderAnimation />
         } else {
             return <SignUp />
         }

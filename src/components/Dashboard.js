@@ -3,7 +3,7 @@ import FilterBar from '../components/Presentational/FilterBar';
 import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
 import ButtonComponent from './Presentational/ButtonComponent'
-
+import LoaderAnimation from './Presentational/Loaders';
 let isVisible = false;
 let prevFilter = null;
 
@@ -97,14 +97,11 @@ class Dashboard extends Component {
         console.log(this.state);
         if (this.props.restaurantPending === true) {
             return (
-                <div>
-                    <h1>Loading Data</h1>
-                </div>
+                <LoaderAnimation />
             )
         } else if (this.state.filterActive === true) {
             return (
                 <div>
-                    <h1>Welcome {this.props.userProfile.name}</h1>
                     <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} />
                     <FilterFoodAndDrinks foodState={this.state} restaurantData={this.props.restaurantData} />
                 </div>
@@ -113,7 +110,6 @@ class Dashboard extends Component {
         else if (this.props.restaurantData.length >= 1) {
             return (
                 <div>
-                    <h1>Welcome {this.props.userProfile.name}</h1>
                     <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} filterHappyHour={this.filterHappyHour} />
                     <RestaurantList
                         loadingRestaurants={this.props.loading}
