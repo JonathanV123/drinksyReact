@@ -107,6 +107,7 @@ class Dashboard extends Component {
             return (
                 <div>
                     <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} filterHappyHour={this.filterHappyHour} />
+                    <h1 className="filterTitle">Your Restaurants</h1>
                     <RestaurantList
                         loadingRestaurants={this.props.loading}
                         restaurants={this.props.restaurantData}

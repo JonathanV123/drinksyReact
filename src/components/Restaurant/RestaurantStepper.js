@@ -20,6 +20,7 @@ class RestaruantStepper extends React.Component {
 
         return (
             <MobileStepper
+                id="overideStepper"
                 variant="progress"
                 steps={8}
                 position="static"

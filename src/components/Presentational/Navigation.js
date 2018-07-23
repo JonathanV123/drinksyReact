@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import SimpleMenu from './SimpleMenu';
 
 const Navigation = (props) => {
-    console.log(props)
     return (
         <header id="header">
             <div id="welcomeContainer">
@@ -12,7 +11,7 @@ const Navigation = (props) => {
                 </Link>
             </div>
             <nav id="nav">
-                <SimpleMenu />
+                <SimpleMenu logout={props.logout} />
             </nav>
 
         </header>

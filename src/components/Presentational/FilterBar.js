@@ -51,7 +51,7 @@ class FilterBar extends React.Component {
                     <Tabs
                         value={this.state.value}
                         onChange={this.handleChange}
-                        indicatorColor="primary"
+                        indicatorColor="secondary"
                         textColor="primary"
                         id="responsiveFilterBar"
                     >

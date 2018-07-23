@@ -92,7 +92,8 @@ class LoginForm extends Component {
             )
         } else {
             return (
-                <div>
+                <div id="loginScreenContainer">
+                    <h1 className="filterTitle">Login</h1>
                     <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
                         <TextField
                             id="email"
@@ -114,8 +115,9 @@ class LoginForm extends Component {
                         />
                         <Button variant="contained" onClick={this.handleSubmit} color="primary">
                             Login
-                    </Button>
+                        </Button>
                     </form>
+
                     <Notification
                         responseMessage={this.state.responseMessage}
                         clearNotification={this.clearNotification}

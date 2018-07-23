@@ -12,6 +12,9 @@ const styles = theme => ({
         maxWidth: '360px',
         backgroundColor: theme.palette.background.paper,
     },
+    centerMe: {
+        textAlign: 'center',
+    },
 });
 
 
@@ -21,23 +24,23 @@ const DrinkReview = (props) => {
         <div className={classes.root}>
             <List id="noPadding" component="nav">
                 <ListItem onClick={() => { props.handleSelection('Amazing', props.drinkOrFoodType); props.formStepComplete() }} button>
-                    <ListItemText primary="Amazing" />
+                    <ListItemText className={classes.centerMe} primary="Amazing" />
                 </ListItem>
                 <Divider light />
                 <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.formStepComplete() }} button>
-                    <ListItemText primary="Good" />
+                    <ListItemText className={classes.centerMe} primary="Good" />
                 </ListItem>
                 <Divider light />
                 <ListItem onClick={() => { props.handleSelection('Decent', props.drinkOrFoodType); props.formStepComplete() }} button>
-                    <ListItemText primary="Decent" />
+                    <ListItemText className={classes.centerMe} primary="Decent" />
                 </ListItem>
                 <Divider light />
                 <ListItem onClick={() => { props.handleSelection('Bad', props.drinkOrFoodType); props.formStepComplete() }} button>
-                    <ListItemText primary="Bad" />
+                    <ListItemText className={classes.centerMe} primary="Bad" />
                 </ListItem>
                 <Divider light />
                 <ListItem onClick={() => { props.handleSelection('None', props.drinkOrFoodType); props.formStepComplete() }} button>
-                    <ListItemText primary="None" />
+                    <ListItemText className={classes.centerMe} primary="None" />
                 </ListItem>
             </List>
         </div>

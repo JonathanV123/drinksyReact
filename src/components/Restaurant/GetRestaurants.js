@@ -13,8 +13,8 @@ class GetRestaurants extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.requestRestaurantData();
         event.preventDefault();
+        this.props.requestRestaurantData();
     }
 
     render() {

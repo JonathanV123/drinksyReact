@@ -50,7 +50,10 @@ class AddRestaurant extends React.Component {
             )
         }
         return (
-            <div>
+            <div id="formContainer">
+                <div id="stepperContainer">
+                    <RestaurantStepper activeStep={this.state.activeStep} />
+                </div>
                 <AddRestaurantForm
                     formStepBack={this.handleFormStepBack}
                     creationStepCount={this.state.formStepCounter}
@@ -58,7 +61,6 @@ class AddRestaurant extends React.Component {
                     userProfile={this.props.userProfile}
                     handleCreation={this.handleCreation}
                 />
-                <RestaurantStepper activeStep={this.state.activeStep} />
             </div>
         )
     }

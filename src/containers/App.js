@@ -55,6 +55,7 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
+
   render() {
     console.log(this.props);
     const userId = this.props.user.id
@@ -68,14 +69,12 @@ class App extends Component {
                 this.props.token === 'Valid' ?
                   <Redirect to={{ pathname: `/home/${userId}` }} />
                   :
-                  <div>
-                    <HomeContainer
-                      {...props}
-                      loading={this.props.loadingJWT}
-                      retrieveToken={this.props.retrieveToken}
-                      userProfile={this.props.user}
-                    />
-                  </div>
+                  <HomeContainer
+                    {...props}
+                    loading={this.props.loadingJWT}
+                    retrieveToken={this.props.retrieveToken}
+                    userProfile={this.props.user}
+                  />
               )}
             />
             <Route
@@ -148,7 +147,7 @@ class App extends Component {
             <Route
               path='/addRestaurant/:id'
               render={(props) => (
-                <div>
+                <div id="rootAddFormContainer">
                   <Navigation user={this.props.user} logout={this.logout} />
                   <AddRestaurant
                     {...props}

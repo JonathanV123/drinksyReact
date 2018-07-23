@@ -21,17 +21,13 @@ const Loading = (props) => {
 
 const SignUp = (props) => {
     return (
-        <div>
-            <div className="welcomeContainer">
-                <h1>Welcome to Drinksy!</h1>
-            </div>
-            <div className="blankForNow">
-                <nav id="loginNav">
-                    <Link className="navBarLink" to={'/createAccount'}>Create Account</Link>
-                    <h2> Or </h2>
-                    <Link className="navBarLink" to={'/login'}>Login</Link>
-                </nav>
-            </div>
+        <div className="welcomeContainer">
+            <span className="headlines" >Welcome to Drinksy!</span>
+            <nav id="loginNav">
+                <Link className="materialFont" to={'/createAccount'}>Create Account</Link>
+                <h2> Or </h2>
+                <Link className="materialFont" to={'/login'}>Login</Link>
+            </nav>
         </div>
     )
 }

@@ -1,3 +1,6 @@
+body {
+  background: #ffd303; }
+
 #root {
   display: -webkit-box;
   display: -moz-box;
@@ -9,19 +12,58 @@
   -webkit-align-items: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
   background: #ffd303; }
 
+.fillScreen {
+  height: 100vh; }
+
+#loginScreenContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh; }
+
 #appContainer {
-  width: 100%;
-  height: 100%; }
+  width: 100%; }
 
 .textAlignCenter {
   text-align: center; }
 
 #homeLink {
   text-decoration: none;
-  color: white; }
+  color: white;
+  font-size: 1.9rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  margin: 0 10px 0 10px;
+  padding-top: 5px;
+  margin-top: 9px;
+  color: white;
+  font-weight: bold; }
+
+#login-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
 
 .notificationContainer {
   display: -webkit-box;
@@ -90,6 +132,20 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center; }
+
+.notificationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  text-align: center; }
 
 .link {
   border: 2px solid white;
@@ -220,25 +276,73 @@
   -webkit-align-items: center;
   align-items: center; }
 
-#welcomeContainer {
-  width: 60%;
+.filterTitle {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: white;
+  font-weight: bold;
+  text-align: center; }
+
+.eachStepContainer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
   -webkit-align-items: center;
   align-items: center;
-  padding-left: 5px;
-  padding-top: 5px;
-  margin-top: 2px;
-  margin-left: 10px;
-  -webkit-justify-content: flex-start;
-  justify-content: flex-start;
-  font-size: 2em;
-  font-weight: bold;
-  height: 100%;
-  font-family: 'Open Sans', sans-serif; }
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#backButtonForReviews {
+  margin-top: 20px; }
+
+#rootAddFormContainer {
+  height: 100%; }
+
+#stepperContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+#overideStepper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  background: transparent; }
+
+#overideStepper > div:first-child {
+  background-color: white; }
+
+.welcomeContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh; }
 
 #nav {
   width: 95%;
@@ -265,6 +369,29 @@
 #noPadding {
   padding: 0; }
 
+#spaceMe {
+  margin: 8px; }
+
+.materialFont {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5em;
+  color: #0336ff;
+  text-decoration: none; }
+
+.spanTime {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5em; }
+
+#lessMargin {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: white; }
+
 .menuItem {
   width: auto;
   color: rgba(0, 0, 0, 0.87);
@@ -282,6 +409,15 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-decoration: none; }
+
+.headlines {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: #ff0266;
+  font-weight: bold;
+  text-align: center; }
 
 #filterTabsCenter {
   display: -webkit-box;

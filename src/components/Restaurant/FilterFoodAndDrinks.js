@@ -100,26 +100,41 @@ const FoodAndDrinksList = (props) => {
 const FilterFoodAndDrinks = (props) => {
     if (props.foodState.filterHappyHour === true) {
         return (
-            <FilterHappyHourNow restaurantData={props.restaurantData} typeFiltered={'happyhour'} />
+            <div className="fillScreen">
+                <h1 className="filterTitle">Happy Hour happening now</h1>
+                <FilterHappyHourNow restaurantData={props.restaurantData} typeFiltered={'happyhour'} />
+            </div>
         )
     } else if (props.foodState.filterBeer === true) {
         return (
-            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'beer'} />
+            <div>
+                <h1 className="filterTitle">Restaurants with Beer</h1>
+                <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'beer'} />
+            </div>
         )
     }
     else if (props.foodState.filterWine === true) {
         return (
-            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'wine'} />
+            <div>
+                <h1 className="filterTitle">Restaurants with Wine</h1>
+                <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'wine'} />
+            </div>
         )
     }
     else if (props.foodState.filterCocktails === true) {
         return (
-            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'cocktails'} />
+            <div>
+                <h1 className="filterTitle">Restaurants with Cocktails</h1>
+                <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'cocktails'} />
+            </div>
         )
     }
     else if (props.foodState.filterFood === true) {
         return (
-            <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'food'} />
+            <div>
+                <h1 className="filterTitle">Restaurants with Food</h1>
+                <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'food'} />
+            </div>
         )
     } else {
         return null
