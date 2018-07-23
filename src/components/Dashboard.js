@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import FilterBar from '../components/Presentational/FilterBar';
 import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
-import ButtonComponent from './Presentational/ButtonComponent'
 import LoaderAnimation from './Presentational/Loaders';
 import RestaurantCard from './Restaurant/RestaurantCard';
 
@@ -57,7 +56,6 @@ class Dashboard extends Component {
     }
 
     filterFoodAndDrink = (type) => {
-        console.log('running!')
         console.log(isVisible);
         isVisible = !isVisible;
         console.log(isVisible);

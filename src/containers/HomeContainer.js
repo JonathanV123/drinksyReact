@@ -1,23 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-// import Button from '@material-ui/core/Button';
-// import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import LoaderAnimation from '../components/Presentational/Loaders';
-
 
 const styles = theme => ({
     button: {
         margin: theme.spacing.unit
     },
 });
-
-const Loading = (props) => {
-    return (
-        <LoaderAnimation />
-    )
-}
 
 const SignUp = (props) => {
     return (
@@ -32,18 +22,13 @@ const SignUp = (props) => {
     )
 }
 
-
-class HomeContainer extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
-    render() {
-        if (this.props.loading) {
-            return <LoaderAnimation />
-        } else {
-            return <SignUp />
-        }
+const HomeContainer = (props) => {
+    if (props.loading) {
+        return <LoaderAnimation />
+    } else {
+        return <SignUp />
     }
+
 }
 
 export default withStyles(styles)(HomeContainer);

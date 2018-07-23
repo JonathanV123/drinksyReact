@@ -29,7 +29,6 @@ const styles = theme => ({
         width: '100%',
         backgroundColor: theme.palette.background.paper,
     },
-
 });
 
 class FilterBar extends React.Component {
@@ -52,7 +51,6 @@ class FilterBar extends React.Component {
                         value={this.state.value}
                         onChange={this.handleChange}
                         indicatorColor="secondary"
-                        textColor="primary"
                         id="responsiveFilterBar"
                     >
                         <Tab label="All" onClick={() => this.props.filterFoodAndDrink('filterActive')} icon={<AllRestaurantsIcon />} />

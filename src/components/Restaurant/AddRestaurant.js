@@ -8,31 +8,9 @@ class AddRestaurant extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            formStepCounter: 0,
             restaurantCreated: false,
             activeStep: 0,
         }
-    }
-    handleFormStepCompletetion = () => {
-        this.setState((prevState, props) => {
-            return {
-                formStepCounter: prevState.formStepCounter + 1,
-                activeStep: prevState.activeStep + 1,
-
-            }
-        })
-    }
-    handleFormStepBack = () => {
-        this.setState((prevState, props) => {
-            return {
-                formStepCounter: prevState.formStepCounter - 1,
-                activeStep: prevState.activeStep - 1,
-            }
-        })
-    }
-
-    handleChange = (event) => {
-        this.setState({ value: event.target.value });
     }
 
     handleCreation = (event) => {
@@ -57,7 +35,6 @@ class AddRestaurant extends React.Component {
                 <AddRestaurantForm
                     formStepBack={this.handleFormStepBack}
                     creationStepCount={this.state.formStepCounter}
-                    formStepComplete={this.handleFormStepCompletetion}
                     userProfile={this.props.userProfile}
                     handleCreation={this.handleCreation}
                 />

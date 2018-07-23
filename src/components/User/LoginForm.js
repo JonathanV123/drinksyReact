@@ -27,24 +27,16 @@ const styles = theme => ({
         display: 'none',
     },
 });
-const Loading = (props) => {
-    return (
-        <div>
-            <LoaderAnimation />
-        </div>
-    )
-}
 
 class LoginForm extends Component {
     constructor(props) {
-        super();
+        super(props);
+        this.state = {
+            email: '',
+            password_digest: '',
+            responseMessage: null,
+        };
     }
-    state = {
-        email: '',
-        password_digest: '',
-        responseMessage: null,
-    };
-    // <Redirect to={{ pathname: `/home/${userId}` }} />
 
     handleChange = (email, password_digest) => event => {
         this.setState({

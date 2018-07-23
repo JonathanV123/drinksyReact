@@ -124,6 +124,7 @@ body {
   align-items: center;
   -webkit-flex-direction: column;
   flex-direction: column;
+  text-align: center;
   width: 200px;
   height: 200px; }
 
@@ -456,6 +457,11 @@ body {
   justify-content: center;
   -webkit-align-items: center;
   align-items: center; }
+
+@media (max-height: 753px) {
+  .paperNotifcationContainer {
+    position: absolute;
+    top: 50%; } }
 
 @media (max-width: 479px) {
   #responsiveFilterBar > div:first-child > div:first-child > div:first-child {

@@ -1,6 +1,4 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import ButtonComponent from '../Presentational/ButtonComponent';
+import React from 'react';
 import RestaurantCard from './RestaurantCard';
 import FilterNotifcations from '../Presentational/FilterNotifcations';
 
@@ -37,7 +35,7 @@ const FilterHappyHourNow = (props) => {
     }
     // If every index value in filteredCards array is undefined, no restaurants match the filter.
     if (filteredCards.every(isUndefined)) {
-        const message = 'None of your restaurants are currently offering Happy Hour :('
+        const message = 'None of your restaurants are currently offering Happy Hour'
         return (
             <FilterNotifcations message={message} />
         )
@@ -52,7 +50,6 @@ const FilterHappyHourNow = (props) => {
 }
 
 const FoodAndDrinksList = (props) => {
-    console.log(props);
     // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, then show the restaurant.
     const filteredCards = props.restaurantData.map((restaurant, index) => {
         if (restaurant[props.typeFiltered] !== 'None') {
@@ -83,7 +80,7 @@ const FoodAndDrinksList = (props) => {
     }
     // If every index value in filteredCards array is undefined, no restaurants match the filter.
     if (filteredCards.every(isUndefined)) {
-        const message = 'None of your restaurants match your current filter :('
+        const message = 'None of your restaurants match your current filter'
         return (
             <FilterNotifcations message={message} />
         )
