@@ -21,7 +21,7 @@ const styles = theme => ({
         margin: 8,
     },
 });
-
+console.log('test');
 const DisplayTimeOfDaySelection = (props) => {
     if (props.timeOfDay) {
         return (
