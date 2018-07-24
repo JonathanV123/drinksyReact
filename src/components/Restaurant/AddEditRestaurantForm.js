@@ -108,7 +108,6 @@ class AddEditRestaurantForm extends Component {
     }
 
     handleStepComplete = () => {
-        console.log('HANDLE STEP COMPLETE')
         if (this.props.formType === 'editForm') {
             this.setState(state => ({
                 formStepCounter: state.formStepCounter + 1,
@@ -187,7 +186,6 @@ class AddEditRestaurantForm extends Component {
         const token = sessionStorage.getItem('jwtToken');
         // If edit form, handle edit restaurant submit.
         if (this.props.formType === 'editForm') {
-            // LOOKUP
             const restaurantId = this.props.restaurant.id;
             const restaurant = {
                 title: this.state.title,
@@ -234,13 +232,10 @@ class AddEditRestaurantForm extends Component {
     };
     render() {
         const { classes } = this.props;
-        let restaurant = null;
-        this.props.restaurant ? restaurant = this.props.restaurant : null;
         if (this.state.formStepCounter === 0) {
             return (
                 <div className="centerMe" >
                     <StepOneTitle
-                        restaurant={restaurant}
                         formType={this.props.formType}
                         title={this.state.title}
                         checkStepCompletion={this.checkStepCompletion}
@@ -258,7 +253,6 @@ class AddEditRestaurantForm extends Component {
             return (
                 <div className="centerMe">
                     <StepTwoDesc
-                        restaurant={restaurant}
                         formType={this.props.formType}
                         description={this.state.description}
                         checkStepCompletion={this.checkStepCompletion}
@@ -317,7 +311,6 @@ class AddEditRestaurantForm extends Component {
             return (
                 <div className="centerMe">
                     <StepSevenHHTime
-                        restaurant={restaurant}
                         formType={this.props.formType}
                         validateHappyHourTime={this.validateHappyHourTime}
                         handleTimeAMPM={this.handleTimeAMPM}

@@ -13,40 +13,35 @@ const styles = theme => ({
     },
 });
 
-const StepFourBeer = (props) => {
-    const { classes } = props;
-    console.log(props);
+const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle">How would you rate their beer selection?</h1>
-                <DrinkReviews
-                    handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'beer'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
-
+            <h1 className="filterTitle">How would you rate their beer selection?</h1>
         )
     } else {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle" sel>Edit Beer Review</h1>
-                <DrinkReviews
-                 handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'beer'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
+            <h1 className="filterTitle">Edit Beer Review</h1>
+
         )
     }
+}
 
+const StepFourBeer = (props) => {
+    const { classes } = props;
+    return (
+        <div className="eachStepContainer">
+            <HeaderMessage formType={props.formType} />
+            <DrinkReviews
+                handleStepComplete={props.handleStepComplete}
+                drinkOrFoodType={'beer'}
+                handleSelection={props.handleSelection}
+            />
+            <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
+                Back
+                </Button>
+        </div>
+
+    )
 }
 
 export default withStyles(styles)(StepFourBeer);

@@ -13,39 +13,32 @@ const styles = theme => ({
     },
 });
 
-const StepSixCocktails = (props) => {
-    const { classes } = props;
+const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle">How would you rate their cocktail selection?</h1>
-                <DrinkReviews
-                    handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'cocktails'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
-
+            <h1 className="filterTitle">How would you rate their cocktail selection?</h1>
         )
     } else {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle" sel>Edit Cocktail Review</h1>
-                <DrinkReviews
-                    handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'cocktails'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
+            <h1 className="filterTitle">Edit Cocktail Review</h1>
         )
     }
-
+}
+const StepSixCocktails = (props) => {
+    const { classes } = props;
+    return (
+        <div className="eachStepContainer">
+            <HeaderMessage formType={props.formType} />
+            <DrinkReviews
+                handleStepComplete={props.handleStepComplete}
+                drinkOrFoodType={'cocktails'}
+                handleSelection={props.handleSelection}
+            />
+            <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
+                Back
+                </Button>
+        </div>
+    )
 }
 
 export default withStyles(styles)(StepSixCocktails);

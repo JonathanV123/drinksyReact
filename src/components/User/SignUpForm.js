@@ -20,7 +20,7 @@ const styles = theme => ({
     width: 200,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: 8,
   },
   input: {
     display: 'none',
@@ -113,7 +113,7 @@ class SignUpForm extends React.Component {
               onChange={this.handleChange('password_digest')}
               margin="normal"
             />
-            <Button variant="contained" type='submit' color="primary">
+            <Button className={classes.button} variant="contained" type='submit' color="primary">
               Create Account
             </Button>
           </form>

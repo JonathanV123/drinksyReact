@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import StepAddHHTime from './StepAddHHTime';
-import StepEditHHTime from './StepEditHHTime';
+import TimeStepForm from './TimeStepForm';
 
 const styles = theme => ({
     container: {
@@ -25,34 +24,19 @@ const styles = theme => ({
 
 const StepSevenHHTime = (props) => {
     const { classes } = props;
-    if (props.formType === 'addForm') {
-        return (
-            <StepAddHHTime
-                validateHappyHourTime={props.validateHappyHourTime}
-                handleTimeAMPM={props.handleTimeAMPM}
-                handleFormStepBack={props.handleFormStepBack}
-                handleChange={props.handleChange}
-                to={props.to}
-                from={props.from}
-                fromTimeOfDay={props.fromTimeOfDay}
-                toTimeOfDay={props.toTimeOfDay}
-            />
-        )
-    } else {
-        return (
-            <StepEditHHTime
-                validateHappyHourTime={props.validateHappyHourTime}
-                handleTimeAMPM={props.handleTimeAMPM}
-                handleFormStepBack={props.handleFormStepBack}
-                handleChange={props.handleChange}
-                to={props.to}
-                from={props.from}
-                fromTimeOfDay={props.fromTimeOfDay}
-                toTimeOfDay={props.toTimeOfDay}
-            />
-        )
-    }
-
+    return (
+        <TimeStepForm
+            formType={props.formType}
+            validateHappyHourTime={props.validateHappyHourTime}
+            handleTimeAMPM={props.handleTimeAMPM}
+            handleFormStepBack={props.handleFormStepBack}
+            handleChange={props.handleChange}
+            to={props.to}
+            from={props.from}
+            fromTimeOfDay={props.fromTimeOfDay}
+            toTimeOfDay={props.toTimeOfDay}
+        />
+    )
 }
 
 export default withStyles(styles)(StepSevenHHTime);

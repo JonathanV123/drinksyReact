@@ -32,12 +32,18 @@ const DisplayTimeOfDaySelection = (props) => {
     }
 
 }
+let headerMessage = null;
+const EditTimeSection = (props) => {
+    if (props.formType === 'addForm') {
+        let headerMessage = "What's the happy hour?"
 
-const AddTimeSection = (props) => {
+    } else {
+        let headerMessage = 'Edit Happy Hour Time'
+    }
     const { classes } = props;
     return (
         <div className="eachStepContainer">
-            <h1 className="filterTitle">What's the happy hour?</h1>
+            <h1 className="filterTitle">{headerMessage}</h1>
             <div className="timeContainerInput">
                 <TextField
                     id="from"
@@ -51,10 +57,10 @@ const AddTimeSection = (props) => {
                 <DisplayTimeOfDaySelection timeOfDay={props.fromTimeOfDay} />
             </div>
             <div className="timeContainer">
-                <Button className={classes.button} variant="contained" onClick={() => props.handleTimeAMPM('am', 'fromTimeOfDay')} color="secondary">
+                <Button id="spaceMe" variant="contained" onClick={() => props.handleTimeAMPM('am', 'fromTimeOfDay')} color="secondary">
                     am
                     </Button>
-                <Button className={classes.button} variant="contained" onClick={() => props.handleTimeAMPM('pm', 'fromTimeOfDay')} color="secondary">
+                <Button id="spaceMe" variant="contained" onClick={() => props.handleTimeAMPM('pm', 'fromTimeOfDay')} color="secondary">
                     pm
                     </Button>
             </div>
@@ -71,23 +77,23 @@ const AddTimeSection = (props) => {
                 <DisplayTimeOfDaySelection timeOfDay={props.toTimeOfDay} />
             </div>
             <div className="timeContainer">
-                <Button className={classes.button} variant="contained" onClick={() => props.handleTimeAMPM('am', 'toTimeOfDay')} color="secondary">
+                <Button id="spaceMe" variant="contained" onClick={() => props.handleTimeAMPM('am', 'toTimeOfDay')} color="secondary">
                     am
                     </Button>
-                <Button className={classes.button} variant="contained" onClick={() => props.handleTimeAMPM('pm', 'toTimeOfDay')} color="secondary">
+                <Button id="spaceMe" variant="contained" onClick={() => props.handleTimeAMPM('pm', 'toTimeOfDay')} color="secondary">
                     pm
                     </Button>
             </div>
             <div className="nextBackContainer">
-                <Button className={classes.button} variant="contained" onClick={props.handleFormStepBack} color="primary">
+                <Button id="spaceMe" className="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
                     Back
                     </Button>
-                <Button className={classes.button} variant="contained" onClick={props.validateHappyHourTime} color="primary">
+                <Button id="spaceMe" variant="contained" onClick={props.validateHappyHourTime} color="primary">
                     Save
-                    </Button>
+                </Button>
             </div>
         </div >
     )
 }
 
-export default withStyles(styles)(AddTimeSection);
+export default withStyles(styles)(EditTimeSection);

@@ -13,39 +13,34 @@ const styles = theme => ({
     },
 });
 
-const StepThreeFood = (props) => {
-    const { classes } = props;
+const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle">How would you rate their food selection?</h1>
-                <DrinkReviews
-                    handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'food'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
-
+            <h1 className="filterTitle">"How would you rate their food selection?"</h1>
         )
     } else {
         return (
-            <div className="eachStepContainer">
-                <h1 className="filterTitle">Edit Food Review</h1>
-                <DrinkReviews
-                    handleStepComplete={props.handleStepComplete}
-                    drinkOrFoodType={'food'}
-                    handleSelection={props.handleSelection}
-                />
-                <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
-                    Back
-                </Button>
-            </div>
+            <h1 className="filterTitle">Edit Food Reivew</h1>
+
         )
     }
+}
 
+const StepThreeFood = (props) => {
+    const { classes } = props;
+    return (
+        <div className="eachStepContainer">
+            <HeaderMessage formType={props.formType} />
+            <DrinkReviews
+                handleStepComplete={props.handleStepComplete}
+                drinkOrFoodType={'food'}
+                handleSelection={props.handleSelection}
+            />
+            <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
+                Back
+                </Button>
+        </div>
+    )
 }
 
 export default withStyles(styles)(StepThreeFood);

@@ -41,6 +41,9 @@ body {
 }
 
 .loginSignupScreenContainer{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
   height:100vh;
 }
 
