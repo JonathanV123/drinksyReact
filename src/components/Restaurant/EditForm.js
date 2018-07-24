@@ -20,7 +20,7 @@ const styles = theme => ({
         width: 200,
     },
     button: {
-        margin: theme.spacing.unit,
+        margin: 8,
     },
 });
 
@@ -125,7 +125,7 @@ class EditForm extends Component {
             }
         })
     }
-    
+
 
     validateHappyHourTime = () => {
         console.log(this.state);
@@ -142,38 +142,26 @@ class EditForm extends Component {
     }
 
     handleSubmit = (event, data) => {
-        const userId = this.props.restaurant.owner;
+        const restaurantId = this.props.restaurant.id;
         const token = sessionStorage.getItem('jwtToken');
-        axios({
-            method: 'patch',
-            url: `http://localhost:8080/updateRestaurant/${userId}`,
-            headers: { 'Authorization': "bearer " + token },
-            data: {
-                title: this.state.title,
-                description: this.state.description,
-                from: this.state.from,
-                to: this.state.to,
-                food: this.state.food,
-                beer: this.state.beer,
-                wine: this.state.wine,
-                cocktails: this.state.cocktails,
-                toTimeOfDay: this.state.toTimeOfDay,
-                fromTimeOfDay: this.state.fromTimeOfDay,
-            }
-        }).then((response) => {
-            this.props.handleEditSubmit();
-            this.props.showHideForm();
-            console.log(response.data);
-        }).catch((err) => {
-            console.log(err.response)
-            this.setState({
-                responseMessage: 'Unable to add restaurant. Please ensure all fields are properly filled out, and try again.',
-            });
-        })
+        const restaurant = {
+            title: this.state.title,
+            description: this.state.description,
+            fromStandard: this.state.from,
+            toStandard: this.state.to,
+            food: this.state.food,
+            beer: this.state.beer,
+            wine: this.state.wine,
+            cocktails: this.state.cocktails,
+            toTimeOfDay: this.state.toTimeOfDay,
+            fromTimeOfDay: this.state.fromTimeOfDay,
+        }
+        this.props.editRestaurant(restaurantId, restaurant);
+        this.props.showHideForm();
     };
+
     render() {
         const { classes } = this.props;
-        console.log(this.state)
         if (this.state.formStepCounter === 0) {
             return (
                 <div className="eachStepContainer">
@@ -188,8 +176,8 @@ class EditForm extends Component {
                             onChange={this.handleChange('title')}
                             margin="normal"
                         />
-                        <Button variant="contained" onClick={() => this.checkStepCompletion('title')} color="primary">
-                            Skip
+                        <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('title')} color="primary">
+                            Ok
                         </Button>
                         <div className="notificationContainer">
                             <Notification
@@ -214,11 +202,11 @@ class EditForm extends Component {
                             onChange={this.handleChange('description')}
                             margin="normal"
                         />
-                        <Button variant="contained" onClick={this.handleFormStepBack} color="primary">
-                            Back
+                        <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
+                            Ok
                         </Button>
-                        <Button variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
-                            Skip
+                        <Button className={classes.button} variant="contained" onClick={this.handleFormStepBack} color="primary">
+                            Back
                         </Button>
                         <div className="notificationContainer">
                             <Notification
@@ -237,8 +225,8 @@ class EditForm extends Component {
                         formStepComplete={this.handleFormStepCompletetion}
                         drinkOrFoodType={'food'} handleSelection={this.handleSelection}
                     />
-                    <Button variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
-                        Skip
+                    <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
+                        Ok
                     </Button>
                     <Button id="backButtonForReviews" variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back
@@ -254,8 +242,8 @@ class EditForm extends Component {
                         drinkOrFoodType={'beer'}
                         handleSelection={this.handleSelection}
                     />
-                    <Button variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
-                        Skip
+                    <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
+                        Ok
                     </Button>
                     <Button id="backButtonForReviews" variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back
@@ -270,8 +258,8 @@ class EditForm extends Component {
                         formStepComplete={this.handleFormStepCompletetion}
                         handleSelection={this.handleSelection}
                     />
-                    <Button variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
-                        Skip
+                    <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
+                        Ok
                     </Button>
                     <Button id="backButtonForReviews" variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back
@@ -287,8 +275,8 @@ class EditForm extends Component {
                         formStepComplete={this.handleFormStepCompletetion}
                         drinkOrFoodType={'cocktails'}
                         handleSelection={this.handleSelection} />
-                    <Button variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
-                        Skip
+                    <Button className={classes.button} variant="contained" onClick={() => this.checkStepCompletion('description')} color="primary">
+                        Ok
                     </Button>
                     <Button id="backButtonForReviews" variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back
@@ -320,7 +308,6 @@ class EditForm extends Component {
                             pm
                     </Button>
                     </div>
-                    {/* <h1 id="lessMargin" >to</h1> */}
                     <div className="timeContainerInput">
                         <TextField
                             id="to"
@@ -347,7 +334,7 @@ class EditForm extends Component {
                             Back
                     </Button>
                         <Button id="spaceMe" variant="contained" onClick={this.validateHappyHourTime} color="primary">
-                            Skip
+                            Ok
                     </Button>
                     </div>
                     <div className="notificationContainer">
@@ -373,10 +360,10 @@ class EditForm extends Component {
                     <h2>{this.state.from}</h2>
                     <h3>to</h3>
                     <h2>{this.state.to}</h2>
-                    <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                    <Button className={classes.button} variant="contained" onClick={this.handleSubmit} color="primary">
                         Submit Edits
                     </Button>
-                    <Button variant="contained" onClick={this.handleFormStepBack} color="primary">
+                    <Button className={classes.button} variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back
                     </Button>
                     <div className="notificationContainer">

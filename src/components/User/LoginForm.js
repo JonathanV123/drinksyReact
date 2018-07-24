@@ -84,7 +84,7 @@ class LoginForm extends Component {
             )
         } else {
             return (
-                <div id="loginScreenContainer">
+                <div className="loginSignupScreenContainer">
                     <h1 className="filterTitle">Login</h1>
                     <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
                         <TextField

@@ -84,7 +84,8 @@ class SignUpForm extends React.Component {
       )
     } else {
       return (
-        <div>
+        <div className="loginSignupScreenContainer">
+          <h1 className="filterTitle">Create Account</h1>
           <form id='signup-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
             <TextField
               id="name"

@@ -81,17 +81,6 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
         case ON_EDIT_RESTAURANT_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false, notification: action.payload.response.data });
         // |||||||||||||||||||||||||||||||||| Edit Restaurant Data ||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-        // case ON_EDIT_RESTAURANT:
-        //     let editCopy = [...action.currentRestaurantData]
-        //     const updatedPersonData = action.updatedPersonInfo;
-        //     editCopy.forEach(person => {
-        //         if (person.id === updatedPersonData.id) {
-        //             person.name = updatedPersonData.name
-        //             person.email = updatedPersonData.email
-        //         }
-        //     });
-        //     return Object.assign({}, state, { currentRestaurantData: editCopy });
         default:
             return state
     }

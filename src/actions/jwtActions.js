@@ -6,7 +6,6 @@ import {
 import axios from 'axios';
 
 
-
 export const verifyToken = (token) => (dispatch) => {
     dispatch({ type: VERIFY_JSON_TOKEN_PENDING });
     axios({

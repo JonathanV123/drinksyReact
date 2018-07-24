@@ -11,7 +11,7 @@ const Navigation = (props) => {
                 </Link>
             </div>
             <nav id="nav">
-                <SimpleMenu logout={props.logout} />
+                <SimpleMenu userId={props.user.id} logout={props.logout} />
             </nav>
 
         </header>

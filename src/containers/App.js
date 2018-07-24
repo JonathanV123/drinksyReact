@@ -10,7 +10,8 @@ import { verifyToken } from '../actions/jwtActions';
 import { fetchAllRestaurantDataForUser, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
 import Restaurant from '../components/Restaurant/Restaurant';
 import Navigation from '../components/Presentational/Navigation';
-import AddRestaurant from '../components/Restaurant/AddRestaurant';
+import AddRestaurantPage from '../components/Restaurant/AddRestaurantPage';
+
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -30,7 +31,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     verifyToken: (token) => dispatch(verifyToken(token)),
     fetchAllRestaurantDataForUser: (userId) => dispatch(fetchAllRestaurantDataForUser(userId)),
-    onRestaurantRemoval: (userId) => dispatch(onRestaurantRemoval(userId)),
+    onRestaurantRemoval: (restaurantId) => dispatch(onRestaurantRemoval(restaurantId)),
     onRestaurantEdit: (restaurantId, title, description, drinks) => dispatch(onRestaurantEdit(restaurantId, title, description, drinks)),
     fetchRestaurantById: (restaurantId) => dispatch(fetchRestaurantById(restaurantId)),
   }
@@ -96,7 +97,6 @@ class App extends Component {
                   </div>
                   :
                   <Redirect to={{ pathname: `/` }} />
-
               )}
             />
             <Route
@@ -130,32 +130,39 @@ class App extends Component {
             <Route
               path='/restaurant/:id'
               render={(props) => (
-                <div>
-                  <Navigation user={this.props.user} logout={this.logout} />
-                  <Restaurant
-                    {...props}
-                    userProfile={this.props.user}
-                    restaurantPending={this.props.restaurantPending}
-                    restaurantById={this.props.restaurantById}
-                    verifyToken={this.props.verifyToken}
-                    editRestaurant={this.props.onRestaurantEdit}
-                    fetchRestaurantById={this.props.fetchRestaurantById}
-                  />
-                </div>
+                this.props.token === 'Valid' ?
+                  <div>
+                    <Navigation user={this.props.user} logout={this.logout} />
+                    <Restaurant
+                      {...props}
+                      userProfile={this.props.user}
+                      restaurantPending={this.props.restaurantPending}
+                      restaurantById={this.props.restaurantById}
+                      verifyToken={this.props.verifyToken}
+                      editRestaurant={this.props.onRestaurantEdit}
+                      fetchRestaurantById={this.props.fetchRestaurantById}
+                      onRestaurantRemoval={this.props.onRestaurantRemoval}
+                    />
+                  </div>
+                  :
+                  <Redirect to={{ pathname: `/` }} />
               )}
             />
             <Route
               path='/addRestaurant/:id'
               render={(props) => (
-                <div id="rootAddFormContainer">
-                  <Navigation user={this.props.user} logout={this.logout} />
-                  <AddRestaurant
-                    {...props}
-                    userProfile={this.props.user}
-                    restaurantPending={this.props.restaurantPending}
-                    verifyToken={this.props.verifyToken}
-                  />
-                </div>
+                this.props.token === 'Valid' ?
+                  <div id="rootAddFormContainer">
+                    <Navigation user={this.props.user} logout={this.logout} />
+                    <AddRestaurantPage
+                      {...props}
+                      userProfile={this.props.user}
+                      restaurantPending={this.props.restaurantPending}
+                      verifyToken={this.props.verifyToken}
+                    />
+                  </div>
+                  :
+                  <Redirect to={{ pathname: `/` }} />
               )}
             />
             <Route render={() => <h1> 404 </h1>} />

@@ -8,12 +8,22 @@ class AddRestaurant extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            restaurantCreated: false,
             activeStep: 0,
+            restaurantCreated: false,
         }
     }
+    handleFormStepperForward = () => {
+        this.setState(state => ({
+            activeStep: state.activeStep + 1,
+        }));
+    };
 
-    handleCreation = (event) => {
+    handleFormStepperBackward = () => {
+        this.setState(state => ({
+            activeStep: state.activeStep - 1,
+        }));
+    }
+    handleCreation = () => {
         this.setState((prevState, props) => {
             return {
                 restaurantCreated: !prevState.restaurantCreated,
@@ -33,8 +43,8 @@ class AddRestaurant extends React.Component {
                     <RestaurantStepper activeStep={this.state.activeStep} />
                 </div>
                 <AddRestaurantForm
-                    formStepBack={this.handleFormStepBack}
-                    creationStepCount={this.state.formStepCounter}
+                    handleFormStepperForward={this.handleFormStepperForward}
+                    handleFormStepperBackward={this.handleFormStepperBackward}
                     userProfile={this.props.userProfile}
                     handleCreation={this.handleCreation}
                 />

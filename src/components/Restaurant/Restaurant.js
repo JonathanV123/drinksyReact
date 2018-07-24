@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import RestaurantEditForm from './EditForm';
-import ButtonComponent from '../Presentational/ButtonComponent';
 import { Link, Redirect } from 'react-router-dom';
 import LoaderAnimation from '../Presentational/Loaders';
+import RestaurantPage from './RestaurantPage';
+import Button from '@material-ui/core/Button';
 
 class Restaurant extends Component {
     constructor(props) {
@@ -30,13 +31,13 @@ class Restaurant extends Component {
         })
     }
 
-    handleEditSubmit = (event) => {
-        this.setState((prevState, props) => {
-            return {
-                restaurantEditSuccess: !prevState.restaurantEditSuccess,
-            }
-        })
-    }
+    // handleEditSubmit = (event) => {
+    //     this.setState((prevState, props) => {
+    //         return {
+    //             restaurantEditSuccess: !prevState.restaurantEditSuccess,
+    //         }
+    //     })
+    // }
 
     render() {
         console.log(this.props);
@@ -64,18 +65,19 @@ class Restaurant extends Component {
             )
         } else if (this.props.restaurantById && this.state.showForm === false) {
             return (
-                <div>
-                    <h1>{this.props.restaurantById.title}</h1>
-                    <p>{this.props.restaurantById.description}</p>
-                    <p>{this.props.restaurantById.drinks}</p>
-                    <ButtonComponent buttonDesc={'Edit Restaurant'} clickAction={this.showHideForm} funcArgs={null} />
-                </div>
+                <RestaurantPage
+                    onRestaurantRemoval={this.props.onRestaurantRemoval}
+                    showHideForm={this.showHideForm}
+                    restaurant={this.props.restaurantById}
+                />
             )
         } else {
             return (
-                <div>
-                    <h1> There seems to be an error retreiving your restaurant</h1>
-                    <Link className="navBarLink" to={`/home/${this.props.userProfile.id}`}>Ok</Link>
+                <div id="errorContainer">
+                    <h1 className="filterTitle"> There seems to be an error retreiving your restaurant</h1>
+                    <Button variant="contained" color="primary">
+                        <Link id="overideLink" to={`/home/${this.props.userProfile.id}`}>Ok</Link>
+                    </Button>
                 </div>
             )
         }

@@ -17,7 +17,23 @@ body {
 .fillScreen {
   height: 100vh; }
 
-#loginScreenContainer {
+.loginSignupScreenContainer {
+  height: 100vh; }
+
+#creation-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#signup-form {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -29,7 +45,8 @@ body {
   align-items: center;
   -webkit-flex-direction: column;
   flex-direction: column;
-  height: 100vh; }
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
 
 #appContainer {
   width: 100%; }
@@ -112,6 +129,19 @@ body {
   height: 100px;
   border: 3px solid black; }
 
+#errorContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
 .paperNotifcationContainer {
   display: -webkit-box;
   display: -moz-box;
@@ -133,6 +163,30 @@ body {
   justify-content: center;
   -webkit-align-items: center;
   align-items: center; }
+
+#noRestaurantsContainer {
+  height: 100vh;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#addRestaurant {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: #2c3970;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none; }
 
 .notificationContainer {
   display: -webkit-box;
@@ -299,9 +353,6 @@ body {
   -webkit-flex-direction: column;
   flex-direction: column; }
 
-#backButtonForReviews {
-  margin-top: 20px; }
-
 #rootAddFormContainer {
   height: 100%; }
 
@@ -330,6 +381,23 @@ body {
 
 #overideStepper > div:first-child {
   background-color: white; }
+
+#overideLink {
+  color: white;
+  text-decoration: none; }
+
+#accountContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
 
 .welcomeContainer {
   display: -webkit-box;
@@ -372,6 +440,20 @@ body {
 
 #spaceMe {
   margin: 8px; }
+
+.restaurantView {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
 
 .materialFont {
   font-size: 1.4rem;
@@ -476,3 +558,15 @@ body {
     align-items: center;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap; } }
+
+@media (max-width: 420px) {
+  .filterTitle {
+    font-size: 2em; }
+  .spanTime {
+    font-size: 0.8em; }
+  .timeContainerInput {
+    text-align: center; } }
+
+@media (max-width: 300px) {
+  .filterTitle {
+    font-size: 1.7em; } }

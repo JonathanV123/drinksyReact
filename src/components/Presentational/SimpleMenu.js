@@ -5,9 +5,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 
 class SimpleMenu extends React.Component {
-    state = {
-        anchorEl: null,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            anchorEl: null,
+        };
+    }
+
 
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
@@ -19,7 +23,6 @@ class SimpleMenu extends React.Component {
 
     render() {
         const { anchorEl } = this.state;
-        const userId = 7;
         return (
             <div>
                 <Button
@@ -37,10 +40,10 @@ class SimpleMenu extends React.Component {
                     onClose={this.handleClose}
                 >
                     <MenuItem>
-                        <Link className="menuItem" onClick={this.handleClose} to={`/home/${userId}`}>My Restaurants</Link>
+                        <Link className="menuItem" onClick={this.handleClose} to={`/home/${this.props.userId}`}>My Restaurants</Link>
                     </MenuItem>
                     <MenuItem>
-                        <Link className="menuItem" onClick={this.handleClose} to={`/addRestaurant/${userId}`}>Add Restaurant</Link>
+                        <Link className="menuItem" onClick={this.handleClose} to={`/addRestaurant/${this.props.userId}`}>Add Restaurant</Link>
                     </MenuItem>
                     <MenuItem>
                         <Link className="menuItem" onClick={() => { this.handleClose; this.props.logout() }} to={'/'} >Logout</Link>

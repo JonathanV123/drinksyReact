@@ -54,7 +54,7 @@ function RestaurantCard(props) {
                     <Divider id="divider" light />
                     <Typography id="hotPinkCenter" component="h2">
                         Happy Hour
-                        </Typography>
+                    </Typography>
                     <Typography id="centerMeHappyHour" className={classes.pos} color="textSecondary">
                         {props.fromStandard}{props.fromTimeOfDay} to {props.toStandard}{props.toTimeOfDay}
                     </Typography>
