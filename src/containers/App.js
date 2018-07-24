@@ -11,7 +11,6 @@ import { fetchAllRestaurantDataForUser, onRestaurantRemoval, onRestaurantEdit, f
 import Restaurant from '../components/Restaurant/Restaurant';
 import Navigation from '../components/Presentational/Navigation';
 import AddRestaurantPage from '../components/Restaurant/AddRestaurantPage';
-
 import '../App.css';
 
 const mapStateToProps = (state) => {

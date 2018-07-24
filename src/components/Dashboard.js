@@ -4,7 +4,6 @@ import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
 import LoaderAnimation from './Presentational/Loaders';
 import RestaurantCard from './Restaurant/RestaurantCard';
-import Button from '@material-ui/core/Button';
 
 let isVisible = false;
 let prevFilter = null;
@@ -120,9 +119,7 @@ class Dashboard extends Component {
             return (
                 <div id="noRestaurantsContainer">
                     <h2 className="filterTitle">You have no restaurants!</h2>
-                    <Button variant="contained" color="primary">
-                        <Link id="overideLink" to={`/addRestaurant/${this.props.userProfile.id}`}>Add A Restaurant</Link>
-                    </Button>
+                    <Link id="overideLink" to={`/addRestaurant/${this.props.userProfile.id}`}>Add A Restaurant</Link>
                 </div>
             )
         }

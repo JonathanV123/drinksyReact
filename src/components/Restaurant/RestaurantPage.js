@@ -43,15 +43,11 @@ const RestaurantPage = (props) => {
             <Typography id="centerMeHappyHour" className={classes.happyHourPos} color="textSecondary">
                 {props.restaurant.fromStandard}{props.restaurant.fromTimeOfDay} to {props.restaurant.toStandard}{props.restaurant.toTimeOfDay}
             </Typography>
-            <Button className={classes.pos} variant="contained" color="primary">
-                <Link onClick={() => props.onRestaurantRemoval(restaurantId)} id="overideLink" to={`/home/${props.restaurant.owner}`}>Delete Restaurant</Link>
-            </Button>
+            <Link onClick={() => props.onRestaurantRemoval(restaurantId)} id="overideLink" to={`/home/${props.restaurant.owner}`}>Delete Restaurant</Link>
             <Button onClick={props.showHideForm} className={classes.pos} variant="contained" color="primary">
                 Edit Restaurant
             </Button>
-            <Button className={classes.pos} variant="contained" color="primary">
-                <Link id="overideLink" to={`/home/${props.restaurant.owner}`}>Back</Link>
-            </Button>
+            <Link id="overideLink" to={`/home/${props.restaurant.owner}`}>Back</Link>
         </div >
     )
 

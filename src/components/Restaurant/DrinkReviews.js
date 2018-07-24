@@ -23,23 +23,23 @@ const DrinkReview = (props) => {
     return (
         <div className={classes.root}>
             <List id="noPadding" component="nav">
-                <ListItem onClick={() => { props.handleSelection('Amazing', props.drinkOrFoodType); props.formStepComplete() }} button>
+                <ListItem onClick={() => { props.handleSelection('Amazing', props.drinkOrFoodType); props.handleStepComplete() }} button>
                     <ListItemText className={classes.centerMe} primary="Amazing" />
                 </ListItem>
                 <Divider light />
-                <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.formStepComplete() }} button>
+                <ListItem onClick={() => { props.handleSelection('Good', props.drinkOrFoodType); props.handleStepComplete() }} button>
                     <ListItemText className={classes.centerMe} primary="Good" />
                 </ListItem>
                 <Divider light />
-                <ListItem onClick={() => { props.handleSelection('Decent', props.drinkOrFoodType); props.formStepComplete() }} button>
+                <ListItem onClick={() => { props.handleSelection('Decent', props.drinkOrFoodType); props.handleStepComplete() }} button>
                     <ListItemText className={classes.centerMe} primary="Decent" />
                 </ListItem>
                 <Divider light />
-                <ListItem onClick={() => { props.handleSelection('Bad', props.drinkOrFoodType); props.formStepComplete() }} button>
+                <ListItem onClick={() => { props.handleSelection('Bad', props.drinkOrFoodType); props.handleStepComplete() }} button>
                     <ListItemText className={classes.centerMe} primary="Bad" />
                 </ListItem>
                 <Divider light />
-                <ListItem onClick={() => { props.handleSelection('None', props.drinkOrFoodType); props.formStepComplete() }} button>
+                <ListItem onClick={() => { props.handleSelection('None', props.drinkOrFoodType); props.handleStepComplete() }} button>
                     <ListItemText className={classes.centerMe} primary="None" />
                 </ListItem>
             </List>

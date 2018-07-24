@@ -1,5 +1,5 @@
 import React from 'react';
-import AddRestaurantForm from './AddRestaurantForm';
+import AddEditRestaurantForm from './AddEditRestaurantForm';
 import { Redirect } from 'react-router-dom';
 import RestaurantStepper from '../Restaurant/RestaurantStepper';
 
@@ -42,7 +42,8 @@ class AddRestaurant extends React.Component {
                 <div id="stepperContainer">
                     <RestaurantStepper activeStep={this.state.activeStep} />
                 </div>
-                <AddRestaurantForm
+                <AddEditRestaurantForm
+                    formType={'addForm'}
                     handleFormStepperForward={this.handleFormStepperForward}
                     handleFormStepperBackward={this.handleFormStepperBackward}
                     userProfile={this.props.userProfile}

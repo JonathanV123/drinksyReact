@@ -95,18 +95,6 @@ class EditForm extends Component {
         });
     };
 
-    handleSelection = (review, drinkOrFoodType) => {
-        this.setState({
-            [drinkOrFoodType]: review,
-        });
-    };
-
-    handleTimeAMPM = (amORpm, toORfrom) => {
-        this.setState({
-            [toORfrom]: amORpm,
-        });
-    }
-
     handleFormStepCompletetion = () => {
         this.setState((prevState, props) => {
             return {
@@ -126,6 +114,22 @@ class EditForm extends Component {
         })
     }
 
+    handleSelection = (review, drinkOrFoodType) => {
+        this.setState({
+            [drinkOrFoodType]: review,
+        });
+    };
+
+    handleTimeAMPM = (amORpm, toORfrom) => {
+        this.setState({
+            [toORfrom]: amORpm,
+        });
+    }
+
+
+
+
+
 
     validateHappyHourTime = () => {
         console.log(this.state);
@@ -142,22 +146,11 @@ class EditForm extends Component {
     }
 
     handleSubmit = (event, data) => {
-        const restaurantId = this.props.restaurant.id;
-        const token = sessionStorage.getItem('jwtToken');
-        const restaurant = {
-            title: this.state.title,
-            description: this.state.description,
-            fromStandard: this.state.from,
-            toStandard: this.state.to,
-            food: this.state.food,
-            beer: this.state.beer,
-            wine: this.state.wine,
-            cocktails: this.state.cocktails,
-            toTimeOfDay: this.state.toTimeOfDay,
-            fromTimeOfDay: this.state.fromTimeOfDay,
-        }
-        this.props.editRestaurant(restaurantId, restaurant);
-        this.props.showHideForm();
+        // const restaurantId = this.props.restaurant.id;
+        // const token = sessionStorage.getItem('jwtToken');
+
+        // this.props.editRestaurant(restaurantId, restaurant);
+        // this.props.showHideForm();
     };
 
     render() {
@@ -321,7 +314,6 @@ class EditForm extends Component {
                         <DisplayTimeOfDaySelection timeOfDay={this.state.toTimeOfDay} />
                     </div>
                     <div className="timeContainer">
-
                         <Button id="spaceMe" variant="contained" onClick={() => this.handleTimeAMPM('am', 'toTimeOfDay')} color="secondary">
                             am
                     </Button>

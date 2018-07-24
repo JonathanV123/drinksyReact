@@ -61,21 +61,6 @@ class AddRestaurantForm extends Component {
             }
         })
     }
-
-    handleStepComplete = () => {
-        this.props.handleFormStepperForward();
-        this.setState(state => ({
-            formStepCounter: state.formStepCounter + 1,
-        }));
-    }
-
-    handleFormStepBack = () => {
-        this.props.handleFormStepperBackward();
-        this.setState(state => ({
-            formStepCounter: state.formStepCounter - 1,
-        }));
-    }
-
     checkStepCompletion = (name) => {
         if (this.state[name].length >= 1) {
             this.handleStepComplete();
@@ -94,6 +79,7 @@ class AddRestaurantForm extends Component {
             })
         }
     }
+
     handleChange = (title, description, from, to) => event => {
         this.setState({
             [title]: event.target.value,
@@ -103,6 +89,21 @@ class AddRestaurantForm extends Component {
             [to]: event.target.value,
         });
     };
+
+    // FLAG
+    handleStepComplete = () => {
+        this.props.handleFormStepperForward();
+        this.setState(state => ({
+            formStepCounter: state.formStepCounter + 1,
+        }));
+    }
+    // FLAG
+    handleFormStepBack = () => {
+        this.props.handleFormStepperBackward();
+        this.setState(state => ({
+            formStepCounter: state.formStepCounter - 1,
+        }));
+    }
 
     handleSelection = (review, drinkOrFoodType) => {
         this.setState({
