@@ -40,6 +40,12 @@ body {
   height: 100vh;
 }
 
+#centerFinalStep{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+}
+
 .loginSignupScreenContainer{
   @include display();
   @include flexBoxCenter();
@@ -411,9 +417,16 @@ body {
   font-weight: 400;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.35417em;
-  color: #ff0266;
+  color: white;
   font-weight: bold;
   text-align: center;
+}
+
+#centerSignupNotification{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  height: 100vh;
 }
 
 #filterTabsCenter{

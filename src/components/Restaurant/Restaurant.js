@@ -39,8 +39,6 @@ class Restaurant extends Component {
     // }
 
     render() {
-        console.log(this.props);
-        const restaurantId = this.props.match.params.id;
         if (this.props.restaurantPending) {
             return (
                 <div>

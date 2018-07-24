@@ -56,9 +56,7 @@ class Dashboard extends Component {
     }
 
     filterFoodAndDrink = (type) => {
-        console.log(isVisible);
         isVisible = !isVisible;
-        console.log(isVisible);
         if (type !== 'filterActive') {
             this.setState((prevState, props) => {
                 for (var key in prevState) {
@@ -66,7 +64,6 @@ class Dashboard extends Component {
                         prevFilter = key
                     }
                 }
-                console.log(prevFilter);
                 return {
                     [type]: ![prevState][type],
                     [prevFilter]: false,

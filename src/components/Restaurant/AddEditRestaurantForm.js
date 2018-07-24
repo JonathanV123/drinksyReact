@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import DrinkReviews from './DrinkReviews';
 import Notification from '../Presentational/Notification';
 import StepOneTitle from '../Restaurant/FormSteps/StepOneTitle';
 import StepTwoDesc from '../Restaurant/FormSteps/StepTwoDesc';
@@ -12,6 +11,8 @@ import StepFourBeer from '../Restaurant/FormSteps/StepFourBeer';
 import StepFiveWine from '../Restaurant/FormSteps/StepFiveWine';
 import StepSixCocktails from '../Restaurant/FormSteps/StepSixCocktails';
 import StepSevenHHTime from './FormSteps/StepSevenHHTime';
+import FinalStepCheck from './FormSteps/FinalStep';
+
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -30,22 +31,10 @@ const styles = theme => ({
     },
 });
 
-const DisplayTimeOfDaySelection = (props) => {
-    if (props.timeOfDay) {
-        return (
-            <span className="spanTime">{props.timeOfDay}</span>
-        )
-    } else {
-        return null;
-    }
-
-}
-
 class AddEditRestaurantForm extends Component {
     constructor(props) {
         super(props);
         // Edit Form State
-        console.log(props.formType)
         if (props.formType === 'editForm') {
             this.state = {
                 title: this.props.restaurant.title,
@@ -89,7 +78,6 @@ class AddEditRestaurantForm extends Component {
         })
     }
     checkStepCompletion = (name) => {
-        console.log('HANDLE STEP COMPLETETIONNNN')
         if (this.state[name].length >= 1) {
             this.handleStepComplete();
         } else if (name === 'title') {
@@ -223,7 +211,6 @@ class AddEditRestaurantForm extends Component {
             }).then((response) => {
                 this.props.handleCreation();
             }).catch((err) => {
-                console.log(err.response)
                 this.setState({
                     responseMessage: 'Unable to add restaurant. Please ensure all fields are properly filled out, and try again.',
                 });
@@ -329,19 +316,22 @@ class AddEditRestaurantForm extends Component {
             )
         } else if (this.state.formStepCounter === 7) {
             return (
-                <div className="eachStepContainer">
-                    <h1>Does this look right?</h1>
-                    <h2>{this.state.title}</h2>
-                    <h2>{this.state.description}</h2>
-                    <h2>{this.state.food}</h2>
-                    <h2>{this.state.beer}</h2>
-                    <h2>{this.state.wine}</h2>
-                    <h2>{this.state.cocktails}</h2>
-                    <h2>{this.state.from}</h2>
-                    <h3>to</h3>
-                    <h2>{this.state.to}</h2>
+                <div id="centerFinalStep" >
+                    <FinalStepCheck
+                        formType={this.props.formType}
+                        title={this.state.title}
+                        description={this.state.description}
+                        from={this.state.from}
+                        to={this.state.to}
+                        food={this.state.food}
+                        beer={this.state.beer}
+                        wine={this.state.wine}
+                        cocktails={this.state.cocktails}
+                        toTimeOfDay={this.state.toTimeOfDay}
+                        fromTimeOfDay={this.state.fromTimeOfDay}
+                    />
                     <Button className={classes.button} variant="contained" onClick={this.handleSubmit} color="primary">
-                        Add Restaurant
+                        Submit
                     </Button>
                     <Button className={classes.button} variant="contained" onClick={this.handleFormStepBack} color="primary">
                         Back

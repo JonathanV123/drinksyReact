@@ -57,7 +57,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     const userId = this.props.user.id
     return (
       <Router>
@@ -106,6 +105,7 @@ class App extends Component {
                   :
                   <SignUpForm
                     {...props}
+                    userProfile={this.props.user}
                     retrieveToken={this.props.retrieveToken}
                   />
               )}

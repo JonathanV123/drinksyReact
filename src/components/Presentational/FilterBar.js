@@ -43,7 +43,6 @@ class FilterBar extends React.Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.props)
         return (
             <div id="transparent" className={classes.root}>
                 <AppBar id="filterTabsCenter" position="static" color="default">

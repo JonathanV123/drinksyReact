@@ -5,6 +5,18 @@ import Typography from '@material-ui/core/Typography';
 
 
 const Notification = (props) => {
+    if (props.type === 'signUp' && props.responseMessage) {
+        return (
+            <Paper className="paperNotifcationContainer" elevation={5}>
+                <Typography className="paperNotifcation" variant="headline" component="h3">
+                    {props.responseMessage}
+                </Typography>
+                <Button variant="contained" onClick={props.clearAndRedirect} color="primary">
+                    Ok
+            </Button>
+            </Paper>
+        )
+    }
     if (props.responseMessage) {
         return (
             <Paper className="paperNotifcationContainer" elevation={5}>
@@ -13,7 +25,7 @@ const Notification = (props) => {
                 </Typography>
                 <Button variant="contained" onClick={props.clearNotification} color="primary">
                     Ok
-                    </Button>
+                </Button>
             </Paper>
         )
     } else {

@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
 const styles = {
     pos: {
@@ -14,43 +13,37 @@ const styles = {
     }
 };
 
-const RestaurantPage = (props) => {
+const FinalStepCheck = (props) => {
     const { classes } = props;
-    const restaurantId = props.restaurant.id;
     return (
         <div className="restaurantView">
             <Typography className={classes.pos} variant="headline" component="h2">
-                {props.restaurant.title}
+                {props.title}
             </Typography>
             <Typography className={classes.pos} component="p">
-                {props.restaurant.description}
+                {props.description}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-                Wine: {props.restaurant.wine}
+                Wine: {props.wine}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-                Cocktails: {props.restaurant.cocktails}
+                Cocktails: {props.cocktails}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-                Food: {props.restaurant.food}
+                Food: {props.food}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
-                Beer: {props.restaurant.beer}
+                Beer: {props.beer}
             </Typography>
             <Typography className={classes.happyHourPos} id="hotPinkCenter" component="h2">
                 Happy Hour
             </Typography>
             <Typography id="centerMeHappyHour" className={classes.happyHourPos} color="textSecondary">
-                {props.restaurant.fromStandard}{props.restaurant.fromTimeOfDay} to {props.restaurant.toStandard}{props.restaurant.toTimeOfDay}
+                {props.from}{props.fromTimeOfDay} to {props.to}{props.toTimeOfDay}
             </Typography>
-            <Link onClick={() => props.onRestaurantRemoval(restaurantId)} id="overideLink" to={`/home/${props.restaurant.owner}`}>Delete Restaurant</Link>
-            <Button id="overideLink" onClick={props.showHideForm} className={classes.pos} variant="contained" color="primary">
-                Edit Restaurant
-            </Button>
-            <Link id="overideLink" to={`/home/${props.restaurant.owner}`}>Back</Link>
         </div >
     )
 
 }
 
-export default withStyles(styles)(RestaurantPage);
+export default withStyles(styles)(FinalStepCheck);

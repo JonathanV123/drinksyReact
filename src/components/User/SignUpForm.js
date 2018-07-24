@@ -29,14 +29,15 @@ const styles = theme => ({
 
 class SignUpForm extends React.Component {
   constructor(props) {
-    super();
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password_digest: '',
+      responseMessage: null,
+      accountCreated: false,
+    };
   }
-  state = {
-    name: '',
-    email: '',
-    password_digest: '',
-    responseMessage: null,
-  };
 
   handleSubmit = (event, data) => {
     axios({
@@ -48,11 +49,14 @@ class SignUpForm extends React.Component {
         password_digest: this.state.password_digest
       }
     }).then((response) => {
-      // const user_created = true;
-      // this.props.accountJustCreated(user_created);
       sessionStorage.setItem('jwtToken', response.data.token)
+      this.setState((prevState, props) => {
+        return {
+          accountCreated: true,
+          responseMessage: 'Account created. You may now login',
+        }
+      })
     }).catch((err) => {
-      console.log(err.response);
       const errorMessage = err.response.data.message;
       this.setState({
         responseMessage: errorMessage,
@@ -68,6 +72,16 @@ class SignUpForm extends React.Component {
       }
     })
   }
+
+  clearAndRedirect = () => {
+    this.setState((prevState, props) => {
+      return {
+        responseMessage: ''
+      }
+    })
+    window.location.reload();
+  }
+
   handleChange = (email, password_digest, name) => event => {
     this.setState({
       [name]: event.target.value,
@@ -78,9 +92,15 @@ class SignUpForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-    if (this.props.loggedIn) {
+    if (this.state.accountCreated) {
       return (
-        <Redirect to="/home" />
+        <div id="centerSignupNotification">
+          <Notification
+            type={'signUp'}
+            responseMessage={this.state.responseMessage}
+            clearAndRedirect={this.clearAndRedirect}
+          />
+        </div>
       )
     } else {
       return (

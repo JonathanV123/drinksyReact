@@ -28,7 +28,6 @@ const styles = {
 };
 
 function RestaurantCard(props) {
-    console.log(props)
     const { classes } = props;
     return (
         <div>
@@ -59,7 +58,7 @@ function RestaurantCard(props) {
                     </Typography>
                 </CardContent>
                 <CardActions id="centerMe" >
-                    <Link className="link" to={`/restaurant/${props.restaurantId}`}>View Restaurant</Link>
+                    <Link id="overideLink" to={`/restaurant/${props.restaurantId}`}>View Restaurant</Link>
                 </CardActions>
             </Card>
         </div>
