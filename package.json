@@ -1,5 +1,6 @@
 {
   "name": "sql-app-react",
+  "homepage": "http://jonathanvoxland.com/projects/drinksyReact/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
