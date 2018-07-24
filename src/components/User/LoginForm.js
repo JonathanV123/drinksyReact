@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-// import Menuitem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Notification from '../Presentational/Notification';
+import LoaderAnimation from '../Presentational/Loaders';
 
 
 const styles = theme => ({
@@ -30,13 +30,13 @@ const styles = theme => ({
 
 class LoginForm extends Component {
     constructor(props) {
-        super();
+        super(props);
+        this.state = {
+            email: '',
+            password_digest: '',
+            responseMessage: null,
+        };
     }
-    state = {
-        email: '',
-        password_digest: '',
-    };
-
 
     handleChange = (email, password_digest) => event => {
         this.setState({
@@ -46,58 +46,79 @@ class LoginForm extends Component {
     };
 
     handleSubmit = (event, data) => {
-        const token = sessionStorage.getItem('jwtToken')
-        console.log(token);
-        console.log('YAY!');
         axios({
             method: 'post',
             url: 'http://localhost:8080/login',
-            headers: { 'Authorization': 'bearer ' + token },
             data: {
                 email: this.state.email,
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
-            const clearAcctCreation = false;
-            this.props.accountJustCreated(clearAcctCreation);
-            this.props.userLoggedIn();
+            // Set token from server to session storage
+            sessionStorage.setItem('jwtToken', response.data.token)
+            const token = sessionStorage.getItem('jwtToken');
+            // Verify the token, so that app has access to user information
+            this.props.verifyToken(token);
         }).catch((err) => {
-            console.log(err)
+            this.setState({
+                responseMessage: err.response.data.message,
+            });
         })
         event.preventDefault();
     };
 
+    // Clear notifications telling user if incorrect password, email, ect...
+    clearNotification = () => {
+        this.setState((prevState, props) => {
+            return {
+                responseMessage: ''
+            }
+        })
+    }
+
     render() {
         const { classes } = this.props;
-        return (
-            <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
-                <TextField
-                    id="email"
-                    label="Email"
-                    value={this.state.email}
-                    className={classes.textField}
-                    onChange={this.handleChange('email')}
-                    margin="normal"
-                />
-                <TextField
-                    id="password-input"
-                    placeholder="Password"
-                    className={classes.textField}
-                    label="Password"
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handleChange('password_digest')}
-                    margin="normal"
-                />
-                {/* <Link to={'/home'}> */}
-                <Button variant="contained" type='submit' color="primary">
-                    Login
-                    </Button>
-                {/* </Link> */}
-            </form>
-        );
+        if (this.props.loading) {
+            return (
+                <LoaderAnimation />
+            )
+        } else {
+            return (
+                <div className="loginSignupScreenContainer">
+                    <h1 className="filterTitle">Login</h1>
+                    <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
+                        <TextField
+                            id="email"
+                            label="Email"
+                            value={this.state.email}
+                            className={classes.textField}
+                            onChange={this.handleChange('email')}
+                            margin="normal"
+                        />
+                        <TextField
+                            id="password-input"
+                            placeholder="Password"
+                            className={classes.textField}
+                            label="Password"
+                            type="password"
+                            value={this.state.password}
+                            onChange={this.handleChange('password_digest')}
+                            margin="normal"
+                        />
+                        <Button variant="contained" onClick={this.handleSubmit} color="primary">
+                            Login
+                        </Button>
+                    </form>
+
+                    <Notification
+                        responseMessage={this.state.responseMessage}
+                        clearNotification={this.clearNotification}
+                    />
+                </div>
+            );
+        }
     }
 }
-
 export default withStyles(styles)(LoginForm);
+
 

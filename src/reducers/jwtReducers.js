@@ -1,34 +1,31 @@
 import {
-    GET_TOKEN_ME,
-    USER_LOGGED_IN
+    VERIFY_JSON_TOKEN_SUCCESS,
+    VERIFY_JSON_TOKEN_PENDING,
+    VERIFY_JSON_TOKEN_FAILED,
 } from '../constants';
 
 
-
-const initialIsLoggedIn = {
-    isUserLoggedIn: false,
-};
-
-export const userIsLoggedIn = (state = initialIsLoggedIn, action = {}) => {
-    console.log(action.type);
-    switch (action.type) {
-        case USER_LOGGED_IN:
-            return Object.assign({}, state, { isUserLoggedIn: true });
-        // case REQUEST_PEOPLE_DATA_FAILED:
-        //     return Object.assign({}, state, { error: action.payload, isPending: false });
-        default:
-            return state
-    }
-}
 const initialToken = {
+    isPending: false,
     token: null,
+    user: {
+        id: null,
+        email: null,
+        name: null,
+    },
 };
-export const tokenRetrieved = (state = initialToken, action = {}) => {
+export const verifyJWT = (state = initialToken, action = {}) => {
     switch (action.type) {
-        case GET_TOKEN_ME:
-            return Object.assign({}, state, { token: action.token });
-        // case REQUEST_PEOPLE_DATA_FAILED:
-        //     return Object.assign({}, state, { error: action.payload, isPending: false });
+        case VERIFY_JSON_TOKEN_PENDING:
+            return Object.assign({}, state, { isPending: true });
+        case VERIFY_JSON_TOKEN_SUCCESS:
+            return Object.assign({}, state, {
+                token: action.payload.token, isPending: false,
+                user: { id: action.payload.user.id, email: action.payload.user.email, name: action.payload.user.name }
+            }
+            );
+        case VERIFY_JSON_TOKEN_FAILED:
+            return Object.assign({}, state, { error: action.payload, isPending: false });
         default:
             return state
     }

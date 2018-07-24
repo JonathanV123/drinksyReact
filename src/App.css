@@ -1,3 +1,6 @@
+body {
+  background: #ffd303; }
+
 #root {
   display: -webkit-box;
   display: -moz-box;
@@ -9,23 +12,228 @@
   -webkit-align-items: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  background-color: lightcoral; }
+  background: #ffd303; }
+
+.fillScreen {
+  height: 100vh; }
+
+#centerFinalStep {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.loginSignupScreenContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh; }
+
+#creation-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#signup-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
 
 #appContainer {
-  width: 100%;
-  height: 100%;
-  background-color: lightcoral; }
+  width: 100%; }
+
+.textAlignCenter {
+  text-align: center; }
+
+#homeLink {
+  text-decoration: none;
+  color: white;
+  font-size: 1.9rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  margin: 0 10px 0 10px;
+  padding-top: 5px;
+  margin-top: 9px;
+  color: white;
+  font-weight: bold; }
+
+#login-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.notificationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-top: 45px; }
+
+#menuColor {
+  color: white;
+  font-size: 1.1em;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+#filterBar {
+  background: #2c3970; }
+
+#loginContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100%; }
 
 .navBarContainer {
   width: 100%;
   height: 100px;
   border: 3px solid black; }
 
-.navBarLink {
+#errorContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.paperNotifcationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  text-align: center;
+  width: 200px;
+  height: 200px; }
+
+.paperNotifcation {
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+#noRestaurantsContainer {
+  height: 100vh;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#addRestaurant {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: #2c3970;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none; }
+
+.notificationContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  text-align: center; }
+
+.link {
+  border: 2px solid white;
+  border-radius: 50px;
+  font-size: 1.4em;
+  padding: 5px;
+  margin: 5px;
   text-decoration: none;
-  font-size: 2em;
-  margin: 5px; }
+  color: #0336ff; }
 
 .peopleContainer {
   display: -webkit-box;
@@ -37,9 +245,23 @@
   justify-content: center;
   -webkit-align-items: center;
   align-items: center;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
+  width: 100%;
+  margin-top: 30px; }
+
+#centerLoader {
+  width: 100%;
   height: 100vh;
-  width: 100%; }
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
 
 .peopleCard {
   width: 250px;
@@ -65,7 +287,7 @@
   border: 2px solid black;
   font-size: 2em; }
 
-.homePageContainer {
+#homePageContainer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -94,6 +316,333 @@
   -webkit-align-items: center;
   align-items: center;
   flex-direction: column;
+  -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   width: 100%;
   height: 100vh; }
+
+#loginNav {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#centerMeHappyHour {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin: 10px 0 0 0; }
+
+#header {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center; }
+
+.filterTitle {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: white;
+  font-weight: bold;
+  text-align: center; }
+
+.eachStepContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.centerMe {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+#backButtonForReviews {
+  margin-top: 20px; }
+
+#rootAddFormContainer {
+  height: 100%; }
+
+#stepperContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+#overideStepper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  background: transparent; }
+
+#overideStepper > div:first-child {
+  background-color: white; }
+
+#overideLink {
+  margin: 9px;
+  text-decoration: none;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  min-width: 88px;
+  cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  min-height: 36px;
+  box-sizing: border-box;
+  line-height: 1.4em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  border-radius: 4px;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  background-color: #3f51b5;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12); }
+
+#overideLink:hover {
+  background-color: #ff0266; }
+
+#accountContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.welcomeContainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh; }
+
+#nav {
+  width: 95%;
+  height: 100%;
+  padding-top: 5px;
+  margin-top: 9px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  margin-right: 15px; }
+
+#highlighted {
+  background-color: red;
+  padding: none; }
+
+#noPadding {
+  padding: 0; }
+
+#spaceMe {
+  margin: 8px; }
+
+.restaurantView {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column; }
+
+.materialFont {
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5em;
+  color: #0336ff;
+  text-decoration: none; }
+
+.spanTime {
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5em; }
+
+#lessMargin {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  color: white; }
+
+.menuItem {
+  width: auto;
+  color: rgba(0, 0, 0, 0.87);
+  height: 24px;
+  overflow: hidden;
+  font-size: 1rem;
+  box-sizing: content-box;
+  font-weight: 400;
+  line-height: 1.5em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  white-space: nowrap;
+  padding-left: 16px;
+  text-overflow: ellipsis;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-decoration: none; }
+
+.headlines {
+  font-size: 2.8rem;
+  font-weight: 400;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.35417em;
+  color: white;
+  font-weight: bold;
+  text-align: center; }
+
+#centerSignupNotification {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 100vh; }
+
+#filterTabsCenter {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 3px 4px -1px rgba(0, 0, 0, 0.4), 0px 4px 5px 0px rgba(0, 0, 0, 0), 0px 1px 10px 0px rgba(0, 0, 0, 0);
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.4), 0px 3px 5px 0px rgba(0, 0, 0, 0), 0px 1px 10px 0px rgba(0, 0, 0, 0);
+  background: transparent; }
+
+#cardSpacing {
+  margin: 20px; }
+
+#transparent {
+  background: transparent; }
+
+#divider {
+  margin: 3px 0 5px 0; }
+
+#hotPinkCenter {
+  color: #ff0266;
+  text-align: center; }
+
+#centerMe {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+@media (max-height: 753px) {
+  .paperNotifcationContainer {
+    position: absolute;
+    top: 50%; } }
+
+@media (max-width: 479px) {
+  #responsiveFilterBar > div:first-child > div:first-child > div:first-child {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap; } }
+
+@media (max-width: 420px) {
+  .filterTitle {
+    font-size: 2em; }
+  .spanTime {
+    font-size: 0.8em; }
+  .timeContainerInput {
+    text-align: center; } }
+
+@media (max-width: 300px) {
+  .filterTitle {
+    font-size: 1.7em; } }

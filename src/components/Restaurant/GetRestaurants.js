@@ -1,9 +1,9 @@
 import React  from 'react';
 
+
 class GetRestaurants extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -13,8 +13,8 @@ class GetRestaurants extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.requestRestaurantData();
         event.preventDefault();
+        this.props.requestRestaurantData();
     }
 
     render() {
