@@ -1,12 +1,10 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     pos: {
         margin: 9,
-        // textAlign: 'center',
     },
     happyHourPos: {
         margin: 4,

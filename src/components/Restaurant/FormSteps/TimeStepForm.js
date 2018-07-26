@@ -32,18 +32,24 @@ const DisplayTimeOfDaySelection = (props) => {
     }
 
 }
-let headerMessage = null;
-const EditTimeSection = (props) => {
-    if (props.formType === 'addForm') {
-        let headerMessage = "What's the happy hour?"
 
+const HeaderMessage = (props) => {
+    if (props.formType === 'addForm') {
+        return (
+            <h1 className="filterTitle">"How would you rate their food selection?"</h1>
+        )
     } else {
-        let headerMessage = 'Edit Happy Hour Time'
+        return (
+            <h1 className="filterTitle">Edit Food Reivew</h1>
+
+        )
     }
+}
+const EditTimeSection = (props) => {
     const { classes } = props;
     return (
         <div className="eachStepContainer">
-            <h1 className="filterTitle">{headerMessage}</h1>
+            <HeaderMessage formType={props.formType} />
             <div className="timeContainerInput">
                 <TextField
                     id="from"

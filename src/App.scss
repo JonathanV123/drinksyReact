@@ -23,10 +23,18 @@ body {
   align-items: center;
 }
 
+
 @mixin flexBoxColumn{
   -webkit-flex-direction: column;
   flex-direction: column;
 };
+
+#errorContainer{
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  height: 100vh;
+}
 
 #root{
   @include display();
