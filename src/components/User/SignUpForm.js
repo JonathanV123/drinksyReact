@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import Notification from '../Presentational/Notification';
 
 const styles = theme => ({
@@ -34,37 +33,45 @@ class SignUpForm extends React.Component {
       name: '',
       email: '',
       password_digest: '',
+      confirm_password_digest: '',
       responseMessage: null,
       accountCreated: false,
     };
   }
 
   handleSubmit = (event, data) => {
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/createUser',
-      data: {
-        name: this.state.name,
-        email: this.state.email,
-        password_digest: this.state.password_digest
-      }
-    }).then((response) => {
-      sessionStorage.setItem('jwtToken', response.data.token)
+    event.preventDefault();
+    if (this.state.password_digest !== this.state.confirm_password_digest) {
       this.setState((prevState, props) => {
         return {
-          accountCreated: true,
-          responseMessage: 'Account created. You may now login',
+          responseMessage: 'Passwords do not match. Try again.'
         }
       })
-    }).catch((err) => {
-      const errorMessage = err.response.data.message;
-      this.setState({
-        responseMessage: errorMessage,
+    } else {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8080/createUser',
+        data: {
+          name: this.state.name,
+          email: this.state.email,
+          password_digest: this.state.password_digest
+        }
+      }).then((response) => {
+        sessionStorage.setItem('jwtToken', response.data.token)
+        this.setState((prevState, props) => {
+          return {
+            accountCreated: true,
+            responseMessage: 'Account created. Logging you in.',
+          }
+        })
+      }).catch((err) => {
+        const errorMessage = err.response.data.message;
+        this.setState({
+          responseMessage: errorMessage,
+        });
       });
-    });
-    event.preventDefault();
-  };
-
+    };
+  }
   clearNotification = () => {
     this.setState((prevState, props) => {
       return {
@@ -131,6 +138,15 @@ class SignUpForm extends React.Component {
               label="Password"
               type="password"
               onChange={this.handleChange('password_digest')}
+              margin="normal"
+            />
+            <TextField
+              id="password-confirm"
+              className={classes.textField}
+              placeholder="confirm"
+              label="Confirm Password"
+              type="password"
+              onChange={this.handleChange('confirm_password_digest')}
               margin="normal"
             />
             <Button className={classes.button} variant="contained" type='submit' color="primary">

@@ -23,7 +23,6 @@ const styles = theme => ({
 
 
 const StepSevenHHTime = (props) => {
-    const { classes } = props;
     return (
         <TimeStepForm
             formType={props.formType}

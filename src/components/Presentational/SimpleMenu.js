@@ -46,7 +46,7 @@ class SimpleMenu extends React.Component {
                         <Link className="menuItem" onClick={this.handleClose} to={`/addRestaurant/${this.props.userId}`}>Add Restaurant</Link>
                     </MenuItem>
                     <MenuItem>
-                        <Link className="menuItem" onClick={() => { this.handleClose; this.props.logout() }} to={'/'} >Logout</Link>
+                        <Link className="menuItem" onClick={() => { this.handleClose(); this.props.logout() }} to={'/'} >Logout</Link>
                     </MenuItem>
                 </Menu>
             </div>

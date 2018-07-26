@@ -59,7 +59,9 @@ class App extends Component {
   render() {
     const userId = this.props.user.id
     return (
-      <Router>
+      <Router
+        basename={'/projects/drinksyReact/'}
+      >
         <div id="appContainer">
           <Switch>
             <Route
