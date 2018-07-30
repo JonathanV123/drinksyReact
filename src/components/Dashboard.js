@@ -27,12 +27,12 @@ const RestaurantList = (props) => {
                 fromTimeOfDay={restaurant.fromTimeOfDay}
                 toTimeOfDay={restaurant.toTimeOfDay}
                 onRestaurantRemoval={props.onRestaurantRemoval}
-                className="peopleCard"
+                className="restaurantCard"
             />
         )
     });
     return (
-        <div className="peopleContainer">
+        <div className="defaultContainer">
             {restaurantCards}
         </div>
     )

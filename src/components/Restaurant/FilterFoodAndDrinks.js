@@ -23,7 +23,7 @@ const FilterHappyHourNow = (props) => {
                     fromTimeOfDay={restaurant.fromTimeOfday}
                     toTimeOfDay={restaurant.toTimeOfDay}
                     onRestaurantRemoval={props.onRestaurantRemoval}
-                    className="peopleCard"
+                    className="restaurantCard"
                 />
             )
         }
@@ -42,7 +42,7 @@ const FilterHappyHourNow = (props) => {
         // Show restaurants that match the filter.
     } else {
         return (
-            <div className="peopleContainer">
+            <div className="defaultContainer">
                 {filteredCards}
             </div>
         )
@@ -69,7 +69,7 @@ const FoodAndDrinksList = (props) => {
                     fromTimeOfDay={restaurant.fromTimeOfDay}
                     toTimeOfDay={restaurant.toTimeOfDay}
                     onRestaurantRemoval={props.onRestaurantRemoval}
-                    className="peopleCard"
+                    className="restaurantCard"
                 />
             )
         }
@@ -87,7 +87,7 @@ const FoodAndDrinksList = (props) => {
         // Show restaurants that match the filter.
     } else {
         return (
-            <div className="peopleContainer">
+            <div className="defaultContainer">
                 {filteredCards}
             </div>
         )

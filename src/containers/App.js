@@ -19,7 +19,6 @@ const mapStateToProps = (state) => {
     loadingJWT: state.verifyJWT.isPending,
     user: state.verifyJWT.user,
     restaurantPending: state.restaurantData.isPending,
-    // restaurantLoaded: state.restaurantData.restaurantLoaded,
     allUserRestaurants: state.restaurantData.currentRestaurantData,
     restaurantById: state.restaurantData.currentRestaurantById,
   }
@@ -55,10 +54,7 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
-// Basename folder path 
-// Tried /var/www/html/projects/drinksyReact
-// Tried /
-//
+  
   render() {
     const userId = this.props.user.id
     return (

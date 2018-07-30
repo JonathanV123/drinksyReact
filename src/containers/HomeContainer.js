@@ -18,6 +18,8 @@ const SignUp = (props) => {
                 <h2> Or </h2>
                 <Link className="materialFont" to={'/login'}>Login</Link>
             </nav>
+            <h3 className="homeAlternate"> Don't feel like making an account?</h3>
+            <h4 className="homeAlternate"> Use <span className="highlighted">test@test.com</span> for <span className="highlighted">email</span>, and <span className="highlighted">test</span> as the <span className="highlighted">password</span> to quickly view the app.</h4>
         </div>
     )
 }

@@ -249,7 +249,7 @@ body {
   text-decoration: none;
   color: #0336ff; }
 
-.peopleContainer {
+.defaultContainer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -277,7 +277,7 @@ body {
   -webkit-align-items: center;
   align-items: center; }
 
-.peopleCard {
+.restaurantCard {
   width: 250px;
   height: 150px;
   background-color: teal;
@@ -487,7 +487,11 @@ body {
   align-items: center;
   -webkit-flex-direction: column;
   flex-direction: column;
+  text-align: center;
   height: 100vh; }
+
+.homeAlternate {
+  color: white; }
 
 #nav {
   width: 95%;
@@ -510,6 +514,10 @@ body {
 #highlighted {
   background-color: red;
   padding: none; }
+
+.highlighted {
+  color: black;
+  font-weight: bold; }
 
 #noPadding {
   padding: 0; }

@@ -30,14 +30,6 @@ class Restaurant extends Component {
         })
     }
 
-    // handleEditSubmit = (event) => {
-    //     this.setState((prevState, props) => {
-    //         return {
-    //             restaurantEditSuccess: !prevState.restaurantEditSuccess,
-    //         }
-    //     })
-    // }
-
     render() {
         if (this.props.restaurantPending) {
             return (

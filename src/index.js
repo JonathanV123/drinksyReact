@@ -14,7 +14,6 @@ import registerServiceWorker from './registerServiceWorker';
 const rootReducer = combineReducers({
     restaurantData,
     verifyJWT,
-    // restaurantDataFetch,
 })
 
 const store = createStore(
