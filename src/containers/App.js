@@ -55,12 +55,14 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
-
+// Tried /var/www/html/projects/drinksyReact
+// Tried /
+//
   render() {
     const userId = this.props.user.id
     return (
       <Router
-        basename={'/var/www/html/projects/drinksyReact'}
+        basename={'/projects/drinksyReact'}
       >
         <div id="appContainer">
           <Switch>
