@@ -60,7 +60,7 @@ class App extends Component {
     const userId = this.props.user.id
     return (
       <Router
-        basename={'/projects/drinksyReact/'}
+        basename={'/var/www/html/projects/drinksyReact'}
       >
         <div id="appContainer">
           <Switch>
