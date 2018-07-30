@@ -55,6 +55,7 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
+// Basename folder path 
 // Tried /var/www/html/projects/drinksyReact
 // Tried /
 //
