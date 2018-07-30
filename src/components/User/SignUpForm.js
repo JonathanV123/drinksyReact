@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Notification from '../Presentational/Notification';
+import LoaderAnimation from '../Presentational/Loaders';
 
 const styles = theme => ({
   container: {
@@ -36,6 +37,7 @@ class SignUpForm extends React.Component {
       confirm_password_digest: '',
       responseMessage: null,
       accountCreated: false,
+      loading: false,
     };
   }
 
@@ -48,6 +50,11 @@ class SignUpForm extends React.Component {
         }
       })
     } else {
+      this.setState((prevState, props) => {
+        return {
+          loading: true,
+        }
+      })
       axios({
         method: 'post',
         url: 'https://drinkys.herokuapp.com/createUser',
@@ -61,6 +68,7 @@ class SignUpForm extends React.Component {
         this.setState((prevState, props) => {
           return {
             accountCreated: true,
+            loading: false,
             responseMessage: 'Account created. Logging you in.',
           }
         })
@@ -99,7 +107,14 @@ class SignUpForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-    if (this.state.accountCreated) {
+    if (this.state.loading === true) {
+      return (
+        <div>
+          <LoaderAnimation />
+        </div>
+      )
+    }
+    else if (this.state.accountCreated) {
       return (
         <div id="centerSignupNotification">
           <Notification

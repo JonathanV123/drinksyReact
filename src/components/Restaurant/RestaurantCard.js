@@ -23,7 +23,6 @@ const styles = {
     },
     pos: {
         marginBottom: 12,
-        // textAlign: 'center',
     },
 };
 

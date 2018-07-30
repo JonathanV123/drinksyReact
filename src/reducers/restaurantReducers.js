@@ -13,27 +13,10 @@ import {
     ON_FETCH_RESTAURANT_BY_ID_FAILED,
 } from '../constants';
 
-// const initialRestaurantDataBeforeFetch = {
-//     isPending: false,
-//     error: '',
-// };
-// export const restaurantDataFetch = (state = initialRestaurantDataBeforeFetch, action = {}) => {
-//     switch (action.type) {
-//         case REQUEST_RESTAURANT_DATA_PENDING:
-//             return Object.assign({}, state, { isPending: true });
-//         case REQUEST_RESTAURANT_DATA_FAILED:
-//             return Object.assign({}, state, { error: action.payload, isPending: false });
-//         default:
-//             return state
-//     }
-// }
-
 const initialRestaurantData = {
     currentRestaurantData: [],
     isPending: false,
     error: null,
-    // removalPending: false,
-    // editPending: false,
     notification: null,
     currentRestaurantById: null,
 };
