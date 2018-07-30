@@ -50,7 +50,7 @@ class SignUpForm extends React.Component {
     } else {
       axios({
         method: 'post',
-        url: 'http://localhost:8080/createUser',
+        url: 'https://drinkys.herokuapp.com/createUser',
         data: {
           name: this.state.name,
           email: this.state.email,

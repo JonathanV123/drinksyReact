@@ -193,7 +193,7 @@ class AddEditRestaurantForm extends Component {
             const userId = this.props.userProfile.id;
             axios({
                 method: 'post',
-                url: `http://localhost:8080/addRestaurant/${userId}`,
+                url: `https://drinkys.herokuapp.com/addRestaurant/${userId}`,
                 headers: { 'Authorization': "bearer " + token },
                 data: {
                     title: this.state.title,
