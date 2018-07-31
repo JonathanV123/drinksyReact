@@ -35,6 +35,7 @@ class LoginForm extends Component {
             email: '',
             password_digest: '',
             responseMessage: null,
+            loading: false,
         };
     }
 
@@ -46,6 +47,11 @@ class LoginForm extends Component {
     };
 
     handleSubmit = (event, data) => {
+        this.setState((prevState, props) => {
+            return {
+                loading: true,
+            }
+        });
         axios({
             method: 'post',
             url: 'https://drinkys.herokuapp.com/login',
@@ -78,7 +84,7 @@ class LoginForm extends Component {
 
     render() {
         const { classes } = this.props;
-        if (this.props.loading) {
+        if (this.state.loading) {
             return (
                 <LoaderAnimation />
             )
