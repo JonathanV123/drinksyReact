@@ -60,6 +60,11 @@ class LoginForm extends Component {
                 password_digest: this.state.password_digest
             }
         }).then((response) => {
+            this.setState((prevState, props) => {
+                return {
+                    loading: false
+                }
+            })
             // Set token from server to session storage
             sessionStorage.setItem('jwtToken', response.data.token)
             const token = sessionStorage.getItem('jwtToken');
@@ -84,7 +89,8 @@ class LoginForm extends Component {
 
     render() {
         const { classes } = this.props;
-        if (this.state.loading) {
+        console.log(this.state.loading)
+        if (this.state.loading === true) {
             return (
                 <LoaderAnimation />
             )
