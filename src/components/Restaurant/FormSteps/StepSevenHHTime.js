@@ -2,6 +2,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TimeStepForm from './TimeStepForm';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     container: {
@@ -37,6 +38,18 @@ const StepSevenHHTime = (props) => {
         />
     )
 }
+
+StepSevenHHTime.propTypes = {
+    formType: PropTypes.string.isRequired,
+    validateHappyHourTime: PropTypes.func.isRequired,
+    handleTimeAMPM: PropTypes.func.isRequired,
+    handleFormStepBack: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    to: PropTypes.string.isRequired,
+    from: PropTypes.string.isRequired,
+    fromTimeOfDay: PropTypes.string.isRequired,
+    toTimeOfDay: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(StepSevenHHTime);
 

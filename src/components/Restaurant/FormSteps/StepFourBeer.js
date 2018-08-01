@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import DrinkReviews from '../DrinkReviews';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     container: {
@@ -38,10 +39,18 @@ const StepFourBeer = (props) => {
             />
             <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
                 Back
-                </Button>
+            </Button>
         </div>
 
     )
 }
+
+StepFourBeer.propTypes = {
+    formType: PropTypes.string.isRequired,
+    handleStepComplete: PropTypes.func.isRequired,
+    drinkOrFoodType: PropTypes.string.isRequired,
+    handleSelection: PropTypes.func.isRequired,
+    handleFormStepBack: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(StepFourBeer);

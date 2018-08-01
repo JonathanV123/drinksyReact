@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ErrorPage = (props) => {
     return (
         <div id="errorContainer">
@@ -9,5 +8,4 @@ const ErrorPage = (props) => {
 
     )
 }
-
 export default ErrorPage

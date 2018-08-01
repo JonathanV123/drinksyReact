@@ -1,6 +1,6 @@
 import React from 'react';
 import RestaurantCard from './RestaurantCard';
-import FilterNotifcations from '../Presentational/FilterNotifcations';
+import FilterNotifications from '../Presentational/FilterNotifications';
 
 const FilterHappyHourNow = (props) => {
     const today = new Date().getHours();
@@ -37,7 +37,7 @@ const FilterHappyHourNow = (props) => {
     if (filteredCards.every(isUndefined)) {
         const message = 'None of your restaurants are currently offering Happy Hour'
         return (
-            <FilterNotifcations message={message} />
+            <FilterNotifications message={message} />
         )
         // Show restaurants that match the filter.
     } else {
@@ -82,7 +82,7 @@ const FoodAndDrinksList = (props) => {
     if (filteredCards.every(isUndefined)) {
         const message = 'None of your restaurants match your current filter'
         return (
-            <FilterNotifcations message={message} />
+            <FilterNotifications message={message} />
         )
         // Show restaurants that match the filter.
     } else {

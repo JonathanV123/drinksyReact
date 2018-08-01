@@ -195,7 +195,7 @@ body {
   -webkit-flex-direction: column;
   flex-direction: column; }
 
-.paperNotifcationContainer {
+.paperNotificationContainer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -211,7 +211,7 @@ body {
   width: 200px;
   height: 200px; }
 
-.paperNotifcation {
+.paperNotification {
   -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center;
@@ -654,7 +654,7 @@ body {
   align-items: center; }
 
 @media (max-height: 753px) {
-  .paperNotifcationContainer {
+  .paperNotificationContainer {
     position: absolute;
     top: 50%; } }
 

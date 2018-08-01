@@ -145,7 +145,7 @@ body {
   @include flexBoxCenter();
   @include flexBoxColumn();
 }
-.paperNotifcationContainer{
+.paperNotificationContainer{
   @include display();
   @include flexBoxCenter();
   @include flexBoxColumn();
@@ -154,7 +154,7 @@ body {
   height:200px;
 }
 
-.paperNotifcation{
+.paperNotification{
   @include flexBoxCenter();
 }
 
@@ -486,7 +486,7 @@ body {
 }
 
 @media (max-height:753px) { 
-  .paperNotifcationContainer{
+  .paperNotificationContainer{
     position: absolute;
     top: 50%;
   }

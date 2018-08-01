@@ -31,6 +31,7 @@ const styles = theme => ({
     },
 });
 
+// Handle Filter bar functionality
 class FilterBar extends React.Component {
     state = {
         value: 0,
@@ -67,6 +68,7 @@ class FilterBar extends React.Component {
 
 FilterBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    filterFoodAndDrink: PropTypes.func,
+    
 };
-
 export default withStyles(styles)(FilterBar);

@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class SimpleMenu extends React.Component {
     constructor(props) {
@@ -11,7 +12,6 @@ class SimpleMenu extends React.Component {
             anchorEl: null,
         };
     }
-
 
     handleClick = event => {
         this.setState({ anchorEl: event.currentTarget });
@@ -32,7 +32,7 @@ class SimpleMenu extends React.Component {
                     id='menuColor'
                 >
                     Menu
-        </Button>
+                </Button>
                 <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
@@ -53,5 +53,10 @@ class SimpleMenu extends React.Component {
         );
     }
 }
+
+SimpleMenu.propTypes = {
+    userId: PropTypes.number.isRequired,
+    logout: PropTypes.func.isRequired,
+};
 
 export default SimpleMenu;

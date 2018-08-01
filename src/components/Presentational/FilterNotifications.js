@@ -15,9 +15,8 @@ const styles = theme => ({
     },
 });
 
-function FilterNotifcation(props) {
+function FilterNotification(props) {
     const { classes } = props;
-
     return (
         <div className="notificationContainer">
             <Paper className={classes.root} elevation={1}>
@@ -29,8 +28,9 @@ function FilterNotifcation(props) {
     );
 }
 
-FilterNotifcation.propTypes = {
+FilterNotification.propTypes = {
     classes: PropTypes.object.isRequired,
+    message: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(FilterNotifcation);
+export default withStyles(styles)(FilterNotification);
