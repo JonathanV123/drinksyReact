@@ -51,7 +51,7 @@ const FilterHappyHourNow = (props) => {
 }
 
 const FoodAndDrinksList = (props) => {
-    // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, then show the restaurant.
+    // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, show the restaurant.
     const filteredCards = props.restaurantData.map((restaurant, index) => {
         if (restaurant[props.typeFiltered] !== 'None') {
             return (
@@ -141,7 +141,7 @@ const FilterFoodAndDrinks = (props) => {
 
 FilterFoodAndDrinks.propTypes = {
     foodState: PropTypes.object.isRequired,
-    restaurantData: PropTypes.object.isRequired,
+    restaurantData: PropTypes.array.isRequired,
 };
 
 export default FilterFoodAndDrinks;

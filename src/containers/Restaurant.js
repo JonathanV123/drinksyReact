@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import LoaderAnimation from '../Presentational/Loaders';
-import RestaurantPage from './RestaurantPage';
-import AddEditRestaurantForm from './AddEditRestaurantForm';
+import LoaderAnimation from '../components/Presentational/Loaders';
+import RestaurantPage from '../components/Restaurant/RestaurantInfo';
+import AddEditRestaurantForm from '../components/Restaurant/AddEditRestaurantForm';
 import PropTypes from 'prop-types';
 
 class Restaurant extends Component {
@@ -79,7 +79,7 @@ class Restaurant extends Component {
 Restaurant.propTypes = {
     userProfile: PropTypes.object.isRequired,
     restaurantPending: PropTypes.bool.isRequired,
-    restaurantById: PropTypes.number.isRequired,
+    restaurantById: PropTypes.object,
     verifyToken: PropTypes.func.isRequired,
     editRestaurant: PropTypes.func.isRequired,
     fetchRestaurantById: PropTypes.func.isRequired,

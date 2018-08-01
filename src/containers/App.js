@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import HomeContainer from './HomeContainer';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
-import Dashboard from '../components/Dashboard';
+import Dashboard from './Dashboard';
 import { verifyToken } from '../actions/jwtActions';
 import { fetchAllRestaurantDataForUser, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
-import Restaurant from '../components/Restaurant/Restaurant';
+import Restaurant from './Restaurant';
 import Navigation from '../components/Presentational/Navigation';
-import AddRestaurantPage from '../components/Restaurant/AddRestaurantPage';
+import AddRestaurantPage from './AddRestaurantPage';
 import '../App.css';
 
 const mapStateToProps = (state) => {

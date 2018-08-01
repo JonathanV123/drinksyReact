@@ -53,7 +53,7 @@ class FilterBar extends React.Component {
                         indicatorColor="secondary"
                         id="responsiveFilterBar"
                     >
-                        <Tab label="All" onClick={() => this.props.filterFoodAndDrink('filterActive')} icon={<AllRestaurantsIcon />} />
+                        <Tab label="All" onClick={() => this.props.filterFoodAndDrink('nowFiltering')} icon={<AllRestaurantsIcon />} />
                         <Tab label="Happy Hour" onClick={() => this.props.filterFoodAndDrink('filterHappyHour')} icon={<HappyHourIcon />} />
                         <Tab label="Cocktails" onClick={() => this.props.filterFoodAndDrink('filterCocktails')} icon={<WineIcon />} />
                         <Tab label="Beer" onClick={() => this.props.filterFoodAndDrink('filterBeer')} icon={<BeerIcon />} />

@@ -1,7 +1,7 @@
 import React from 'react';
-import AddEditRestaurantForm from './AddEditRestaurantForm';
+import AddEditRestaurantForm from '../components/Restaurant/AddEditRestaurantForm';
 import { Redirect } from 'react-router-dom';
-import RestaurantStepper from '../Restaurant/RestaurantStepper';
+import RestaurantStepper from '../components/Restaurant/RestaurantStepper';
 import PropTypes from 'prop-types';
 
 
@@ -57,9 +57,9 @@ class AddRestaurant extends React.Component {
     }
 }
 
-AddEditRestaurantForm.propTypes = {
+AddRestaurant.propTypes = {
     userProfile: PropTypes.object.isRequired,
-    restaurantPending: PropTypes.string.isRequired,
+    restaurantPending: PropTypes.bool.isRequired,
     verifyToken: PropTypes.func.isRequired,
 };
 

@@ -19,7 +19,7 @@ export const fetchAllRestaurantDataForUser = (userId) => (dispatch) => {
     dispatch({ type: REQUEST_RESTAURANT_DATA_PENDING });
     axios({
         method: 'get',
-        url: `https://drinkys.herokuapp.com/home/${userId}`,
+        url: `http://localhost:8080/home/${userId}`,
         headers: { 'Authorization': "bearer " + token },
     })
         .then(response => dispatch({ type: REQUEST_RESTAURANT_DATA_SUCCESS, payload: response.data }, ))
@@ -33,7 +33,7 @@ export const onRestaurantRemoval = (restaurantId) => {
         const restaurantState = getState().restaurantData.currentRestaurantData;
         axios({
             method: 'delete',
-            url: `https://drinkys.herokuapp.com/deleteRestaurant/${restaurantId}`,
+            url: `http://localhost:8080/deleteRestaurant/${restaurantId}`,
             headers: { 'Authorization': "bearer " + token },
         })
             .then(response => dispatch({ type: ON_REMOVE_RESTAURANT_SUCCESS, restaurantData: restaurantState, payload: response.data }, ))
@@ -46,7 +46,7 @@ export const onRestaurantEdit = (restaurantId, restaurantData) => (dispatch) => 
     dispatch({ type: ON_EDIT_RESTAURANT_PENDING });
     axios({
         method: 'patch',
-        url: `https://drinkys.herokuapp.com/updateRestaurant/${restaurantId}`,
+        url: `http://localhost:8080/updateRestaurant/${restaurantId}`,
         headers: { 'Authorization': "bearer " + token },
         data: {
             title: restaurantData.title,
@@ -71,7 +71,7 @@ export const fetchRestaurantById = (restaurantId) => (dispatch) => {
     dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_PENDING });
     axios({
         method: 'get',
-        url: `https://drinkys.herokuapp.com/restaurant/${restaurantId}`,
+        url: `http://localhost:8080/restaurant/${restaurantId}`,
         headers: { 'Authorization': "bearer " + token },
     })
         .then(response => dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_SUCCESS, payload: response.data, restaurantId: restaurantId }))

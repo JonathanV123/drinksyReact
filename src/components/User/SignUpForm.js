@@ -58,7 +58,7 @@ class SignUpForm extends React.Component {
       })
       axios({
         method: 'post',
-        url: 'https://drinkys.herokuapp.com/createUser',
+        url: 'http://localhost:8080/createUser',
         data: {
           name: this.state.name,
           email: this.state.email,
@@ -186,7 +186,6 @@ class SignUpForm extends React.Component {
 
 SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
   userProfile: PropTypes.object.isRequired,
 };
 

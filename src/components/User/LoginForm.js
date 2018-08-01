@@ -55,7 +55,7 @@ class LoginForm extends Component {
         });
         axios({
             method: 'post',
-            url: 'https://drinkys.herokuapp.com/login',
+            url: 'http://localhost:8080/login',
             data: {
                 email: this.state.email,
                 password_digest: this.state.password_digest
