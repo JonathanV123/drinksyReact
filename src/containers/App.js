@@ -54,7 +54,7 @@ class App extends Component {
     sessionStorage.removeItem('jwtToken');
     window.location.reload();
   }
-  
+
   render() {
     const userId = this.props.user.id
     return (
@@ -165,7 +165,12 @@ class App extends Component {
                   <Redirect to={{ pathname: `/` }} />
               )}
             />
-            <Route render={() => <h1> 404 </h1>} />
+            <Route render={() =>
+              <div id="errorPage">
+                <h1 className="filterTitle"> This page does not exist</h1>
+                <h2 className="filterTitle"> 404 </h2>
+              </div>
+            } />
           </Switch>
         </div>
       </Router>
