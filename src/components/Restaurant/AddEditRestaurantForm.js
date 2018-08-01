@@ -11,6 +11,7 @@ import StepFiveWine from '../Restaurant/FormSteps/StepFiveWine';
 import StepSixCocktails from '../Restaurant/FormSteps/StepSixCocktails';
 import StepSevenHHTime from './FormSteps/StepSevenHHTime';
 import FinalStepCheck from './FormSteps/FinalStep';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     container: {
@@ -33,7 +34,7 @@ const styles = theme => ({
 class AddEditRestaurantForm extends Component {
     constructor(props) {
         super(props);
-        // Edit Form State
+        // Edit Restaurant Form State
         if (props.formType === 'editForm') {
             this.state = {
                 title: this.props.restaurant.title,
@@ -50,7 +51,7 @@ class AddEditRestaurantForm extends Component {
                 activeStep: 0,
                 responseMessage: '',
             };
-            // Add Form State    
+            // Add Restaurant Form State    
         } else {
             this.state = {
                 title: '',
@@ -68,7 +69,7 @@ class AddEditRestaurantForm extends Component {
             };
         }
     }
-
+    // Clear notifcation to user
     clearNotification = () => {
         this.setState((prevState, props) => {
             return {
@@ -76,6 +77,7 @@ class AddEditRestaurantForm extends Component {
             }
         })
     }
+    // Title and Description validation. Make sure user entered information.
     checkStepCompletion = (name) => {
         if (this.state[name].length >= 1) {
             this.handleStepComplete();
@@ -93,7 +95,7 @@ class AddEditRestaurantForm extends Component {
             })
         }
     }
-
+    // Increase step counter by 1
     handleStepComplete = () => {
         if (this.props.formType === 'editForm') {
             this.setState(state => ({
@@ -108,7 +110,7 @@ class AddEditRestaurantForm extends Component {
         }
 
     }
-
+    // Decrease step counter by 1
     handleFormStepBack = () => {
         if (this.props.formType === 'editForm') {
             this.setState(state => ({
@@ -133,14 +135,14 @@ class AddEditRestaurantForm extends Component {
         });
     };
 
-
-
+    // Handle review selection for Food, Drink, Wine, Beer, and Cocktails.
     handleSelection = (review, drinkOrFoodType) => {
         this.setState({
             [drinkOrFoodType]: review,
         });
     };
 
+    // Handles time of day selection (AM/PM) for happy hour.
     handleTimeAMPM = (amORpm, toORfrom) => {
         this.setState({
             [toORfrom]: amORpm,
@@ -187,6 +189,7 @@ class AddEditRestaurantForm extends Component {
                 fromTimeOfDay: this.state.fromTimeOfDay,
             }
             this.props.editRestaurant(restaurantId, restaurant);
+            // Hide form.
             this.props.showHideForm();
             // If not edit edit, then handle add restaurant form submit.
         } else {
@@ -218,6 +221,7 @@ class AddEditRestaurantForm extends Component {
     };
     render() {
         const { classes } = this.props;
+        // Name section
         if (this.state.formStepCounter === 0) {
             return (
                 <div className="centerMe" >
@@ -235,6 +239,7 @@ class AddEditRestaurantForm extends Component {
                     </div>
                 </div >
             )
+            // Description section   
         } else if (this.state.formStepCounter === 1) {
             return (
                 <div className="centerMe">
@@ -251,6 +256,7 @@ class AddEditRestaurantForm extends Component {
                     />
                 </div >
             )
+            // Food section   
         } else if (this.state.formStepCounter === 2) {
             return (
                 <StepThreeFood
@@ -261,6 +267,7 @@ class AddEditRestaurantForm extends Component {
                     handleFormStepBack={this.handleFormStepBack}
                 />
             )
+            // Beer section    
         } else if (this.state.formStepCounter === 3) {
             return (
                 <StepFourBeer
@@ -271,6 +278,7 @@ class AddEditRestaurantForm extends Component {
                     handleFormStepBack={this.handleFormStepBack}
                 />
             )
+            // Wine section    
         } else if (this.state.formStepCounter === 4) {
             return (
                 <StepFiveWine
@@ -281,7 +289,7 @@ class AddEditRestaurantForm extends Component {
                     handleFormStepBack={this.handleFormStepBack}
                 />
             )
-
+            // Cocktails section
         } else if (this.state.formStepCounter === 5) {
             return (
                 <StepSixCocktails
@@ -293,6 +301,7 @@ class AddEditRestaurantForm extends Component {
                 />
             )
         }
+        // Happy Hour section
         else if (this.state.formStepCounter === 6) {
             return (
                 <div className="centerMe">
@@ -313,6 +322,7 @@ class AddEditRestaurantForm extends Component {
                     />
                 </div>
             )
+            // Final section. Submit information to server.    
         } else if (this.state.formStepCounter === 7) {
             return (
                 <div id="centerFinalStep" >
@@ -346,6 +356,19 @@ class AddEditRestaurantForm extends Component {
         }
     }
 }
+
+AddEditRestaurantForm.propTypes = {
+    showForm: PropTypes.func,
+    showHideForm: PropTypes.func,
+    restaurant: PropTypes.object,
+    creationStepCount: PropTypes.number,
+    handleEditSubmit: PropTypes.func,
+    formType: PropTypes.string.isRequired,
+    handleFormStepperForward: PropTypes.func,
+    handleFormStepperBackward: PropTypes.func,
+    userProfile: PropTypes.object,
+    handleCreation: PropTypes.func,
+};
 
 export default withStyles(styles)(AddEditRestaurantForm);
 

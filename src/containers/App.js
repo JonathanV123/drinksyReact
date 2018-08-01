@@ -167,8 +167,8 @@ class App extends Component {
             />
             <Route render={() =>
               <div id="errorPage">
-                <h1 className="filterTitle"> This page does not exist</h1>
-                <h2 className="filterTitle"> 404 </h2>
+                <h1 className="drinksyHeader"> This page does not exist</h1>
+                <h2 className="drinksyHeader"> 404 </h2>
               </div>
             } />
           </Switch>

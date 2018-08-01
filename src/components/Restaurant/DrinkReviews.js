@@ -47,10 +47,11 @@ const DrinkReview = (props) => {
     );
 }
 
-
-
 DrinkReview.propTypes = {
     classes: PropTypes.object.isRequired,
+    handleStepComplete: PropTypes.func.isRequired,
+    drinkOrFoodType: PropTypes.string.isRequired,
+    handleSelection: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(DrinkReview);

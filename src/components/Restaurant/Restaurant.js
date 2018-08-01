@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import LoaderAnimation from '../Presentational/Loaders';
 import RestaurantPage from './RestaurantPage';
 import AddEditRestaurantForm from './AddEditRestaurantForm';
+import PropTypes from 'prop-types';
 
 class Restaurant extends Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Restaurant extends Component {
         }
     }
 
+    // Handle restaurant creation
     handleCreation = (event) => {
         this.setState((prevState, props) => {
             return {
@@ -22,6 +24,7 @@ class Restaurant extends Component {
             }
         })
     }
+    // Make form visible or invisible
     showHideForm = () => {
         this.setState((prevState, props) => {
             return {
@@ -29,7 +32,6 @@ class Restaurant extends Component {
             }
         })
     }
-
     render() {
         if (this.props.restaurantPending) {
             return (
@@ -41,6 +43,7 @@ class Restaurant extends Component {
             return (
                 <Redirect to={`/home/${this.props.restaurantById.owner}`} />
             )
+        // Show the edit form for the individual restaurant.    
         } else if (this.state.showForm === true) {
             return (
                 <AddEditRestaurantForm
@@ -53,6 +56,7 @@ class Restaurant extends Component {
                     formType={'editForm'}
                 />
             )
+        // Display individual restaurant data     
         } else if (this.props.restaurantById && this.state.showForm === false) {
             return (
                 <RestaurantPage
@@ -64,12 +68,22 @@ class Restaurant extends Component {
         } else {
             return (
                 <div id="errorContainer">
-                    <h1 className="filterTitle"> There seems to be an error retreiving your restaurant</h1>
+                    <h1 className="drinksyHeader"> There seems to be an error retreiving your restaurant</h1>
                     <Link id="overideLink" to={`/home/${this.props.userProfile.id}`}>Ok</Link>
                 </div>
             )
         }
     }
 }
+
+Restaurant.propTypes = {
+    userProfile: PropTypes.object.isRequired,
+    restaurantPending: PropTypes.bool.isRequired,
+    restaurantById: PropTypes.number.isRequired,
+    verifyToken: PropTypes.func.isRequired,
+    editRestaurant: PropTypes.func.isRequired,
+    fetchRestaurantById: PropTypes.func.isRequired,
+    onRestaurantRemoval: PropTypes.func.isRequired,
+};
 
 export default Restaurant;

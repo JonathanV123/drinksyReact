@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Notification from '../Presentational/Notification';
 import LoaderAnimation from '../Presentational/Loaders';
+import PropTypes from 'prop-types';
 
 
 const styles = theme => ({
@@ -86,7 +87,6 @@ class LoginForm extends Component {
             }
         })
     }
-
     render() {
         const { classes } = this.props;
         if (this.state.loading === true) {
@@ -96,7 +96,7 @@ class LoginForm extends Component {
         } else {
             return (
                 <div className="loginSignupScreenContainer">
-                    <h1 className="filterTitle">Login</h1>
+                    <h1 className="drinksyHeader">Login</h1>
                     <form id='login-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
                         <TextField
                             id="email"
@@ -120,7 +120,6 @@ class LoginForm extends Component {
                             Login
                         </Button>
                     </form>
-
                     <Notification
                         responseMessage={this.state.responseMessage}
                         clearNotification={this.clearNotification}
@@ -130,6 +129,16 @@ class LoginForm extends Component {
         }
     }
 }
+
+LoginForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+    retrieveToken: PropTypes.func.isRequired,
+    userProfile: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired,
+    verifyToken: PropTypes.func.isRequired,
+};
+
 export default withStyles(styles)(LoginForm);
 
 

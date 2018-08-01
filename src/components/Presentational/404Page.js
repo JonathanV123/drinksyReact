@@ -3,7 +3,7 @@ import React from 'react';
 const ErrorPage = (props) => {
     return (
         <div id="errorContainer">
-            <h1 className="filterTitle">404 Something went wrong :(</h1>
+            <h1 className="drinksyHeader">404 Something went wrong :(</h1>
         </div>
 
     )

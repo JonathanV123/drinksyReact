@@ -66,6 +66,20 @@ function RestaurantCard(props) {
 
 RestaurantCard.propTypes = {
     classes: PropTypes.object.isRequired,
+    key: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    restaurantId: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
+    beer: PropTypes.string.isRequired,
+    cocktails: PropTypes.string.isRequired,
+    food: PropTypes.string.isRequired,
+    wine: PropTypes.string.isRequired,
+    toStandard: PropTypes.string.isRequired,
+    fromStandard: PropTypes.string.isRequired,
+    fromTimeOfDay: PropTypes.string.isRequired,
+    toTimeOfDay: PropTypes.func.isRequired,
+    onRestaurantRemoval: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(RestaurantCard);

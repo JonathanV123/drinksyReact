@@ -4,10 +4,11 @@ import FilterFoodAndDrinks from '../components/Restaurant/FilterFoodAndDrinks';
 import { Link } from 'react-router-dom';
 import LoaderAnimation from './Presentational/Loaders';
 import RestaurantCard from './Restaurant/RestaurantCard';
+import PropTypes from 'prop-types';
+
 
 let isVisible = false;
 let prevFilter = null;
-
 
 const RestaurantList = (props) => {
     const restaurantCards = props.restaurants.map((restaurant, index) => {
@@ -55,8 +56,11 @@ class Dashboard extends Component {
         }
     }
 
+    // Possible refactor
     filterFoodAndDrink = (type) => {
+        // Type would be equal to filterHappyHour, filterBeer, ect...
         isVisible = !isVisible;
+        /// If type is not filterActive, then a certain filter is being applied to wine, beer, ect...
         if (type !== 'filterActive') {
             this.setState((prevState, props) => {
                 for (var key in prevState) {
@@ -102,7 +106,7 @@ class Dashboard extends Component {
             return (
                 <div>
                     <FilterBar filterFoodAndDrink={this.filterFoodAndDrink} filterHappyHour={this.filterHappyHour} />
-                    <h1 className="filterTitle">Your Restaurants</h1>
+                    <h1 className="drinksyHeader">Your Restaurants</h1>
                     <RestaurantList
                         loadingRestaurants={this.props.loading}
                         restaurants={this.props.restaurantData}
@@ -115,7 +119,7 @@ class Dashboard extends Component {
         else {
             return (
                 <div id="noRestaurantsContainer">
-                    <h2 className="filterTitle">You have no restaurants!</h2>
+                    <h2 className="drinksyHeader">You have no restaurants!</h2>
                     <Link id="overideLink" to={`/addRestaurant/${this.props.userProfile.id}`}>Add A Restaurant</Link>
                 </div>
             )
@@ -123,6 +127,15 @@ class Dashboard extends Component {
     }
 }
 
+Dashboard.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    restaurantPending: PropTypes.bool.isRequired,
+    retrieveToken: PropTypes.func.isRequired,
+    userProfile: PropTypes.object.isRequired,
+    fetchAllRestaurantDataForUser: PropTypes.func.isRequired,
+    restaurantData: PropTypes.object.isRequired,
+    onRestaurantRemoval: PropTypes.func.isRequired,
+};
 
 export default Dashboard;
 

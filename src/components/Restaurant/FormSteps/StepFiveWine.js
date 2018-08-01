@@ -17,11 +17,11 @@ const styles = theme => ({
 const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <h1 className="filterTitle">How would you rate their wine selection?</h1>
+            <h1 className="drinksyHeader">How would you rate their wine selection?</h1>
         )
     } else {
         return (
-            <h1 className="filterTitle">Edit Wine Review</h1>
+            <h1 className="drinksyHeader">Edit Wine Review</h1>
 
         )
     }
