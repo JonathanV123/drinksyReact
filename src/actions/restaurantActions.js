@@ -33,7 +33,7 @@ export const onRestaurantRemoval = (restaurantId) => {
         const restaurantState = getState().restaurantData.currentRestaurantData;
         axios({
             method: 'delete',
-            url: `https://drinkys.herokuapp.com/${restaurantId}`,
+            url: `https://drinkys.herokuapp.com/deleteRestaurant/${restaurantId}`,
             headers: { 'Authorization': "bearer " + token },
         })
             .then(response => dispatch({ type: ON_REMOVE_RESTAURANT_SUCCESS, restaurantData: restaurantState, payload: response.data }, ))
@@ -46,7 +46,7 @@ export const onRestaurantEdit = (restaurantId, restaurantData) => (dispatch) => 
     dispatch({ type: ON_EDIT_RESTAURANT_PENDING });
     axios({
         method: 'patch',
-        url: `https://drinkys.herokuapp.com/${restaurantId}`,
+        url: `https://drinkys.herokuapp.com/updateRestaurant/${restaurantId}`,
         headers: { 'Authorization': "bearer " + token },
         data: {
             title: restaurantData.title,
@@ -71,7 +71,7 @@ export const fetchRestaurantById = (restaurantId) => (dispatch) => {
     dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_PENDING });
     axios({
         method: 'get',
-        url: `https://drinkys.herokuapp.com/${restaurantId}`,
+        url: `https://drinkys.herokuapp.com/restaurant/${restaurantId}`,
         headers: { 'Authorization': "bearer " + token },
     })
         .then(response => dispatch({ type: ON_FETCH_RESTAURANT_BY_ID_SUCCESS, payload: response.data, restaurantId: restaurantId }))

@@ -10,7 +10,7 @@ export const verifyToken = (token) => (dispatch) => {
     dispatch({ type: VERIFY_JSON_TOKEN_PENDING });
     axios({
         method: 'post',
-        url: 'https://drinkys.herokuapp.com/',
+        url: 'https://drinkys.herokuapp.com/verifyToken',
         data: {
             token: token,
         }
