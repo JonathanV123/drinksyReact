@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import DrinkReviews from '../DrinkReviews';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     container: {
@@ -16,12 +17,11 @@ const styles = theme => ({
 const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <h1 className="filterTitle">"How would you rate their food selection?"</h1>
+            <h1 className="drinksyHeader">"How would you rate their food selection?"</h1>
         )
     } else {
         return (
-            <h1 className="filterTitle">Edit Food Reivew</h1>
-
+            <h1 className="drinksyHeader">Edit Food Reivew</h1>
         )
     }
 }
@@ -38,9 +38,17 @@ const StepThreeFood = (props) => {
             />
             <Button className={classes.button} id="backButtonForReviews" variant="contained" onClick={props.handleFormStepBack} color="primary">
                 Back
-                </Button>
+            </Button>
         </div>
     )
 }
+
+StepThreeFood.propTypes = {
+    formType: PropTypes.string.isRequired,
+    handleStepComplete: PropTypes.func.isRequired,
+    drinkOrFoodType: PropTypes.string.isRequired,
+    handleSelection: PropTypes.func.isRequired,
+    handleFormStepBack: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(StepThreeFood);

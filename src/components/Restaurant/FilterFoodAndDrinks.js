@@ -1,6 +1,7 @@
 import React from 'react';
 import RestaurantCard from './RestaurantCard';
-import FilterNotifcations from '../Presentational/FilterNotifcations';
+import FilterNotifications from '../Presentational/FilterNotifications';
+import PropTypes from 'prop-types';
 
 const FilterHappyHourNow = (props) => {
     const today = new Date().getHours();
@@ -37,7 +38,7 @@ const FilterHappyHourNow = (props) => {
     if (filteredCards.every(isUndefined)) {
         const message = 'None of your restaurants are currently offering Happy Hour'
         return (
-            <FilterNotifcations message={message} />
+            <FilterNotifications message={message} />
         )
         // Show restaurants that match the filter.
     } else {
@@ -50,7 +51,7 @@ const FilterHappyHourNow = (props) => {
 }
 
 const FoodAndDrinksList = (props) => {
-    // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, then show the restaurant.
+    // Map restaurants that match the typerFiltered prop (wine, food, ect...) if value is not none, show the restaurant.
     const filteredCards = props.restaurantData.map((restaurant, index) => {
         if (restaurant[props.typeFiltered] !== 'None') {
             return (
@@ -82,7 +83,7 @@ const FoodAndDrinksList = (props) => {
     if (filteredCards.every(isUndefined)) {
         const message = 'None of your restaurants match your current filter'
         return (
-            <FilterNotifcations message={message} />
+            <FilterNotifications message={message} />
         )
         // Show restaurants that match the filter.
     } else {
@@ -98,14 +99,14 @@ const FilterFoodAndDrinks = (props) => {
     if (props.foodState.filterHappyHour === true) {
         return (
             <div className="fillScreen">
-                <h1 className="filterTitle">Happy Hour happening now</h1>
+                <h1 className="drinksyHeader">Happy Hour happening now</h1>
                 <FilterHappyHourNow restaurantData={props.restaurantData} typeFiltered={'happyhour'} />
             </div>
         )
     } else if (props.foodState.filterBeer === true) {
         return (
             <div>
-                <h1 className="filterTitle">Restaurants with Beer</h1>
+                <h1 className="drinksyHeader">Restaurants with Beer</h1>
                 <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'beer'} />
             </div>
         )
@@ -113,7 +114,7 @@ const FilterFoodAndDrinks = (props) => {
     else if (props.foodState.filterWine === true) {
         return (
             <div>
-                <h1 className="filterTitle">Restaurants with Wine</h1>
+                <h1 className="drinksyHeader">Restaurants with Wine</h1>
                 <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'wine'} />
             </div>
         )
@@ -121,7 +122,7 @@ const FilterFoodAndDrinks = (props) => {
     else if (props.foodState.filterCocktails === true) {
         return (
             <div>
-                <h1 className="filterTitle">Restaurants with Cocktails</h1>
+                <h1 className="drinksyHeader">Restaurants with Cocktails</h1>
                 <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'cocktails'} />
             </div>
         )
@@ -129,7 +130,7 @@ const FilterFoodAndDrinks = (props) => {
     else if (props.foodState.filterFood === true) {
         return (
             <div>
-                <h1 className="filterTitle">Restaurants with Food</h1>
+                <h1 className="drinksyHeader">Restaurants with Food</h1>
                 <FoodAndDrinksList restaurantData={props.restaurantData} typeFiltered={'food'} />
             </div>
         )
@@ -138,5 +139,9 @@ const FilterFoodAndDrinks = (props) => {
     }
 }
 
+FilterFoodAndDrinks.propTypes = {
+    foodState: PropTypes.object.isRequired,
+    restaurantData: PropTypes.array.isRequired,
+};
 
 export default FilterFoodAndDrinks;

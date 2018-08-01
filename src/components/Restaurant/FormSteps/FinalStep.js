@@ -1,6 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 const styles = {
     pos: {
@@ -41,7 +42,19 @@ const FinalStepCheck = (props) => {
             </Typography>
         </div >
     )
-
 }
+
+FinalStepCheck.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    from: PropTypes.string.isRequired,
+    to: PropTypes.string.isRequired,
+    food: PropTypes.string.isRequired,
+    beer: PropTypes.string.isRequired,
+    wine: PropTypes.string.isRequired,
+    cocktails: PropTypes.string.isRequired,
+    toTimeOfDay: PropTypes.string.isRequired,
+    fromTimeOfDay: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(FinalStepCheck);

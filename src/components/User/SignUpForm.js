@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Notification from '../Presentational/Notification';
 import LoaderAnimation from '../Presentational/Loaders';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
   container: {
@@ -80,6 +81,8 @@ class SignUpForm extends React.Component {
       });
     };
   }
+  
+  // Clear any error notifcations.
   clearNotification = () => {
     this.setState((prevState, props) => {
       return {
@@ -88,6 +91,7 @@ class SignUpForm extends React.Component {
     })
   }
 
+  // Clear notification of account creation and login.
   clearAndRedirect = () => {
     this.setState((prevState, props) => {
       return {
@@ -114,6 +118,7 @@ class SignUpForm extends React.Component {
         </div>
       )
     }
+    // If account is successfully created, notify user the user and login.
     else if (this.state.accountCreated) {
       return (
         <div id="centerSignupNotification">
@@ -124,10 +129,11 @@ class SignUpForm extends React.Component {
           />
         </div>
       )
+    // Show the sign up form  
     } else {
       return (
         <div className="loginSignupScreenContainer">
-          <h1 className="filterTitle">Create Account</h1>
+          <h1 className="drinksyHeader">Create Account</h1>
           <form id='signup-form' noValidate autoComplete='off' onSubmit={this.handleSubmit}>
             <TextField
               id="name"
@@ -177,6 +183,11 @@ class SignUpForm extends React.Component {
     }
   }
 }
+
+SignUpForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  userProfile: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(SignUpForm);
 

@@ -3,6 +3,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     container: {
@@ -22,15 +23,14 @@ const styles = theme => ({
     },
 });
 
-
 const HeaderMessage = (props) => {
     if (props.formType === 'addForm') {
         return (
-            <h1 className="filterTitle">Restaurant Description</h1>
+            <h1 className="drinksyHeader">Restaurant Description</h1>
         )
     } else {
         return (
-            <h1 className="filterTitle">Edit Restaurant Description</h1>
+            <h1 className="drinksyHeader">Edit Restaurant Description</h1>
 
         )
     }
@@ -53,14 +53,22 @@ const StepTwoDesc = (props) => {
                 />
                 <Button className={classes.button} variant="contained" onClick={() => props.checkStepCompletion('description')} color="primary">
                     Save
-                        </Button>
+                </Button>
                 <Button className={classes.button} variant="contained" onClick={props.handleFormStepBack} color="primary">
                     Back
-                        </Button>
+                </Button>
             </form>
         </div>
     )
 }
+
+StepTwoDesc.propTypes = {
+    formType: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    checkStepCompletion: PropTypes.func.isRequired,
+    handleChange: PropTypes.func.isRequired,
+    handleFormStepBack: PropTypes.func.isRequired,
+};
 
 export default withStyles(styles)(StepTwoDesc);
 

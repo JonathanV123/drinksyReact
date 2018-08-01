@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import HomeContainer from './HomeContainer';
 import SignUpForm from '../components/User/SignUpForm';
 import LoginForm from '../components/User/LoginForm';
-import Dashboard from '../components/Dashboard';
+import Dashboard from './Dashboard';
 import { verifyToken } from '../actions/jwtActions';
 import { fetchAllRestaurantDataForUser, onRestaurantRemoval, onRestaurantEdit, fetchRestaurantById } from '../actions/restaurantActions';
-import Restaurant from '../components/Restaurant/Restaurant';
+import Restaurant from './Restaurant';
 import Navigation from '../components/Presentational/Navigation';
-import AddRestaurantPage from '../components/Restaurant/AddRestaurantPage';
+import AddRestaurantPage from './AddRestaurantPage';
 import '../App.css';
 
 const mapStateToProps = (state) => {
@@ -23,7 +23,6 @@ const mapStateToProps = (state) => {
     restaurantById: state.restaurantData.currentRestaurantById,
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -72,7 +71,6 @@ class App extends Component {
                   <HomeContainer
                     {...props}
                     loading={this.props.loadingJWT}
-                    retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                   />
               )}
@@ -87,7 +85,6 @@ class App extends Component {
                       {...props}
                       loading={this.props.loadingJWT}
                       restaurantPending={this.props.restaurantPending}
-                      retrieveToken={this.props.retrieveToken}
                       userProfile={this.props.user}
                       fetchAllRestaurantDataForUser={this.props.fetchAllRestaurantDataForUser}
                       restaurantData={this.props.allUserRestaurants}
@@ -107,7 +104,6 @@ class App extends Component {
                   <SignUpForm
                     {...props}
                     userProfile={this.props.user}
-                    retrieveToken={this.props.retrieveToken}
                   />
               )}
             />
@@ -119,7 +115,6 @@ class App extends Component {
                   :
                   <LoginForm
                     {...props}
-                    retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                     loading={this.props.loadingJWT}
                     verifyToken={this.props.verifyToken}
@@ -167,8 +162,8 @@ class App extends Component {
             />
             <Route render={() =>
               <div id="errorPage">
-                <h1 className="filterTitle"> This page does not exist</h1>
-                <h2 className="filterTitle"> 404 </h2>
+                <h1 className="drinksyHeader"> This page does not exist</h1>
+                <h2 className="drinksyHeader"> 404 </h2>
               </div>
             } />
           </Switch>
@@ -182,7 +177,6 @@ App.propTypes = {
   token: PropTypes.string,
   loadingJWT: PropTypes.bool,
   user: PropTypes.object,
-  retrieveToken: PropTypes.func,
   verifyToken: PropTypes.func
 }
 

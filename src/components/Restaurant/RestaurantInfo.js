@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const styles = {
     pos: {
@@ -50,7 +51,13 @@ const RestaurantPage = (props) => {
             <Link id="overideLink" to={`/home/${props.restaurant.owner}`}>Back</Link>
         </div >
     )
-
 }
 
+RestaurantPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+    onRestaurantRemoval: PropTypes.func.isRequired,
+    showHideForm: PropTypes.func.isRequired,
+    restaurant: PropTypes.object.isRequired,
+};
+                 
 export default withStyles(styles)(RestaurantPage);

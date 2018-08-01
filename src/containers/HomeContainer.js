@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import LoaderAnimation from '../components/Presentational/Loaders';
+import PropTypes from 'prop-types';
 
 const styles = theme => ({
     button: {
@@ -31,6 +32,11 @@ const HomeContainer = (props) => {
         return <SignUp />
     }
 
+}
+
+HomeContainer.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    userProfile: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(HomeContainer);

@@ -11,7 +11,6 @@ const styles = {
 };
 
 class RestaruantStepper extends React.Component {
-
     render() {
         const { classes } = this.props;
         return (
@@ -30,6 +29,7 @@ class RestaruantStepper extends React.Component {
 RestaruantStepper.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
+    activeStep: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles, { withTheme: true })(RestaruantStepper);

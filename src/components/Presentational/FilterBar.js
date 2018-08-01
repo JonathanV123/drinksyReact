@@ -31,6 +31,7 @@ const styles = theme => ({
     },
 });
 
+// Handle Filter bar functionality
 class FilterBar extends React.Component {
     state = {
         value: 0,
@@ -52,7 +53,7 @@ class FilterBar extends React.Component {
                         indicatorColor="secondary"
                         id="responsiveFilterBar"
                     >
-                        <Tab label="All" onClick={() => this.props.filterFoodAndDrink('filterActive')} icon={<AllRestaurantsIcon />} />
+                        <Tab label="All" onClick={() => this.props.filterFoodAndDrink('nowFiltering')} icon={<AllRestaurantsIcon />} />
                         <Tab label="Happy Hour" onClick={() => this.props.filterFoodAndDrink('filterHappyHour')} icon={<HappyHourIcon />} />
                         <Tab label="Cocktails" onClick={() => this.props.filterFoodAndDrink('filterCocktails')} icon={<WineIcon />} />
                         <Tab label="Beer" onClick={() => this.props.filterFoodAndDrink('filterBeer')} icon={<BeerIcon />} />
@@ -67,6 +68,7 @@ class FilterBar extends React.Component {
 
 FilterBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    filterFoodAndDrink: PropTypes.func,
+    
 };
-
 export default withStyles(styles)(FilterBar);
