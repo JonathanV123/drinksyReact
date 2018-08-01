@@ -80,6 +80,13 @@ body {
   width: 100%;
 }
 
+#errorPage{
+  height: 100vh;
+  @include display();
+  @include flexBoxCenter();
+  @include flexBoxColumn();
+  color: white;
+}
 .textAlignCenter{
   text-align: center;
 }

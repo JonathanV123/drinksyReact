@@ -89,7 +89,6 @@ class LoginForm extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state.loading)
         if (this.state.loading === true) {
             return (
                 <LoaderAnimation />
