@@ -24,7 +24,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
     verifyToken: (token) => dispatch(verifyToken(token)),
@@ -72,7 +71,6 @@ class App extends Component {
                   <HomeContainer
                     {...props}
                     loading={this.props.loadingJWT}
-                    retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                   />
               )}
@@ -87,7 +85,6 @@ class App extends Component {
                       {...props}
                       loading={this.props.loadingJWT}
                       restaurantPending={this.props.restaurantPending}
-                      retrieveToken={this.props.retrieveToken}
                       userProfile={this.props.user}
                       fetchAllRestaurantDataForUser={this.props.fetchAllRestaurantDataForUser}
                       restaurantData={this.props.allUserRestaurants}
@@ -107,7 +104,6 @@ class App extends Component {
                   <SignUpForm
                     {...props}
                     userProfile={this.props.user}
-                    retrieveToken={this.props.retrieveToken}
                   />
               )}
             />
@@ -119,7 +115,6 @@ class App extends Component {
                   :
                   <LoginForm
                     {...props}
-                    retrieveToken={this.props.retrieveToken}
                     userProfile={this.props.user}
                     loading={this.props.loadingJWT}
                     verifyToken={this.props.verifyToken}
@@ -182,7 +177,6 @@ App.propTypes = {
   token: PropTypes.string,
   loadingJWT: PropTypes.bool,
   user: PropTypes.object,
-  retrieveToken: PropTypes.func,
   verifyToken: PropTypes.func
 }
 

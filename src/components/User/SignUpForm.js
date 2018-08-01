@@ -187,7 +187,6 @@ class SignUpForm extends React.Component {
 SignUpForm.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-  retrieveToken: PropTypes.func.isRequired,
   userProfile: PropTypes.object.isRequired,
 };
 

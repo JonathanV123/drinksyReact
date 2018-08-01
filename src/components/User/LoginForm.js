@@ -132,8 +132,6 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-    retrieveToken: PropTypes.func.isRequired,
     userProfile: PropTypes.object.isRequired,
     loading: PropTypes.bool.isRequired,
     verifyToken: PropTypes.func.isRequired,

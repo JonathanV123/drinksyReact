@@ -130,7 +130,6 @@ class Dashboard extends Component {
 Dashboard.propTypes = {
     loading: PropTypes.bool.isRequired,
     restaurantPending: PropTypes.bool.isRequired,
-    retrieveToken: PropTypes.func.isRequired,
     userProfile: PropTypes.object.isRequired,
     fetchAllRestaurantDataForUser: PropTypes.func.isRequired,
     restaurantData: PropTypes.object.isRequired,
