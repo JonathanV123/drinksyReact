@@ -73,6 +73,7 @@ class LoginForm extends Component {
             this.props.verifyToken(token);
         }).catch((err) => {
             this.setState({
+                loading: false,
                 responseMessage: err.response.data.message,
             });
         })
