@@ -47,7 +47,7 @@ export const restaurantData = (state = initialRestaurantData, action = {}) => {
             return Object.assign({}, state, { isPending: true });
         case ON_REMOVE_RESTAURANT_SUCCESS:
             let restaurantDataCopy = [...action.restaurantData]
-            const result = restaurantDataCopy.filter(restaurant => restaurant.id !== action.restaurantData.id);
+            const result = restaurantDataCopy.filter(restaurant => restaurant.id !== action.payload.restaurantId);
             return Object.assign({}, state, { currentRestaurantData: result, isPending: false });
         case ON_REMOVE_RESTAURANT_DATA_FAILED:
             return Object.assign({}, state, { error: action.payload, isPending: false, notification: action.payload.response.data });
