@@ -76,12 +76,13 @@ class SignUpForm extends React.Component {
       }).catch((err) => {
         const errorMessage = err.response.data.message;
         this.setState({
+          loading: false,
           responseMessage: errorMessage,
         });
       });
     };
   }
-  
+
   // Clear any error notifcations.
   clearNotification = () => {
     this.setState((prevState, props) => {
@@ -129,7 +130,7 @@ class SignUpForm extends React.Component {
           />
         </div>
       )
-    // Show the sign up form  
+      // Show the sign up form  
     } else {
       return (
         <div className="loginSignupScreenContainer">
