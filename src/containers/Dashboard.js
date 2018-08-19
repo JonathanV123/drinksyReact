@@ -68,7 +68,7 @@ class Dashboard extends Component {
                     // Example -- prevState[key] = filterCocktails: false,
                     // Check if any filters were true in previous state
                     if (prevState[key] === true) {
-                    // If true set the prevFilter to the key. Example key would be filterWine.    
+                        // If true set the prevFilter to the key. Example key would be filterWine.    
                         prevFilter = key
                     }
                 }
